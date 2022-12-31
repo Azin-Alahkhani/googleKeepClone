@@ -1,12 +1,10 @@
 import React from 'react'
 
 function NoteCard({noteTitle,noteText, handleRemove, index}) {
-    // const [noteText,setNoteText] = useState("temp note text,temp note text,temp note text,temp note text,temp note text,temp note text,")
    const Remove = (e)=>{
     e.preventDefault()
     handleRemove({index})
    }
-    // const [noteTitle,setNoteTitle] = useState("temp note title")
   return (
     
 <div class=" max-w-sm p-6 m-6 bg-white border bg-amber-100 border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 ">
