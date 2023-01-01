@@ -22,7 +22,7 @@ function AddNote(props) {
     }
   }
   return (
-    <div class="m-10 p-6 max-w-sm mx-auto bg-amber-100 rounded-xl shadow-lg flex items-start space-x-4">
+    <div class="m-10 p-6 max-w-sm mx-auto bg-amber-100 rounded-xl shadow-lg flex items-start space-x-4" >
       <div class="shrink-0">
         <img class="h-12 w-12" src={logo} alt="Logo" />
       </div>

@@ -8,10 +8,10 @@ function App() {
     <div>
       <Header />
       <div class="grid grid-cols-2 md:grid-cols-9 ">
-        <div class="col-start-1 col-span-1 md:col-span-6 ">
+        <div class="col-start-1 col-span-2 md:col-span-6 ">
           <NoteContainer />
         </div>
-        <div class=" col-span-1 md:col-span-3 ">
+        <div class=" col-span-1 md:col-span-2 ">
           <AddNoteContainer />
         </div>
       </div>
