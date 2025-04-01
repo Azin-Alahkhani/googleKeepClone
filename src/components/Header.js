@@ -73,7 +73,7 @@ const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
           <div></div>
           </div>
           {/*right side stuff*/}
-          <div class="grid grid-cols-5 gap-1 ">
+          <div className="grid grid-cols-5 gap-1 ">
               <span >ma</span>
               <span>ma</span>
               <span>ma</span>

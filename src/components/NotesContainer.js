@@ -1,36 +1,30 @@
-import { connect } from "react-redux"
-import { removeNote } from "../redux/actions"
-import NoteCard from "./NoteCard"
+import { useSelector, useDispatch } from "react-redux";
+import { removeNote } from "../redux/actions";
+import NoteCard from "./NoteCard";
+
+function NoteContainer({menuOpen}) {
+    const notes = useSelector((state) => state.notes.notes || []) ; // Get notes from Redux store
+    const dispatch = useDispatch(); // Dispatch actions
 
 
-const mapStateToProps = (state) => {
-    console.log(state)
-    return {
-        notes: state
-    }
-}
-const mapDispatchToProps = (dispatch) => ({
-    removeNote: (noteTitle, noteText) => dispatch(removeNote(noteTitle, noteText)),
-})
+    const handleRemove = (note) => {
+        dispatch(removeNote(note)); // Remove note from Redux
+    };
 
-function noteContainer(props) {
-    const notes = props.notes
-    const handleRemove = ({ noteTitle, noteText }) => {
-        props.removeNote({ noteTitle, noteText })
-    }
     return (
-        <div class="grid grid-cols-4 gap-3 ">
-            {notes.map(note => {
-                return (<NoteCard  
-                    class="col-span-1 "
-                    key={note.index} 
+        <div className={!menuOpen ? "grid grid-cols-4 gap-3" : "grid grid-cols-2 gap-3"}>
+           {notes.map((note, index) => (
+                <NoteCard  
+                    key={index} 
                     handleRemove={handleRemove} 
-                    index={note.index} 
-                    noteTitle={note.noteTitle} 
-                    noteText={note.noteText} /> )
-            })}
+                    noteTitle={note.title} 
+                    noteText={note.content} 
+                    label={note.label}
+                />
+            ))}
+            
         </div>
-    )
+    );
 }
 
-export const NoteContainer = connect(mapStateToProps, mapDispatchToProps)(noteContainer)
+export default NoteContainer;

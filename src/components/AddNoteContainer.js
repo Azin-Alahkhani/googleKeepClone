@@ -1,15 +1,10 @@
 import React, { useState, useRef } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";  // Import useDispatch from react-redux
 import { addNote } from "../redux/actions";
 import { FaPalette, FaListUl } from "react-icons/fa";
 import ColorPicker from "./ColorPicker"; // Importing the new ColorPicker component
 
-const mapDispatchToProps = (dispatch) => ({
-  addNote: (noteTitle, noteText, bgColor, isList) =>
-    dispatch(addNote({ noteTitle, noteText, bgColor, isList })),
-});
-
-function AddNote(props) {
+function AddNoteContainer() {
   const [noteText, setNoteText] = useState("");
   const [noteTitle, setNoteTitle] = useState("");
   const [isFocused, setIsFocused] = useState(false);
@@ -17,6 +12,8 @@ function AddNote(props) {
   const [isList, setIsList] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const noteRef = useRef(null);
+
+  const dispatch = useDispatch();  // Set up dispatch
 
   // Handle Click Outside to Collapse
   const handleClickOutside = (e) => {
@@ -36,7 +33,16 @@ function AddNote(props) {
   const handleAddNote = (e) => {
     e.preventDefault();
     if (noteText.trim() || noteTitle.trim()) {
-      props.addNote(noteTitle, noteText, bgColor, isList);
+      const noteData = {
+        title: noteTitle,
+        content: noteText,
+        bgColor: bgColor,
+        id:12,
+        labels:[]
+      };
+
+      console.log("Dispatching addNote:", noteData); // Log to ensure we're dispatching the correct data
+      dispatch(addNote(noteData)); // Dispatch addNote action
       setNoteText("");
       setNoteTitle("");
       setIsList(false);
@@ -51,7 +57,7 @@ function AddNote(props) {
       className="mx-auto max-w-xl p-4 rounded-lg shadow-lg shadow-gray-900/50 border dark:border-gray-700"
       style={{
         backgroundColor: bgColor,
-        color: "#fff", // Ensure text is visible based on background
+        color: "#fff",
       }}
     >
       <form className="flex flex-col space-y-2">
@@ -68,7 +74,7 @@ function AddNote(props) {
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-full p-2 text-gray-800 text-white bg-transparent border-none focus:outline-none resize-none"
+          className="w-full p-2 text-white  bg-transparent border-none focus:outline-none resize-none"
           placeholder="Take a note..."
           rows={isFocused ? 3 : 1}
         />
@@ -93,11 +99,11 @@ function AddNote(props) {
                   <FaPalette size={20} className="text-gray-700 dark:text-white" />
                 </button>
 
-               
+                {showColorPicker && (
                   <div className="absolute top-10 left-0 z-10 shadow-lg">
-                    <ColorPicker onSelectColor={(color) => { setBgColor(color); setShowColorPicker(false); showColorPicker={showColorPicker} }} />
+                    <ColorPicker onSelectColor={(color) => { setBgColor(color); setShowColorPicker(false); }} />
                   </div>
-              
+                )}
               </div>
             </div>
 
@@ -116,4 +122,4 @@ function AddNote(props) {
   );
 }
 
-export const AddNoteContainer = connect(null, mapDispatchToProps)(AddNote);
+export default AddNoteContainer;
