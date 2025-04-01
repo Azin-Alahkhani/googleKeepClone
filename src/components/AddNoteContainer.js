@@ -97,9 +97,9 @@ const handleColorSelect = (color)=>{
                     e.preventDefault();
                     setShowColorPicker(!showColorPicker);
                }}
-                  className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+                  className="p-2 rounded-full   hover:bg-gray-600"
                 >
-                  <FaPalette size={20} className="text-gray-700 dark:text-white" />
+                  <FaPalette size={20} className="text-white" />
                 </button>
 
                 {showColorPicker && (

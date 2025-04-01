@@ -1,11 +1,11 @@
 
 import logo from "../assets/keep_2020q4_48dp.png";
-import { FaSearch } from "react-icons/fa";
-import { AddNoteContainer } from "./AddNoteContainer";
-import Sidebar from "./Sidebar";
+import { FaSearch , FaUser  } from "react-icons/fa";
+import {FiSettings, FiList, FiRefreshCcw} from "react-icons/fi";
+
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-
+import { Tooltip} from "@material-tailwind/react";
 
 
 function Header({menuOpen, setMenuOpen}) {
@@ -73,12 +73,36 @@ const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
           <div></div>
           </div>
           {/*right side stuff*/}
-          <div className="grid grid-cols-5 gap-1 ">
-              <span >ma</span>
-              <span>ma</span>
-              <span>ma</span>
-              <span>ma</span>
-              <span>ma</span>
+          <div className="grid grid-cols-4 gap-5 mr-5 ">
+            
+           
+              <div>
+                 
+                <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
+                  <FiRefreshCcw className="w-7 h-7 text-gray-500 hover:text-white" title="Refresh"/>
+                </button>
+            </div>
+             <div>
+                 
+                <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
+                  <FiList className="w-7 h-7 text-gray-500 hover:text-white" title="Refresh"/>
+                </button>
+            </div>
+             <div>
+                 
+                <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
+                  <FiSettings className="w-7 h-7 text-gray-500 hover:text-white" title="Refresh"/>
+                </button>
+            </div>
+             <div>
+                 
+                <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
+                  <FaUser className="w-7 h-7 text-gray-500 hover:text-white" title="Refresh"/>
+                </button>
+            </div>
+            
+              
+
             </div>
            
        {/*<div
