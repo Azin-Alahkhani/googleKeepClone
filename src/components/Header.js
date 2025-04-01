@@ -1,36 +1,105 @@
-import React from 'react'
-import logo from '../assets/Google_Keep_2019_icon.webp'
+
+import logo from "../assets/keep_2020q4_48dp.png";
+import { FaSearch } from "react-icons/fa";
+import { AddNoteContainer } from "./AddNoteContainer";
+import Sidebar from "./Sidebar";
+import { Bars3Icon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+
+
 
 function Header() {
-  return (
-    
-<nav class="bg-amber-100 border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
-  <div class="container flex flex-wrap items-center justify-between mx-auto">
-    <a href="/" class="flex items-center rounded">
-        <img src={logo} class="h-6 mr-3 sm:h-9" alt="Keep Logo" />
-        <span class="self-center text-xl font-semibold whitespace-nowrap text-gray-500 dark:text-white">Keep</span>
-    </a>
-    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-      <span class="sr-only">Open main menu</span>
-      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a class="block py-2 pl-3 pr-4 text-gray-700  rounded md:bg-transparent  hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-amber-500 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-amber-500 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
-        </li>
-        <li>
-          <a class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-amber-500 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
 
-  )
+  }
+
+ function handleSearchTermChange(e) {
+    setSearchTerm(e.target.value);
+  }
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchBarColor, setSearchBarColor] = useState("#202124"); // Default dark color
+
+
+  return (
+    <nav className="border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 font-sans " style={{ position: "sticky", top: 0, zIndex: 1000 , backgroundColor:"#202124" }}>
+      
+      <div className="flex flex-row  items-center font-sans">
+      <div className="flex flex-row items-center justify-between">
+      {/* menu toggle */}
+        <div className="flex items-center m-2">
+           <button
+    onClick={toggleMenu}
+    type="button"
+    className="p-2 rounded-full hover:bg-gray-800 "
+  >
+    <Bars3Icon className="h-6 w-6 text-white " />
+  </button>
+          </div>
+        <div> 
+            <a href="/" className="flex items-center rounded">
+                    <img src={logo} className="h-8 sm:h-10" alt="Keep Logo" />
+                      <span className="self-center text-xl font-thin whitespace-nowrap text-white">
+                      Keep
+                      </span>
+                    </a>
+       </div>
+       </div>
+       
+       <div className="flex items-center justify-around w-full"> 
+       
+      
+   
+        <div className="ml-24 w-full flex justify-normal items-center p-1   rounded-lg shadow-md border focus:bg-gray-100 mr-24"
+      style={{
+        backgroundColor: searchBarColor,
+        color: "#fff", 
+      }}>
+        <FaSearch className="w-5 h-5 text-gray-500 dark:text-gray-300" />
+        
+        <input
+            value={searchTerm}
+            onChange={handleSearchTermChange}
+            type="text"
+            className="w-full text-lg font-medium p-2 bg-transparent dark:text-white border-none focus:outline-none"
+            placeholder="Search"
+          />
+        </div>
+        
+        </div>
+        <div className="Grid grid-cols-3 gap-0">
+          <div></div>
+          </div>
+          {/*right side stuff*/}
+          <div class="grid grid-cols-5 gap-1 ">
+              <span >ma</span>
+              <span>ma</span>
+              <span>ma</span>
+              <span>ma</span>
+              <span>ma</span>
+            </div>
+           
+       {/*<div
+          className="hidden w-full md:block md:w-auto"
+          id="navbar-default"
+        >
+          <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <li>
+              <a className="block py-2 pl-3 pr-4 text-gray-700 rounded md:hover:text-amber-500 dark:text-gray-400 dark:hover:text-white">
+                Home
+              </a>
+            </li>
+            <li>
+              <a className="block py-2 pl-3 pr-4 text-gray-700 rounded md:hover:text-amber-500 dark:text-gray-400 dark:hover:text-white">
+                About
+              </a>
+            </li>
+          </ul>
+        </div>*/}
+      </div>
+      <hr className="border-gray-500 dark:border-gray-700 mt-2" />
+    </nav>
+  );
 }
 
-export default Header
+export default Header;
