@@ -60,7 +60,7 @@ function AddNote(props) {
             value={noteTitle}
             onChange={(e) => setNoteTitle(e.target.value)}
             type="text"
-            className="w-full text-lg font-medium p-2 focus:outline-none bg-transparent dark:text-white"
+            className="w-full text-lg font-medium p-2 focus:outline-none bg-transparent text-white"
             placeholder="Title"
           />
         )}
@@ -68,7 +68,7 @@ function AddNote(props) {
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-full p-2 text-gray-800 dark:text-white bg-transparent border-none focus:outline-none resize-none"
+          className="w-full p-2 text-gray-800 text-white bg-transparent border-none focus:outline-none resize-none"
           placeholder="Take a note..."
           rows={isFocused ? 3 : 1}
         />

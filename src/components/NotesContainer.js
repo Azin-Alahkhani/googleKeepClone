@@ -19,7 +19,7 @@ function noteContainer(props) {
         props.removeNote({ noteTitle, noteText })
     }
     return (
-        <div class="grid grid-cols-5 gap-3 ">
+        <div class="grid grid-cols-4 gap-3 ">
             {notes.map(note => {
                 return (<NoteCard  
                     class="col-span-1 "

@@ -8,18 +8,18 @@ import { useState } from "react";
 
 
 
-function Header() {
-   const [isMenuOpen, setIsMenuOpen] = useState(false);
+function Header({menuOpen, setMenuOpen}) {
+  
   const toggleMenu = () => {
-
+    setMenuOpen(!menuOpen);
+    console.log("Menu Opened: ", menuOpen);
   }
 
  function handleSearchTermChange(e) {
     setSearchTerm(e.target.value);
   }
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchBarColor, setSearchBarColor] = useState("#202124"); // Default dark color
-
+const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
 
   return (
     <nav className="border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 font-sans " style={{ position: "sticky", top: 0, zIndex: 1000 , backgroundColor:"#202124" }}>
@@ -50,9 +50,9 @@ function Header() {
        
       
    
-        <div className="ml-24 w-full flex justify-normal items-center p-1   rounded-lg shadow-md border focus:bg-gray-100 mr-24"
+        <div className="ml-24 w-full flex justify-normal items-center p-1   rounded-lg shadow-md border  mr-24"
       style={{
-        backgroundColor: searchBarColor,
+        backgroundColor: isFocusedOnSearch ? "#ffffff" : "#202124",
         color: "#fff", 
       }}>
         <FaSearch className="w-5 h-5 text-gray-500 dark:text-gray-300" />
@@ -60,6 +60,8 @@ function Header() {
         <input
             value={searchTerm}
             onChange={handleSearchTermChange}
+            onFocus={() => setIsFocusedOnSearch(true)}
+            onBlur={() => setIsFocusedOnSearch(false)}
             type="text"
             className="w-full text-lg font-medium p-2 bg-transparent dark:text-white border-none focus:outline-none"
             placeholder="Search"
