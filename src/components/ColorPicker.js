@@ -6,7 +6,7 @@ const darkColors = [
   "#3E2723", "#1B5E20", "#004D40", "#0D47A1", "#311B92"
 ];
 
-function ColorPicker({ onColorSelect , showPalette, setShowPalette }) {
+function ColorPicker({ onColorSelect ,showPalette, setShowPalette}) {
   
 useEffect(() => { 
   

@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   notes: [
-    { id: 1, title: "First Note", content: "This is my first note. Lets make it a tad bit longer to check the ui under different conditions", labels: ["Work"] ,bgColor:""},
-    { id: 2, title: "Second Note", content: "Google Keep Clone! lets see how close we can get to the actual design. seems easy but we'll have to wait and see.", labels: ["Personal"],bgColor:"" },
+    { id: 1, title: "First Note", content: "This is my first note. Lets make it a tad bit longer to check the ui under different conditions", labels: ["Work"] ,bgColor:"#202124"},
+    { id: 2, title: "Second Note", content: "Google Keep Clone! lets see how close we can get to the actual design. seems easy but we'll have to wait and see.", labels: ["Personal"],bgColor:"#202124" },
   ],
   selectedLabel: null, // For filtering
 };

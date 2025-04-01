@@ -16,12 +16,13 @@ function NoteContainer({menuOpen}) {
            {notes.map((note, index) => (
             <div className={menuOpen ? "basis-1/4" : "basis-1/6"} >
                 <NoteCard  
-                    key={index} 
+                    key={note.id} 
                     handleRemove={handleRemove} 
                     noteTitle={note.title} 
                     noteText={note.content} 
                     label={note.label}
                     index={note.id}
+                    bgColor={note.bgColor}
                 />
                 </div>
             ))}

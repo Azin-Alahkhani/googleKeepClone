@@ -30,7 +30,9 @@ function AddNoteContainer() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
+const handleColorSelect = (color)=>{
+  setBgColor(color);
+}
   const handleAddNote = (e) => {
     e.preventDefault();
     if (noteText.trim() || noteTitle.trim()) {
@@ -48,6 +50,7 @@ function AddNoteContainer() {
       setIsList(false);
       setBgColor("#202124"); // Reset to default dark color
       setIsFocused(false);
+      setShowColorPicker(false);
     }
   };
 
@@ -101,7 +104,7 @@ function AddNoteContainer() {
 
                 {showColorPicker && (
                   <div className="absolute top-10 left-0 z-10 shadow-lg">
-                    <ColorPicker onSelectColor={(color) => { setBgColor(color); setShowColorPicker(false); }} />
+                    <ColorPicker showPalette={showColorPicker} onColorSelect={handleColorSelect} setShowPalette={setShowColorPicker}/>
                   </div>
                 )}
               </div>
