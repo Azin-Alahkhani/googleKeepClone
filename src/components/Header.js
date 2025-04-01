@@ -63,7 +63,7 @@ const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
             onFocus={() => setIsFocusedOnSearch(true)}
             onBlur={() => setIsFocusedOnSearch(false)}
             type="text"
-            className="w-full text-lg font-medium p-2 bg-transparent dark:text-white border-none focus:outline-none"
+            className="w-full text-lg font-medium p-2 bg-transparent focus:text-gray-800 border-none focus:outline-none"
             placeholder="Search"
           />
         </div>

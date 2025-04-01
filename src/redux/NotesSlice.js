@@ -13,9 +13,9 @@ const notesSlice = createSlice({
   initialState,
   reducers: {
     addNote: (state, action) => {
-        console.log(action.payload);
-      //state.notes.push(action.payload);
-            state.notes = [...state.notes, action.payload]; 
+       console.log("Before adding:", state.notes); // Log state before mutation
+  state.notes.push(action.payload);
+  console.log("After adding:", state.notes);
     },
     removeNote: (state, action) => {
       state.notes = state.notes.filter(note => note.id !== action.payload);

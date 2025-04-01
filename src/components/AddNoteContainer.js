@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";  // Import useDispatch from react-redux
-import { addNote } from "../redux/actions";
+import { addNote } from "../redux/NotesSlice";
 import { FaPalette, FaListUl } from "react-icons/fa";
 import ColorPicker from "./ColorPicker"; // Importing the new ColorPicker component
 
@@ -12,6 +12,7 @@ function AddNoteContainer() {
   const [isList, setIsList] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const noteRef = useRef(null);
+  
 
   const dispatch = useDispatch();  // Set up dispatch
 
@@ -37,7 +38,7 @@ function AddNoteContainer() {
         title: noteTitle,
         content: noteText,
         bgColor: bgColor,
-        id:12,
+        id:new Date().toISOString(),
         labels:[]
       };
 
