@@ -12,15 +12,18 @@ function NoteContainer({menuOpen}) {
     };
 
     return (
-        <div className={!menuOpen ? "grid grid-cols-4 gap-3" : "grid grid-cols-2 gap-3"}>
+        <div className="flex flex-wrap"  >
            {notes.map((note, index) => (
+            <div className={menuOpen ? "basis-1/4" : "basis-1/6"} >
                 <NoteCard  
                     key={index} 
                     handleRemove={handleRemove} 
                     noteTitle={note.title} 
                     noteText={note.content} 
                     label={note.label}
+                    index={note.id}
                 />
+                </div>
             ))}
             
         </div>

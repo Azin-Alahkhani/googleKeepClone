@@ -42,7 +42,6 @@ function AddNoteContainer() {
         labels:[]
       };
 
-      console.log("Dispatching addNote:", noteData); // Log to ensure we're dispatching the correct data
       dispatch(addNote(noteData)); // Dispatch addNote action
       setNoteText("");
       setNoteTitle("");

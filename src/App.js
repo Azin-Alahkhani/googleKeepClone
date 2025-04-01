@@ -14,9 +14,9 @@ function App() {
     <div style={{ backgroundColor: "#202124" }}>
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
      <div className="flex flex-row ">
-      <div className={menuOpen ? "basis-1/8":"basis-3/10"}><Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} /></div>
+      <div className={menuOpen ? "basis-1/8":"basis-1/10"}><Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} /></div>
 
-<div className={menuOpen ?"basis-7/8 ":"basis-7/10"}>
+<div className={menuOpen ?"basis-7/8 ":"basis-9/10"}>
 <div className='flex flex-col '>
   <div className="basis-full p-5 ml-10 w-200">
       <AddNoteContainer />

@@ -7,9 +7,9 @@ function NoteCard({noteTitle,noteText, handleRemove, index,label}) {
    }
   return (
     
-<div className=" max-w-sm p-6 m-6 border bg-amber-100 border-gray-200 rounded-lg shadow-md bg-gray-800 dark:border-gray-700 ">
-    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{noteTitle}</h5>
-    <p className="font-normal text-gray-700 dark:text-gray-400">{noteText}</p>
+<div className="max-w-sm p-4 m-1 border bg-zinc-800 border-gray-200 rounded-lg shadow-md bg-gray-800 dark:border-gray-700" >
+    <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">{noteTitle}</h5>
+    <p className="font-normal text-white">{noteText}</p>
 </div>
 
   )
