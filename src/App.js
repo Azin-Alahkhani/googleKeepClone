@@ -14,16 +14,16 @@ function App() {
     <div style={{ backgroundColor: "#202124" }}>
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
      <div className="flex flex-row ">
-      <div className={menuOpen ? "basis-1/8":"basis-1/10"}><Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} /></div>
+      <div className={menuOpen ? "basis-1/8 w-[300px]":"basis-1/8 w-[200px]"}><Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} /></div>
 
-<div className={menuOpen ?"basis-7/8 ":"basis-9/10"}>
-<div className='flex flex-col '>
-  <div className="basis-full p-5 ml-10 w-200">
+<div className={ "basis-8/10 justify-center"}>
+ 
+  <div className="basis-full p-5 ">
       <AddNoteContainer />
       
       </div>
-      <div><NoteContainer menuOpen={menuOpen}/></div>
- </div></div>
+      <div className='w-full'><NoteContainer menuOpen={menuOpen}/></div>
+ </div> 
      </div>
     
 
