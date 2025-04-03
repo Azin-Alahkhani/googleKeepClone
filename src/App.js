@@ -3,12 +3,42 @@ import Header from './components/Header';
 import  AddNoteContainer  from './components/AddNoteContainer';
 import NoteContainer from './components/NotesContainer';
 import Sidebar from './components/Sidebar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import {store} from './redux/storeConfig';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuW,setMenuW]=useState('300px');
+  const UpdateMenuWidth= ()=>{
+    const width = window.innerWidth;
+
+            if (width < 600) {
+               
+            } else if (width < 800) {
+            
+             
+          
+            }else if (width<950) {
+               
+                    
+            }
+            else if (width<1024){
+                
+            }
+            
+            else if (width < 1200) {
+                
+            } else {
+                // Default: 4 or 6 columns
+            }
+  }
+  useEffect(() => {
+        UpdateMenuWidth(); // Set columns on mount
+        window.addEventListener("resize", UpdateMenuWidth); // Listen for resize events
+
+        return () => window.removeEventListener("resize", UpdateMenuWidth); // Cleanup
+    }, [menuOpen]);
   return (
     <Provider store={store}>
     <div style={{ backgroundColor: "#202124" }}>

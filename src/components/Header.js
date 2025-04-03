@@ -22,7 +22,7 @@ function Header({menuOpen, setMenuOpen}) {
 const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
 
   return (
-    <nav className="border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 font-sans " style={{ position: "sticky", top: 0, zIndex: 1000 , backgroundColor:"#202124" }}>
+    <nav className="border-gray-200 fixed px-2 sm:px-4 py-2.5 dark:bg-gray-900 font-sans " style={{ position: "sticky", top: 0, zIndex: 1000 , backgroundColor:"#202124" }}>
       
       <div className="flex flex-row  items-center font-sans">
       <div className="flex flex-row items-center justify-between">
@@ -46,7 +46,7 @@ const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
        </div>
        </div>
        
-       <div className="flex items-center justify-around w-full"> 
+       <div className="hidden md:flex items-center justify-around w-full"> 
        
       
    
@@ -72,8 +72,9 @@ const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
         <div className="Grid grid-cols-3 gap-0">
           <div></div>
           </div>
+          
           {/*right side stuff*/}
-          <div className="grid grid-cols-4 gap-5 mr-5 ">
+          <div className="grid grid-cols-4 gap-5 mr-5 flex-end ">
             
            
               <div>

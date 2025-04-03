@@ -2,9 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeNote } from "../redux/actions";
 import NoteCard from "./NoteCard";
 import { useState , useEffect } from "react";
+import NoteModal from "./NoteModal"; // Import modal component
 
 function NoteContainer({menuOpen}) {
     const notes = useSelector((state) => state.notes.notes || []) ; // Get notes from Redux store
+      const [selectedNote, setSelectedNote] = useState(null);
+
     const dispatch = useDispatch(); // Dispatch actions
     const [columns, setColumns] = useState(menuOpen ? 4 : 5);
     const [noteW,setNoteW] = useState('200px')
@@ -61,9 +64,17 @@ function NoteContainer({menuOpen}) {
                         label={note.label}
                         index={note.id}
                         bgColor={note.bgColor}
+                         onClick={() => setSelectedNote(note)}
                     />
                 </div>
             ))}
+            {/* Modal for Editing */}
+            {selectedNote && (
+                <NoteModal
+                    note={selectedNote}
+                    onClose={() => setSelectedNote(null)}
+                />
+            )}
         </div>
     );
 }

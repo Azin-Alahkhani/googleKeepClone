@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { FiHome, FiTrash, FiSettings, FiArchive, FiPieChart, FiAlertCircle } from "react-icons/fi";
+import { FiHome, FiTrash, FiSettings, FiArchive, FiPieChart, FiAlertCircle , FiBookmark } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 const Sidebar = ({isExpanded,setIsExpanded}) => {
+  const labels = useSelector(state=>(state.labels.labels || []))
   
 
   useEffect(() => {
@@ -9,12 +11,21 @@ const Sidebar = ({isExpanded,setIsExpanded}) => {
   }, [isExpanded]);
 
   const menuItems = [
-    { id: 1, icon: FiHome, label: "Notes" },
-    { id: 2, icon: FiAlertCircle, label: "Reminders" },
-    { id: 3, icon: FiSettings, label: "Edit labels" },
-    { id: 4, icon: FiArchive, label: "Archive" },
-    { id: 5, icon: FiTrash, label: "Trash" }
-  ];
+        { id: 1, icon: FiHome, label: "Notes" },
+        { id: 2, icon: FiAlertCircle, label: "Reminders" },
+    ];
+ const labelItems = labels.map((label, index) => ({
+        id: index, // Dynamic index
+        icon: FiBookmark,
+        label,
+    }));
+    console.log(labelItems);
+    const extraMenuItems = [
+        { id: 3, icon: FiSettings, label: "Edit labels" },
+        { id: 4, icon: FiArchive, label: "Archive" },
+        { id: 5, icon: FiTrash, label: "Trash" },
+    ];
+   
 
   return (
     <div
@@ -46,6 +57,60 @@ const Sidebar = ({isExpanded,setIsExpanded}) => {
             )}
           </div>
         ))}
+{/* User Labels with Bookmark Icon */}
+                {labelItems.map((item) => (
+                    <div
+                        key={item.id}
+                        className="group relative flex items-center gap-4 px-2 py-3 hover:bg-gray-700 rounded-lg cursor-pointer transition-all duration-200"
+                        role="button"
+                        tabIndex={0}
+                    >
+                        <div className="flex items-center justify-center min-w-[2rem]">
+                            <item.icon className="h-6 w-6" aria-hidden="true" />
+                        </div>
+                        <span
+                            className={`${
+                                isExpanded ? "opacity-100" : "opacity-0 hidden"
+                            } whitespace-nowrap transition-opacity duration-200 ${
+                                isExpanded ? "delay-100" : ""
+                            }`}
+                        >
+                            {item.label}
+                        </span>
+                        {!isExpanded && (
+                            <div className="absolute left-full ml-6 px-2 py-1 bg-gray-900 text-sm rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+                                {item.label}
+                            </div>
+                        )}
+                    </div>
+                ))}
+
+         {extraMenuItems.map((item) => (
+          <div
+            key={item.id}
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-gray-700 rounded-lg cursor-pointer transition-all duration-200"
+            role="button"
+            tabIndex={0}
+          >
+            <div className="flex items-center justify-center min-w-[2rem]">
+              <item.icon
+                className="h-6 w-6"
+                aria-hidden="true"
+              />
+            </div>
+            <span
+              className={`${isExpanded ? "opacity-100" : "opacity-0 hidden"} whitespace-nowrap transition-opacity duration-200 ${isExpanded ? "delay-100" : ""}`}
+            >
+              {item.label}
+            </span>
+            {!isExpanded && (
+              <div className="absolute left-full ml-6 px-2 py-1 bg-gray-900 text-sm rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
+                {item.label}
+              </div>
+            )}
+          </div>
+        ))}
+        
       </nav>
     </div>
   );
