@@ -55,7 +55,7 @@ function NoteContainer({menuOpen}) {
             }}
         >
             {notes.map((note) => (
-                <div key={note.id} className="w-full max-w-[200px]">
+               
                     <NoteCard
                         key={note.id}
                         handleRemove={handleRemove}
@@ -67,7 +67,7 @@ function NoteContainer({menuOpen}) {
                          onClick={() => setSelectedNote(note)}
                          img={note.img}
                     />
-                </div>
+               
             ))}
             {/* Modal for Editing */}
             {selectedNote && (
