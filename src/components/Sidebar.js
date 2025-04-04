@@ -58,7 +58,7 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
         {menuItems.map((item) => (
           <div
             key={item.id}
-            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-yellow-900 rounded-r-full cursor-pointer transition-all duration-200"
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-[#41321c] rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
             onClick={() => handleClick(item.id)}
             tabIndex={0}
@@ -86,7 +86,7 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
         {labelItems.map((item) => (
           <div
             key={item.id}
-            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-yellow-900 rounded-r-full cursor-pointer transition-all duration-200"
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-[#41321c] rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
             onClick={() => handleClick(item.id)}
             tabIndex={0}
@@ -114,7 +114,7 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
         {extraMenuItems.map((item) => (
           <div
             key={item.id}
-            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-yellow-900 rounded-r-full cursor-pointer transition-all duration-200"
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-[#41321c] rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
             onClick={() => handleClick(item.id)}
             tabIndex={0}
