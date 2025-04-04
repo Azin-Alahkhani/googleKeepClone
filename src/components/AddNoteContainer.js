@@ -14,6 +14,8 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
   const [isList, setIsList] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const noteRef = useRef(null);
+   const [menuOpen, setMenuOpen] = useState(false);
+   const menuRef = useRef(null);
     
     console.log("being edited: ",isEdit, bgColor);
 
@@ -185,12 +187,46 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
                     <FiImage className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "  title="Add Image"/>
                     
                 </label>
+                 {/* More Options Menu */}
                   {isEdit && (
-        <button type="button" onClick={handleRemove}>
-          <FiMoreVertical className="text-white text-xl hover:text-gray-200 hover:bg-gray-600  transition"
-                      size={20}
-                      title="More"/>
-        </button>
+     
+        <div className="relative">
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setMenuOpen(!menuOpen);
+                                        }}
+                                        className="p-2 rounded-full hover:bg-gray-600"
+                                    >
+                                        <FiMoreVertical size={20} className="text-white hover:text-gray-200" title="More" />
+                                    </button>
+
+                                    {menuOpen && (
+                                         <div ref={menuRef} className="absolute right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-1 z-10 text-xs">                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Delete note
+                                            </button>
+                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Add label
+                                            </button>
+                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Make a copy
+                                            </button>
+                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Show checkboxes
+                                            </button>
+                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Grab image text
+                                            </button>
+                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Copy to google doc
+                                            </button>
+                                             <button className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left" onClick={handleRemove}>
+                                                Version history
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
       )}
             </div>
 
