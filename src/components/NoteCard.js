@@ -36,7 +36,7 @@ function NoteCard({
           className="w-full h-auto max-h-80 object-cover rounded-md mb-2"
         />
       )}
-      {(noteText != "" || noteTitle != "") && (
+      {(noteText !== "" || noteTitle !== "") && (
         <div className="relative max-w-sm p-4 m-1  ">
           {/* Checkmark on hover 
             {isHovered && (

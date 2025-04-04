@@ -54,17 +54,17 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
         isExpanded ? "w-64" : "w-20"
       } text-white h-screen pt-3  left-0 transition-all duration-300 ease-in-out`}
     >
-      <nav className="flex flex-col gap-4">
+      <nav className="flex flex-col gap-4 ">
         {menuItems.map((item) => (
           <div
             key={item.id}
-            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-gray-700 rounded-r-full cursor-pointer transition-all duration-200"
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-yellow-900 rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
             onClick={() => handleClick(item.id)}
             tabIndex={0}
           >
             <div className="flex items-center justify-center min-w-[2rem]">
-              <item.icon className="h-6 w-6" aria-hidden="true" />
+              <item.icon className="h-6 w-6  ml-6" aria-hidden="true" />
             </div>
             <span
               className={`${
@@ -86,13 +86,13 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
         {labelItems.map((item) => (
           <div
             key={item.id}
-            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-gray-700 rounded-r-full cursor-pointer transition-all duration-200"
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-yellow-900 rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
             onClick={() => handleClick(item.id)}
             tabIndex={0}
           >
             <div className="flex items-center justify-center min-w-[2rem]">
-              <item.icon className="h-6 w-6" aria-hidden="true" />
+              <item.icon className="h-6 w-6  ml-6" aria-hidden="true" />
             </div>
             <span
               className={`${
@@ -120,7 +120,7 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
             tabIndex={0}
           >
             <div className="flex items-center justify-center min-w-[2rem]">
-              <item.icon className="h-6 w-6" aria-hidden="true" />
+              <item.icon className="h-6 w-6 ml-6" aria-hidden="true" />
             </div>
             <span
               className={`${

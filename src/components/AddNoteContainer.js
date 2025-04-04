@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
 import { addNote, editNote, removeNote } from "../redux/NotesSlice";
-import { FaPalette, FaListUl } from "react-icons/fa";
-import { FiImage, FiMoreVertical } from "react-icons/fi";
-import ColorPicker from "./ColorPicker"; // Importing the new ColorPicker component
+import { FaListUl } from "react-icons/fa";
+import { FiImage } from "react-icons/fi";
+
 import NoteFooterButtons from "./NoteFooterButtons"; // Importing the new NoteFooterButtons component
 
 function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
@@ -28,15 +28,18 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
         // Dispatch note
         dispatchNote();
       }
-      setNoteText("");
-      setNoteTitle("");
-      setIsList(false);
-      setBgrColor("#202124"); // Reset to default dark color
-      setShowColorPicker(false);
-      setImage("");
-      setIsFocused(false);
-      setShowColorPicker(false); // Close color picker if clicked outside
+      resetContainer();
     }
+  };
+  const resetContainer = () => {
+    setNoteText("");
+    setNoteTitle("");
+    setIsList(false);
+    setBgrColor("#202124"); // Reset to default dark color
+    setShowColorPicker(false);
+    setImage("");
+    setIsFocused(false);
+    setShowColorPicker(false);
   };
   const dispatchNote = () => {
     if (!isEdit) {
@@ -90,7 +93,16 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
       reader.readAsDataURL(file);
     }
   };
+  useEffect(() => {
+    if (image) {
+      if (!isEdit && !noteText.trim() && !noteTitle.trim()) {
+        dispatchNote();
 
+        resetContainer();
+      }
+      // Logs the updated image URL
+    }
+  }, [image]);
   const handleRemove = () => {
     if (onSave) {
       console.log("removing :", note.id);
