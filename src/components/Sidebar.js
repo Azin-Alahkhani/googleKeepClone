@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { FiHome, FiTrash, FiSettings, FiArchive, FiPieChart, FiAlertCircle , FiBookmark } from "react-icons/fi";
+import { FiHome, FiTrash,FiBell , FiBookmark } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import EditLabelsModal from "./EditLabelsModal";
+import { MdOutlineModeEdit } from "react-icons/md";
+import { IoArchiveOutline } from "react-icons/io5";
 
 const Sidebar = ({isExpanded,setIsExpanded}) => {
   const labels = useSelector(state=>(state.labels.labels || []))
@@ -14,7 +16,7 @@ const Sidebar = ({isExpanded,setIsExpanded}) => {
 
   const menuItems = [
         { id: 1, icon: FiHome, label: "Notes" },
-        { id: 2, icon: FiAlertCircle, label: "Reminders" },
+        { id: 2, icon: FiBell, label: "Reminders" },
     ];
  const labelItems = labels.map((label, index) => ({
         id: index, // Dynamic index
@@ -23,8 +25,8 @@ const Sidebar = ({isExpanded,setIsExpanded}) => {
     }));
     console.log(labelItems);
     const extraMenuItems = [
-        { id: 3, icon: FiSettings, label: "Edit labels" },
-        { id: 4, icon: FiArchive, label: "Archive" },
+        { id: 3, icon: MdOutlineModeEdit, label: "Edit labels" },
+        { id: 4, icon: IoArchiveOutline, label: "Archive" },
         { id: 5, icon: FiTrash, label: "Trash" },
     ];
    const handleClick = (id) => {
@@ -117,7 +119,7 @@ const Sidebar = ({isExpanded,setIsExpanded}) => {
          {extraMenuItems.map((item) => (
           <div
             key={item.id}
-            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-gray-700 rounded-r-full cursor-pointer transition-all duration-200"
+            className="group relative flex items-center gap-4 px-2 py-3 hover:bg-yellow-900 rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
             onClick={() => handleClick(item.id)}
             tabIndex={0}

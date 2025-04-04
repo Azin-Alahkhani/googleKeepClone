@@ -2,10 +2,10 @@
 import logo from "../assets/keep_2020q4_48dp.png";
 import { FaSearch , FaUser  } from "react-icons/fa";
 import {FiSettings, FiList, FiRefreshCcw} from "react-icons/fi";
-
+import { IoIosSearch } from "react-icons/io";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { Tooltip} from "@material-tailwind/react";
+
 
 
 function Header({menuOpen, setMenuOpen}) {
@@ -45,33 +45,35 @@ const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);
                     </a>
        </div>
        </div>
-       
+       {/* Search bar */}
        <div className="hidden md:flex items-center justify-around w-full"> 
-       
-      
-   
-        <div className="ml-24 w-full flex justify-normal items-center p-1   rounded-lg shadow-md border  mr-24"
-      style={{
-        backgroundColor: isFocusedOnSearch ? "#ffffff" : "#202124",
-        color: "#fff", 
-      }}>
-        <FaSearch className="w-5 h-5 text-gray-500 dark:text-gray-300" />
+        <div className="ml-24 w-full flex justify-normal items-center p-1   rounded-lg shadow-md border-none  mr-24"
+              style={{
+                backgroundColor: isFocusedOnSearch ? "#ffffff" : "oklch(43.9% 0 0)",
+               
+              }}>
+<div className={`${isFocusedOnSearch ? "hover:bg-stone-100" : "hover:bg-stone-500"} rounded-full m-1 ml-3 w-8 h-8 flex items-center justify-center`}>
+                   <IoIosSearch className="w-5 h-5 text-sm " 
+            style={{
+                color: !isFocusedOnSearch ? "white" : "black"
+              }}/>
+                </div>
+           
         
-        <input
-            value={searchTerm}
-            onChange={handleSearchTermChange}
-            onFocus={() => setIsFocusedOnSearch(true)}
-            onBlur={() => setIsFocusedOnSearch(false)}
-            type="text"
-            className="w-full text-lg font-medium p-2 bg-transparent focus:text-gray-800 border-none focus:outline-none"
-            placeholder="Search"
-          />
+            <input
+                tabIndex={0}
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+                onFocus={() => setIsFocusedOnSearch(true)}
+                onBlur={() => setIsFocusedOnSearch(false)}
+                type="text"
+                className="w-full text-white text-lg font-medium p-2 bg-transparent focus:text-gray-800 border-none focus:outline-none"
+                placeholder="Search"
+              />
         </div>
         
         </div>
-        <div className="Grid grid-cols-3 gap-0">
-          <div></div>
-          </div>
+        
           
           {/*right side stuff*/}
           <div className="grid grid-cols-4 gap-5 mr-5 flex-end ">
