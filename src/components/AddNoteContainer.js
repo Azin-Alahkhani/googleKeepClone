@@ -1,21 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";  // Import useDispatch from react-redux
-import { addNote, editNote } from "../redux/NotesSlice";
+import { addNote, editNote, removeNote } from "../redux/NotesSlice";
 import { FaPalette, FaListUl } from "react-icons/fa";
-import { FiImage } from "react-icons/fi";
+import { FiImage, FiMoreVertical } from "react-icons/fi";
 import ColorPicker from "./ColorPicker"; // Importing the new ColorPicker component
 
-function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,onSave}) {
+function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,onSave, isEdit=false}) {
   const [noteText, setNoteText] = useState(content);
   const [noteTitle, setNoteTitle] = useState(title);
   const [isFocused, setIsFocused] = useState(false);
   const [image,setImage]= useState(img);
-  const [bgrColor, setBgrColor] = useState(bgColor); 
+  const [bgrColor, setBgrColor] = useState(bgColor!="#202124" ? bgColor : "#202124"); 
   const [isList, setIsList] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const noteRef = useRef(null);
-    const isEdit = content==""?false:true;
-    console.log("being edited: ",isEdit);
+    
+    console.log("being edited: ",isEdit, bgColor);
 
   const dispatch = useDispatch();  // Set up dispatch
 
@@ -37,12 +37,12 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
         img : image,
         labels:[]
       };
-      console.log("dispatching new note",noteData);
+      console.log("dispatching new note",bgrColor);
       dispatch(addNote(noteData)); 
         }
-        else  {
+        else if(onSave) {
           const noteData = {id:index, content:noteText, bgColor: bgrColor, title:noteTitle, img: image}
-          console.log("dispatching edited note ",noteData);
+          console.log("dispatching edited note ",bgrColor);
           dispatch(editNote({id:index, content:noteText, title:noteTitle, img: image}))
           onSave()
         }
@@ -68,6 +68,7 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
   }, [noteRef, isEdit, noteTitle, noteText, image]);
   const handleColorSelect = (color)=>{
     setBgrColor(color);
+    console.log("color selected",color, bgrColor);
   }
 
  const handleImageUpload = (e) => {
@@ -77,8 +78,35 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
             reader.onload = () => setImage(reader.result);
             reader.readAsDataURL(file);
             console.log("image saved");
+             const noteData = {
+        title: noteTitle,
+        content: noteText,
+        bgColor: bgrColor,
+        id:new Date().toISOString(),
+        img : image,
+        labels:[]
+      };
+      console.log("dispatching new note",bgrColor);
+      dispatch(addNote(noteData)); 
+       setNoteText("");
+      setNoteTitle("");
+      setIsList(false);
+      setBgrColor("#202124"); // Reset to default dark color
+      setShowColorPicker(false);
+      setImage("");
+      setIsFocused(false);
+      setShowColorPicker(false); 
         }
     };
+
+    const handleRemove = ()=>{
+      if(onSave){
+         console.log("removing :",index)
+      dispatch(removeNote(index));
+      onSave();
+      }
+     
+    }
   return (
     <div
       ref={noteRef}
@@ -88,7 +116,9 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
         color: "#fff",
       }}
     >
-      <form className="flex flex-col space-y-2 ">
+       
+      <form className="flex flex-col space-y-2 w-full">
+      
          {/* Show image if uploaded */}
             {image && (
                 <div className="mt-2">
@@ -155,6 +185,13 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
                     <FiImage className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "  title="Add Image"/>
                     
                 </label>
+                  {isEdit && (
+        <button type="button" onClick={handleRemove}>
+          <FiMoreVertical className="text-white text-xl hover:text-gray-200 hover:bg-gray-600  transition"
+                      size={20}
+                      title="More"/>
+        </button>
+      )}
             </div>
 
            
@@ -179,6 +216,8 @@ function AddNoteContainer({content="", title="",bgColor="#202124",img="",index,o
                    </label> 
                 </button>
               </div>
+
+              
 </div>
                 )}
               

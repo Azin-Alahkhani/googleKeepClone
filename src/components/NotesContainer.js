@@ -65,6 +65,7 @@ function NoteContainer({menuOpen}) {
                         index={note.id}
                         bgColor={note.bgColor}
                          onClick={() => setSelectedNote(note)}
+                         img={note.img}
                     />
                 </div>
             ))}

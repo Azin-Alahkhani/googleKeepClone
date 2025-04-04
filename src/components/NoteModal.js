@@ -12,7 +12,6 @@ function NoteModal({ note, onClose }) {
     console.log(bgColor)
     const handleSave = () => {
         console.log("modal close")
-       // dispatch(editNote({ id: note.id, title, content, bgColor }));
         onClose();
     };
     const handleChangeTitle=(newTitle)=>{
@@ -24,12 +23,7 @@ function NoteModal({ note, onClose }) {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="w-[650px]  p-6 rounded-lg shadow-lg relative">
-                <button
-                    className="absolute top-3 right-3 text-white text-xl"
-                    onClick={handleSave}
-                >
-                    ✕
-                </button>
+               
 
                 {/* Reuse AddNoteContainer with controlled inputs */}
                 <AddNoteContainer
@@ -43,6 +37,7 @@ function NoteModal({ note, onClose }) {
                     img={img}
                     setImg={setImg}
                     index={note.id}
+                    isEdit={true}
                 />
             </div>
         </div>

@@ -1,20 +1,31 @@
-import { useState } from "react";
+import { useState  } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { FaTimes, FaTrash, FaPlus } from "react-icons/fa";
 
-export default function EditLabelsModal({ isOpen, onClose, labels, setLabels }) {
-  const [newLabel, setNewLabel] = useState("");
 
+import { addLabel } from "../redux/LabelSlice"; // Import your action to add a label
+import { removeLabel } from "../redux/LabelSlice"; // Import your action to remove a label
+
+
+export default function EditLabelsModal({ isOpen, onClose }) {
+  const [newLabel, setNewLabel] = useState("");
+  const labels = useSelector((state) => state.labels.labels || []); // Fetch labels from Redux store
+   const dispatch = useDispatch();
+   
   if (!isOpen) return null; // Don't render if not open
 
+ 
   const handleAddLabel = () => {
     if (newLabel.trim() && !labels.includes(newLabel)) {
-      setLabels([...labels, newLabel]);
+      dispatch(addLabel(newLabel)); // Dispatch action to add label
+      console.log("Adding label:", newLabel);
       setNewLabel(""); // Clear input
     }
   };
 
   const handleDeleteLabel = (labelToRemove) => {
-    setLabels(labels.filter((label) => label !== labelToRemove));
+    console.log("Deleting label:", labelToRemove);
+    dispatch(removeLabel(labelToRemove)); // Dispatch action to remove label
   };
 
   return (
@@ -35,7 +46,7 @@ export default function EditLabelsModal({ isOpen, onClose, labels, setLabels }) 
             <div key={index} className="flex justify-between items-center bg-gray-800 p-2 rounded">
               <span>{label}</span>
               <button onClick={() => handleDeleteLabel(label)}>
-                <FaTrash className="text-gray-400 hover:text-red-400" />
+                <FaTrash className="text-gray-400 hover:text-red-400" title="Delete label"/>
               </button>
             </div>
           ))}
@@ -51,7 +62,7 @@ export default function EditLabelsModal({ isOpen, onClose, labels, setLabels }) 
             className="w-full bg-gray-800 text-white p-2 rounded focus:outline-none"
           />
           <button onClick={handleAddLabel} className="bg-gray-700 p-2 rounded">
-            <FaPlus className="text-white" />
+            <FaPlus className="text-white" title="Add new label" />
           </button>
         </div>
       </div>
