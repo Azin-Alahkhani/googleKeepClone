@@ -17,7 +17,6 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   const [isList, setIsList] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const noteRef = useRef(null);
-
   const dispatch = useDispatch(); // Set up dispatch
 
   // Handle Click Outside to Collapse
@@ -53,7 +52,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
       };
       console.log("dispatching new note", bgrColor);
       dispatch(addNote(noteData));
-    } else if (onSave) {
+    } else if (onSave && isEdit) {
       const noteData = {
         id: note.id,
         content: noteText,
@@ -92,11 +91,12 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
         setImage(reader.result); // Ensure `image` is a URL
       };
       reader.readAsDataURL(file);
+      console.log("image uploaded on note container", reader.result);
     }
   };
   useEffect(() => {
     if (image) {
-      if (!isEdit && !noteText.trim() && !noteTitle.trim()) {
+      if (!isEdit && !noteText.trim() && !noteTitle.trim() && !isFocused) {
         dispatchNote();
 
         resetContainer();

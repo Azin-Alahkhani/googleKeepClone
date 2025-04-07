@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { FiMoreVertical, FiImage } from "react-icons/fi";
+import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { FaPalette } from "react-icons/fa";
 import ColorPicker from "./ColorPicker"; // Assuming you have a ColorPicker component
 
@@ -7,10 +7,16 @@ function NoteFooterButtons({
   handleColorSelect,
   handleRemove,
   isEdit = false,
+  handleImageUpload,
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+
+  const handleRemoveClick = (e) => {
+    e.stopPropagation(); // Prevent card click
+    handleRemove(e);
+  };
 
   return (
     <div className="flex justify-between items-center">
@@ -43,13 +49,34 @@ function NoteFooterButtons({
             </div>
           )}
         </div>
+        {/* Reminder Button */}
         <label
-          htmlFor="imageUpload"
           className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition"
+          role="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent card click
+          }}
         >
+          <FiBell
+            className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
+            title=" Remind me"
+          />
+        </label>
+
+        {/* Add image */}
+        <label className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition">
           <FiImage
             className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
             title="Add Image"
+          />
+          {/* Image Upload */}
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            id="imageUpload"
+            onChange={handleImageUpload}
           />
         </label>
         {/* More Options Menu */}
@@ -59,6 +86,7 @@ function NoteFooterButtons({
               type="button"
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent card click
                 setMenuOpen(!menuOpen);
               }}
               className="p-2 rounded-full hover:bg-gray-600"

@@ -1,26 +1,54 @@
 import { FiCheckSquare, FiCheck } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { editNote } from "../redux/NotesSlice"; // Assuming you have this action
 import NoteFooterButtons from "./NoteFooterButtons"; // Assuming you have this component
 
 function NoteCard({ note, handleRemove, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
-  const [bgColor, setBgColor] = useState(note.bgColor);
+  const [bgColor, setBgColor] = useState(note.bgColor); // Initialize with note color
+  const [image, setImage] = useState(note.img); // Initialize with note image
 
-  const Remove = (e) => {
-    e.preventDefault();
-    handleRemove({ index: note.id });
+  const dispatch = useDispatch(); // Set up dispatch
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImage(reader.result); // Ensure `image` is a URL
+      };
+      reader.readAsDataURL(file);
+      console.log("image uploaded on footer", reader.result);
+      //dispatchUpdatedNote();
+    }
   };
 
   const dispatchUpdatedNote = () => {
-    const noteData = {
-      id: note.id,
-      content: note.content,
-      bgColor: note.bgColor,
-      title: note.title,
-      img: note.img,
-    };
-    console.log("dispatching edited note ", noteData);
+    console.log("dispatching edited note ", bgColor);
+    dispatch(
+      editNote({
+        id: note.id,
+        content: note.content,
+        bgColor: bgColor !== "" ? bgColor : note.bgColor,
+        title: note.title,
+        img: image !== "" ? image : note.img,
+      })
+    );
   };
+  const handleBgChange = (color) => {
+    console.log("color selected", color);
+    setBgColor(color);
+
+    console.log("color changed to", color);
+    //dispatchUpdatedNote();
+  };
+
+  useEffect(() => {
+    if (bgColor !== "" || image !== "") {
+      dispatchUpdatedNote();
+    }
+  }, [bgColor, image]);
 
   return (
     <div
@@ -58,9 +86,11 @@ function NoteCard({ note, handleRemove, onClick }) {
       )}
       {/* Footer with buttons */}
       <div
-        className={`absolute bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
-          isHovered ? "opacity-100" : "opacity-0"
+        tabIndex={0}
+        className={`absolute z-10 bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
+          isHovered ? "opacity-60" : "opacity-0"
         }`}
+        onClick={(e) => e.stopPropagation()}
       >
         {/*<button onClick={Remove} className="hover:bg-gray-700 p-1 rounded">
           <FiCheckSquare size={20} />
@@ -72,8 +102,9 @@ function NoteCard({ note, handleRemove, onClick }) {
 
         <NoteFooterButtons
           handleRemove={handleRemove}
-          handleColorSelect={setBgColor}
+          handleColorSelect={handleBgChange}
           isEdit={true}
+          handleImageUpload={handleImageUpload}
         />
       </div>
     </div>
