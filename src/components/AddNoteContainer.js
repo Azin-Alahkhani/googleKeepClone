@@ -78,6 +78,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [noteRef, isEdit, noteTitle, noteText, image]);
+
   const handleColorSelect = (color) => {
     setBgrColor(color);
     console.log("color selected", color, bgrColor);

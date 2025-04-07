@@ -3,7 +3,11 @@ import { FiMoreVertical, FiImage } from "react-icons/fi";
 import { FaPalette } from "react-icons/fa";
 import ColorPicker from "./ColorPicker"; // Assuming you have a ColorPicker component
 
-function NoteFooterButtons({ handleColorSelect, handleRemove, isEdit }) {
+function NoteFooterButtons({
+  handleColorSelect,
+  handleRemove,
+  isEdit = false,
+}) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
