@@ -24,7 +24,7 @@ export default function EditLabelsModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-100">
       <div className="bg-gray-900 text-white w-96 p-4 rounded-lg shadow-lg">
         {/* Header */}
         <div className="flex justify-between items-center border-b border-gray-700 pb-2">

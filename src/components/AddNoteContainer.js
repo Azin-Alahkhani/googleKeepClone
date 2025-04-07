@@ -16,9 +16,10 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   );
   const [isList, setIsList] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const [labels, setLabels] = useState(note.labels || []);
   const noteRef = useRef(null);
   const dispatch = useDispatch(); // Set up dispatch
-
+  console.log(note.labels);
   // Handle Click Outside to Collapse
   const handleClickOutside = (e) => {
     if (!noteRef.current) return;
@@ -48,25 +49,19 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
         bgColor: bgrColor,
         id: new Date().toISOString(),
         img: image,
-        labels: [],
+        labels,
       };
-      console.log("dispatching new note", bgrColor);
+      console.log("dispatching new note", noteData);
       dispatch(addNote(noteData));
     } else if (onSave && isEdit) {
-      const noteData = {
-        id: note.id,
-        content: noteText,
-        bgColor: bgrColor,
-        title: noteTitle,
-        img: image,
-      };
-      console.log("dispatching edited note ", bgrColor);
       dispatch(
         editNote({
           id: note.id,
           content: noteText,
           title: noteTitle,
           img: image,
+          labels: labels,
+          bgColor: bgrColor,
         })
       );
       onSave();
@@ -80,7 +75,6 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
 
   const handleColorSelect = (color) => {
     setBgrColor(color);
-    console.log("color selected", color, bgrColor);
   };
 
   const handleImageUpload = (e) => {
@@ -91,7 +85,6 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
         setImage(reader.result); // Ensure `image` is a URL
       };
       reader.readAsDataURL(file);
-      console.log("image uploaded on note container", reader.result);
     }
   };
   useEffect(() => {
@@ -114,7 +107,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   return (
     <div
       ref={noteRef}
-      className="mx-auto max-w-xl p-4 rounded-lg shadow-lg shadow-gray-900/50 border dark:border-gray-700 flex justify-between"
+      className="mx-auto max-w-xl p-4 rounded-lg shadow-lg shadow-gray-900/50 border dark:border-gray-700 flex justify-between mb-2"
       style={{
         backgroundColor: bgrColor,
         color: "#fff",
@@ -159,11 +152,24 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
           rows={isFocused || isEdit ? 3 : 1}
         />
         {(isFocused || isEdit) && (
-          <NoteFooterButtons
-            handleColorSelect={handleColorSelect}
-            isEdit={isEdit}
-            handleRemove={handleRemove}
-          />
+          <>
+            <div className="flex items-center justify-between">
+              {labels.map((label) => (
+                <span
+                  key={label}
+                  className="bg-gray-600 text-white rounded-full px-2 py-1 text-xs mr-2"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+            <NoteFooterButtons
+              handleColorSelect={handleColorSelect}
+              isEdit={isEdit}
+              handleRemove={handleRemove}
+              handleImageUpload={handleImageUpload}
+            />
+          </>
         )}
       </form>
       {!isFocused && !isEdit && (

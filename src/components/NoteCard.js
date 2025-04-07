@@ -8,6 +8,7 @@ function NoteCard({ note, handleRemove, onClick }) {
   const [isHovered, setIsHovered] = useState(false);
   const [bgColor, setBgColor] = useState(note.bgColor); // Initialize with note color
   const [image, setImage] = useState(note.img); // Initialize with note image
+  const [labels, setLabels] = useState(note.labels || []); // Initialize with note labels
 
   const dispatch = useDispatch(); // Set up dispatch
 
@@ -19,13 +20,10 @@ function NoteCard({ note, handleRemove, onClick }) {
         setImage(reader.result); // Ensure `image` is a URL
       };
       reader.readAsDataURL(file);
-      console.log("image uploaded on footer", reader.result);
-      //dispatchUpdatedNote();
     }
   };
 
   const dispatchUpdatedNote = () => {
-    console.log("dispatching edited note ", bgColor);
     dispatch(
       editNote({
         id: note.id,
@@ -33,15 +31,12 @@ function NoteCard({ note, handleRemove, onClick }) {
         bgColor: bgColor !== "" ? bgColor : note.bgColor,
         title: note.title,
         img: image !== "" ? image : note.img,
+        labels: labels,
       })
     );
   };
   const handleBgChange = (color) => {
-    console.log("color selected", color);
     setBgColor(color);
-
-    console.log("color changed to", color);
-    //dispatchUpdatedNote();
   };
 
   useEffect(() => {
@@ -53,7 +48,7 @@ function NoteCard({ note, handleRemove, onClick }) {
   return (
     <div
       key={note.index}
-      className="w-full max-w-[230px]  border mb-2 border-gray-200 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform hover:scale-105 hover:shadow-lg relative"
+      className="w-full max-w-[230px] z-0 border mb-2 border-gray-200 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform  hover:shadow-lg relative"
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick} // Click anywhere on the card
       onMouseEnter={() => setIsHovered(true)}
@@ -73,21 +68,33 @@ function NoteCard({ note, handleRemove, onClick }) {
       {(note.title !== "" || note.content !== "") && (
         <div className="relative max-w-sm p-4 m-1 rounded-lg ">
           {note.title && (
-            <p className="mb-4 text-md font-bold tracking-tight text-white">
+            <p className="mb-4 text-md font-bold tracking-tight text-white break-words">
               {note.title}
             </p>
           )}
           {note.content && (
-            <p className="font-normal text-md text-white mb-6">
+            <p className="font-normal text-md text-white mb-1 break-words">
               {note.content}
             </p>
           )}
         </div>
       )}
+      {labels && (
+        <div className="flex items-center justify-start mb-12">
+          {labels.map((label) => (
+            <span
+              key={label}
+              className="border text-white rounded-full px-2 py-1 text-xs m-2"
+            >
+              {label}
+            </span>
+          ))}
+        </div>
+      )}
       {/* Footer with buttons */}
       <div
         tabIndex={0}
-        className={`absolute z-10 bottom-0 left-0 right-0 p-2 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
+        className={`absolute z-50 bottom-0 left-0 right-0 p-2 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
           isHovered ? "opacity-100" : "opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -106,6 +113,7 @@ function NoteCard({ note, handleRemove, onClick }) {
           isEdit={true}
           handleImageUpload={handleImageUpload}
           isHovered={isHovered}
+          labels={note.labels}
         />
       </div>
     </div>

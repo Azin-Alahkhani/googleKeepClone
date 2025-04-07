@@ -20,7 +20,7 @@ function ColorPicker({ onColorSelect, showPalette, setShowPalette }) {
   return (
     <div className="relative">
       {showPalette && (
-        <div className="absolute left-0 mt-2 w-90 p-2 bg-zinc-800 shadow-lg rounded-lg flex flex-row justify-center items-center gap-1">
+        <div className="absolute left-0 mt-2 w-90 p-2 bg-zinc-800 shadow-lg rounded-lg flex flex-row justify-center items-center gap-1 z-100">
           {darkColors.map((color) => (
             <div
               key={color.color}

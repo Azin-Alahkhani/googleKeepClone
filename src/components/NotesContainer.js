@@ -44,7 +44,6 @@ function NoteContainer({ menuOpen }) {
         columns={columns}
         spacing={1}
         className="flex flex-wrap -mx-4 gap-1 "
-        columnClassName="w-full p-1"
       >
         {notes.map((note) => (
           <NoteCard

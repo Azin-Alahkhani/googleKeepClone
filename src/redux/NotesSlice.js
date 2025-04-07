@@ -7,7 +7,7 @@ const initialState = {
       title: "First Note",
       content:
         "This is my first note. Lets make it a tad bit longer to check the ui under different conditions",
-      labels: ["Work"],
+      labels: ["Work", "Personal"],
       bgColor: "#202124",
       img: "",
     },
@@ -25,7 +25,7 @@ const initialState = {
       title: "mnbn",
       content:
         "Google Keep Clone! lets see how close we can get to the actual design. seems easy but we'll have to wait and see.",
-      labels: ["Personal"],
+      labels: ["Work"],
       bgColor: "#202124",
       img: "",
     },
@@ -33,7 +33,7 @@ const initialState = {
       id: 4,
       title: "Smbh",
       content: "jhfbhejhfbhejhfbhejhfbhe.",
-      labels: ["Personal"],
+      labels: ["Work"],
       bgColor: "#202124",
       img: "",
     },
