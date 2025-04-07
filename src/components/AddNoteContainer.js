@@ -14,12 +14,13 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   const [bgrColor, setBgrColor] = useState(
     note.bgColor != "#202124" ? note.bgColor : "#202124"
   );
-  const [isList, setIsList] = useState(false);
-  const [showColorPicker, setShowColorPicker] = useState(false);
+
   const [labels, setLabels] = useState(note.labels || []);
   const noteRef = useRef(null);
-  const dispatch = useDispatch(); // Set up dispatch
+  const dispatch = useDispatch();
+
   console.log(note.labels);
+
   // Handle Click Outside to Collapse
   const handleClickOutside = (e) => {
     if (!noteRef.current) return;
@@ -34,14 +35,14 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   const resetContainer = () => {
     setNoteText("");
     setNoteTitle("");
-    setIsList(false);
+
     setBgrColor("#202124"); // Reset to default dark color
-    setShowColorPicker(false);
+
     setImage("");
     setIsFocused(false);
-    setShowColorPicker(false);
   };
   const dispatchNote = () => {
+    console.log("selected labels", labels);
     if (!isEdit) {
       const noteData = {
         title: noteTitle,
@@ -153,7 +154,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
         />
         {(isFocused || isEdit) && (
           <>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-start gap-2">
               {labels.map((label) => (
                 <span
                   key={label}
@@ -168,6 +169,8 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
               isEdit={isEdit}
               handleRemove={handleRemove}
               handleImageUpload={handleImageUpload}
+              setLabels={setLabels}
+              labels={labels}
             />
           </>
         )}

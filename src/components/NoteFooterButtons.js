@@ -11,20 +11,22 @@ function NoteFooterButtons({
   isEdit = false,
   handleImageUpload,
   isHovered = false,
-  handleAddLabel,
+  setLabels,
   labels = [],
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const [showLabelMenu, setShowLabelMenu] = useState(false);
-  const [selectedLabels, setSelectedLabels] = useState([]);
+  const [selectedLabels, setSelectedLabels] = useState(labels);
   const allLabels = useSelector((state) => state.labels.labels || []);
 
   const onClose = () => {
     console.log(selectedLabels);
     setShowLabelMenu(false);
     setMenuOpen(false);
+    setLabels(selectedLabels);
+    //setSelectedLabels([]);
   };
   const handleLabelToggle = (label) => {
     setSelectedLabels(

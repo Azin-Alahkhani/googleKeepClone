@@ -35,7 +35,7 @@ function NoteContainer({ menuOpen }) {
   }, [menuOpen]);
 
   const handleRemove = (note) => {
-    dispatch(removeNote(note)); // Remove note from Redux
+    dispatch(removeNote(note.id)); // Remove note from Redux
   };
 
   return (
