@@ -105,6 +105,7 @@ function NoteCard({ note, handleRemove, onClick }) {
           handleColorSelect={handleBgChange}
           isEdit={true}
           handleImageUpload={handleImageUpload}
+          isHovered={isHovered}
         />
       </div>
     </div>

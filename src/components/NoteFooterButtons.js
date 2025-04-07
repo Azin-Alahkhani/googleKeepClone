@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { FaPalette } from "react-icons/fa";
 import ColorPicker from "./ColorPicker"; // Assuming you have a ColorPicker component
@@ -8,6 +8,7 @@ function NoteFooterButtons({
   handleRemove,
   isEdit = false,
   handleImageUpload,
+  isHovered = false,
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +18,12 @@ function NoteFooterButtons({
     console.log("Delete note clicked");
     handleRemove();
   };
+  useEffect(() => {
+    if (!isHovered) {
+      setMenuOpen(false);
+      setShowColorPicker(false);
+    }
+  }, [isHovered]);
 
   return (
     <div className="flex justify-between items-center">
@@ -40,7 +47,7 @@ function NoteFooterButtons({
           </button>
 
           {showColorPicker && (
-            <div className="absolute top-10 left-0 z-10 shadow-lg">
+            <div className="absolute top-10 left-0 z-100 shadow-lg">
               <ColorPicker
                 showPalette={showColorPicker}
                 onColorSelect={handleColorSelect}
@@ -101,7 +108,7 @@ function NoteFooterButtons({
             {menuOpen && (
               <div
                 ref={menuRef}
-                className="absolute z-10 right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-1 z-10 text-xs"
+                className="absolute z-100 right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-1  text-xs"
               >
                 <button
                   className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
