@@ -20,6 +20,23 @@ const initialState = {
       bgColor: "#202124",
       img: "",
     },
+    {
+      id: 3,
+      title: "mnbn",
+      content:
+        "Google Keep Clone! lets see how close we can get to the actual design. seems easy but we'll have to wait and see.",
+      labels: ["Personal"],
+      bgColor: "#202124",
+      img: "",
+    },
+    {
+      id: 4,
+      title: "Smbh",
+      content: "jhfbhejhfbhejhfbhejhfbhe.",
+      labels: ["Personal"],
+      bgColor: "#202124",
+      img: "",
+    },
   ],
   selectedLabel: null, // For filtering
 };

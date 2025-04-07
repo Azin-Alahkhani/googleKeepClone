@@ -13,7 +13,7 @@ function NoteFooterButtons({
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  const handleRemoveClick = (e) => {
+  const handleRemoveClick = () => {
     console.log("Delete note clicked");
     handleRemove();
   };
@@ -101,9 +101,8 @@ function NoteFooterButtons({
             {menuOpen && (
               <div
                 ref={menuRef}
-                className="absolute right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-1 z-10 text-xs"
+                className="absolute z-10 right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-1 z-10 text-xs"
               >
-                {" "}
                 <button
                   className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
                   onClick={handleRemoveClick}

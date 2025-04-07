@@ -3,6 +3,7 @@ import { removeNote } from "../redux/actions";
 import NoteCard from "./NoteCard";
 import { useState, useEffect } from "react";
 import NoteModal from "./NoteModal"; // Import modal component
+import Masonry from "@mui/lab/Masonry";
 
 function NoteContainer({ menuOpen }) {
   const notes = useSelector((state) => state.notes.notes || []); // Get notes from Redux store
@@ -14,16 +15,14 @@ function NoteContainer({ menuOpen }) {
   const updateColumns = () => {
     const width = window.innerWidth;
 
-    if (width < 600) {
-      setColumns(1); // Mobile: 1 column
-    } else if (width < 800) {
-      setColumns(2);
-    } else if (width < 950) {
-      setColumns(3);
-    } else if (width < 1024) {
-      setColumns(4);
-    } else if (width < 1200) {
-      setColumns(4);
+    if (width < 500) {
+      setColumns(1);
+    } else if (width < 900) {
+      setColumns(menuOpen ? 1 : 2);
+    } else if (width < 869) {
+      setColumns(menuOpen ? 3 : 2);
+    } else if (width < 1395) {
+      setColumns(menuOpen ? 3 : 4);
     } else {
       setColumns(menuOpen ? 4 : 5); // Default: 4 or 6 columns
     }
@@ -40,32 +39,33 @@ function NoteContainer({ menuOpen }) {
   };
 
   return (
-    <div
-      className="grid gap-4 p-4"
-      style={{
-        gridTemplateColumns: `repeat(${columns}, minmax(200px, 1fr))`,
-        alignItems: "flex-start",
-      }}
-    >
-      {notes.map((note) => (
-        <NoteCard
-          key={note.id}
-          note={note}
-          handleRemove={handleRemove}
-          noteTitle={note.title}
-          noteText={note.content}
-          label={note.label}
-          index={note.id}
-          bgColor={note.bgColor}
-          onClick={() => setSelectedNote(note)}
-          img={note.img}
-        />
-      ))}
+    <>
+      <Masonry
+        columns={columns}
+        spacing={1}
+        className="flex flex-wrap -mx-4 gap-1 "
+        columnClassName="w-full p-1"
+      >
+        {notes.map((note) => (
+          <NoteCard
+            key={note.id}
+            note={note}
+            handleRemove={handleRemove}
+            noteTitle={note.title}
+            noteText={note.content}
+            label={note.label}
+            index={note.id}
+            bgColor={note.bgColor}
+            onClick={() => setSelectedNote(note)}
+            img={note.img}
+          />
+        ))}
+      </Masonry>
       {/* Modal for Editing */}
       {selectedNote && (
         <NoteModal note={selectedNote} onClose={() => setSelectedNote(null)} />
       )}
-    </div>
+    </>
   );
 }
 

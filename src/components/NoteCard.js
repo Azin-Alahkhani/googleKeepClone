@@ -53,7 +53,7 @@ function NoteCard({ note, handleRemove, onClick }) {
   return (
     <div
       key={note.index}
-      className="w-full max-w-[250px] border border-gray-200 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform hover:scale-105 hover:shadow-lg relative"
+      className="w-full max-w-[230px]  border mb-2 border-gray-200 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform hover:scale-105 hover:shadow-lg relative"
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick} // Click anywhere on the card
       onMouseEnter={() => setIsHovered(true)}
@@ -71,7 +71,7 @@ function NoteCard({ note, handleRemove, onClick }) {
       )}
 
       {(note.title !== "" || note.content !== "") && (
-        <div className="relative max-w-sm p-4 m-1 rounded-lg">
+        <div className="relative max-w-sm p-4 m-1 rounded-lg ">
           {note.title && (
             <p className="mb-4 text-md font-bold tracking-tight text-white">
               {note.title}
