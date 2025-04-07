@@ -64,14 +64,14 @@ function NoteCard({ note, handleRemove, onClick }) {
         <img
           src={note.img}
           alt="Note"
-          className={`w-full h-auto object-cover rounded-md mb-2 ${
-            !note.title && !note.content ? "rounded-t-lg" : ""
+          className={`w-full h-auto object-cover ${
+            !note.title && !note.content ? "rounded-t-lg " : "mb-2 "
           }`}
         />
       )}
 
       {(note.title !== "" || note.content !== "") && (
-        <div className="relative max-w-sm p-4 m-1">
+        <div className="relative max-w-sm p-4 m-1 rounded-lg">
           {note.title && (
             <p className="mb-4 text-md font-bold tracking-tight text-white">
               {note.title}
@@ -87,8 +87,8 @@ function NoteCard({ note, handleRemove, onClick }) {
       {/* Footer with buttons */}
       <div
         tabIndex={0}
-        className={`absolute z-10 bottom-0 left-0 right-0 p-2 bg-black bg-opacity-50 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
-          isHovered ? "opacity-60" : "opacity-0"
+        className={`absolute z-10 bottom-0 left-0 right-0 p-2 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
+          isHovered ? "opacity-100" : "opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
       >

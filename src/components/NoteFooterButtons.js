@@ -14,8 +14,8 @@ function NoteFooterButtons({
   const menuRef = useRef(null);
 
   const handleRemoveClick = (e) => {
-    e.stopPropagation(); // Prevent card click
-    handleRemove(e);
+    console.log("Delete note clicked");
+    handleRemove();
   };
 
   return (
@@ -106,7 +106,7 @@ function NoteFooterButtons({
                 {" "}
                 <button
                   className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
-                  onClick={handleRemove}
+                  onClick={handleRemoveClick}
                 >
                   Delete note
                 </button>
