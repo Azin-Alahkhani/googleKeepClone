@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { FiHome, FiTrash, FiBell, FiBookmark } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import EditLabelsModal from "./EditLabelsModal";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { IoArchiveOutline } from "react-icons/io5";
 
+import { setSelectedLabel } from "../redux/NotesSlice";
+
 const Sidebar = ({ isExpanded, setIsExpanded }) => {
   const labels = useSelector((state) => state.labels.labels || []);
   const [editModal, setEditModal] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     localStorage.setItem("sidebarState", JSON.stringify(isExpanded));
@@ -28,9 +32,14 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
     { id: 4, icon: IoArchiveOutline, label: "Archive" },
     { id: 5, icon: FiTrash, label: "Trash" },
   ];
+  const handleClickLabels = (label) => {
+    console.log("Selected label:", label);
+    dispatch(setSelectedLabel(label));
+  };
   const handleClick = (id) => {
     switch (id) {
       case 1:
+        dispatch(setSelectedLabel(null));
         break;
       case 2:
         break;
@@ -88,7 +97,7 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
             key={item.id}
             className="group relative flex items-center gap-4 px-2 py-3 hover:bg-[#41321c] rounded-r-full cursor-pointer transition-all duration-200"
             role="button"
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClickLabels(item.label)}
             tabIndex={0}
           >
             <div className="flex items-center justify-center min-w-[2rem]">

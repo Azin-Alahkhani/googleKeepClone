@@ -8,7 +8,11 @@ import Masonry from "@mui/lab/Masonry";
 function NoteContainer({ menuOpen }) {
   const notes = useSelector((state) => state.notes.notes || []); // Get notes from Redux store
   const [selectedNote, setSelectedNote] = useState(null);
+  const selectedLabel = useSelector((state) => state.notes.selectedLabel);
 
+  const filteredNotes = selectedLabel
+    ? notes.filter((note) => note.labels?.includes(selectedLabel))
+    : notes;
   const dispatch = useDispatch(); // Dispatch actions
   const [columns, setColumns] = useState(menuOpen ? 4 : 5);
   const [noteW, setNoteW] = useState("200px");
@@ -45,7 +49,7 @@ function NoteContainer({ menuOpen }) {
         spacing={1}
         className="flex flex-wrap -mx-4 gap-1 "
       >
-        {notes.map((note) => (
+        {filteredNotes.map((note) => (
           <NoteCard
             key={note.id}
             note={note}
