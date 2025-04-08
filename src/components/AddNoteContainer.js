@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"; // Import useDispatch from react-redu
 import { addNote, editNote, removeNote } from "../redux/NotesSlice";
 import { FaListUl } from "react-icons/fa";
 import { FiImage } from "react-icons/fi";
+import { FaTrashAlt } from "react-icons/fa";
 
 import NoteFooterButtons from "./NoteFooterButtons"; // Importing the new NoteFooterButtons component
 
@@ -105,26 +106,37 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
       onSave();
     }
   };
+
   return (
     <div
       ref={noteRef}
-      className={`mx-auto max-w-xl ${
-        isFocused || isEdit ? "p-2" : "px-2 py-1"
+      className={`mx-auto max-w-xl  ${
+        isFocused || isEdit ? "p-2" : "px-2 "
       } rounded-lg shadow-xl shadow-gray-900/50 border border-zinc-700 flex justify-between mb-2 transition-all duration-200`}
       style={{
         backgroundColor: bgrColor,
         color: "#fff",
       }}
     >
-      <form className="flex flex-col space-y-2 w-full">
+      <form className="flex flex-col justify-center space-y-2 w-full ">
         {/* Show image if uploaded */}
         {image && (
-          <div className="mt-2">
-            <img
-              src={image}
-              alt="Note"
-              className="w-full max-h-80 rounded-lg"
-            />
+          <div className="mt-2 relative group ">
+            <div className="max-h-[600px] overflow-auto">
+              <img
+                src={image}
+                alt="Note"
+                className="w-full object-contain rounded-lg"
+              />
+            </div>
+            {/* Bin Icon */}
+            <button
+              onClick={() => setImage("")}
+              className="absolute bottom-2 right-2 bg-zinc-700 hover:bg-zin-800 opacity-0 group-hover:opacity-100 p-1  hover:text-white text-zinc-400 transition-all"
+              title="Remove Image"
+            >
+              <FaTrashAlt className="w-6 h-6" />
+            </button>
           </div>
         )}
 
@@ -142,7 +154,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
             value={noteTitle}
             onChange={(e) => setNoteTitle(e.target.value)}
             type="text"
-            className="w-full text-lg font-medium px-2 focus:outline-none bg-transparent text-white"
+            className="w-full text-lg font-semibold px-2 focus:outline-none bg-transparent text-white"
             placeholder="Title"
           />
         )}
@@ -150,7 +162,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-full px-2 text-white  bg-transparent border-none focus:outline-none resize-none"
+          className="w-full px-2 text-white font-bold  bg-transparent border-none focus:outline-none resize-none"
           placeholder="Take a note..."
           rows={isFocused || isEdit ? 3 : 1}
         />
