@@ -4,6 +4,7 @@ import { addNote, editNote, removeNote } from "../redux/NotesSlice";
 import { FaListUl } from "react-icons/fa";
 import { FiImage } from "react-icons/fi";
 import { FaTrashAlt } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
 
 import NoteFooterButtons from "./NoteFooterButtons"; // Importing the new NoteFooterButtons component
 
@@ -41,9 +42,12 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
 
     setImage("");
     setIsFocused(false);
+    if (onSave) {
+      onSave();
+    }
+    setLabels([]); // Reset labels
   };
   const dispatchNote = () => {
-    console.log("selected labels", labels);
     if (!isEdit) {
       const noteData = {
         title: noteTitle,
@@ -53,19 +57,24 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
         img: image,
         labels,
       };
-      console.log("dispatching new note", noteData);
       dispatch(addNote(noteData));
     } else if (onSave && isEdit) {
-      dispatch(
-        editNote({
-          id: note.id,
-          content: noteText,
-          title: noteTitle,
-          img: image,
-          labels: labels,
-          bgColor: bgrColor,
-        })
-      );
+      if (
+        noteTitle !== note.title ||
+        noteText !== note.content ||
+        image !== note.img
+      ) {
+        dispatch(
+          editNote({
+            id: note.id,
+            content: noteText,
+            title: noteTitle,
+            img: image,
+            labels: labels,
+            bgColor: bgrColor,
+          })
+        );
+      }
       onSave();
     }
   };
@@ -106,7 +115,20 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
       onSave();
     }
   };
-
+  const handleClickClose = () => {
+    if (
+      noteTitle !== note.title ||
+      noteText !== note.content ||
+      image !== note.img
+    ) {
+      // Dispatch note
+      dispatchNote();
+    }
+    resetContainer();
+    if (onSave) {
+      onSave();
+    }
+  };
   return (
     <div
       ref={noteRef}
@@ -135,7 +157,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
               className="absolute bottom-2 right-2 bg-zinc-700 hover:bg-zin-800 opacity-0 group-hover:opacity-100 p-1  hover:text-white text-zinc-400 transition-all"
               title="Remove Image"
             >
-              <FaTrashAlt className="w-6 h-6" />
+              <FaTrash className="w-6 h-6" />
             </button>
           </div>
         )}
@@ -149,6 +171,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
           onChange={handleImageUpload}
         />
 
+        {/* Title and Content Area */}
         {(isFocused || isEdit) && (
           <input
             value={noteTitle}
@@ -166,8 +189,10 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
           placeholder="Take a note..."
           rows={isFocused || isEdit ? 3 : 1}
         />
+
         {(isFocused || isEdit) && (
           <>
+            {/* Labels  */}
             <div className="flex items-center justify-start gap-2">
               {labels.map((label) => (
                 <span
@@ -178,6 +203,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
                 </span>
               ))}
             </div>
+
             <NoteFooterButtons
               handleColorSelect={handleColorSelect}
               isEdit={isEdit}
@@ -185,6 +211,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
               handleImageUpload={handleImageUpload}
               setLabels={setLabels}
               labels={labels}
+              handleClickClose={handleClickClose}
             />
           </>
         )}

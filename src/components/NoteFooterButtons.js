@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { FaPalette } from "react-icons/fa";
+import { MdOutlinePersonAddAlt, MdOutlineAddAlert } from "react-icons/md";
 import ColorPicker from "./ColorPicker"; // Assuming you have a ColorPicker component
 
 function NoteFooterButtons({
@@ -13,6 +14,7 @@ function NoteFooterButtons({
   isHovered = false,
   setLabels,
   labels = [],
+  handleClickClose,
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -46,7 +48,6 @@ function NoteFooterButtons({
   }, [selectedLabels]);
   return (
     <div className="flex justify-between items-center">
-      {/* List & Color Picker */}
       <div className="flex gap-3 relative">
         {/* Color Picker Button */}
         <div className="relative inline-block ">
@@ -75,6 +76,7 @@ function NoteFooterButtons({
             </div>
           )}
         </div>
+
         {/* Reminder Button */}
         <label
           className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition"
@@ -84,9 +86,24 @@ function NoteFooterButtons({
             e.stopPropagation(); // Prevent card click
           }}
         >
-          <FiBell
+          <MdOutlineAddAlert
             className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
             title=" Remind me"
+          />
+        </label>
+
+        {/* Collaborator Button */}
+        <label
+          className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition"
+          role="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent card click
+          }}
+        >
+          <MdOutlinePersonAddAlt
+            className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
+            title=" Collaborator"
           />
         </label>
 
@@ -105,8 +122,8 @@ function NoteFooterButtons({
             onChange={handleImageUpload}
           />
         </label>
-        {/* More Options Menu */}
 
+        {/* More Options Menu */}
         <div className="relative">
           <button
             type="button"
@@ -217,6 +234,17 @@ function NoteFooterButtons({
           )}
         </div>
       </div>
+      {handleClickClose && (
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={handleClickClose}
+            className="px-4 py-2 text-sm text-white  rounded-sm hover:bg-gray-500"
+          >
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 }
