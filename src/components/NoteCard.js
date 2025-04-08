@@ -51,7 +51,7 @@ function NoteCard({ note, onClick }) {
   return (
     <div
       key={note.index}
-      className="w-full max-w-[230px] z-0 border mb-2 border-gray-200 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform  hover:shadow-lg relative"
+      className="w-full max-w-[230px] z-0 border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform  hover:shadow-lg relative"
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick} // Click anywhere on the card
       onMouseEnter={() => setIsHovered(true)}
@@ -83,11 +83,11 @@ function NoteCard({ note, onClick }) {
         </div>
       )}
       {labels && (
-        <div className="flex items-center justify-start mb-12">
+        <div className="flex items-center justify-start mb-12 ml-2 gap-1">
           {labels.map((label) => (
             <span
               key={label}
-              className="border text-white rounded-full px-2 py-1 text-xs m-2"
+              className="border border-zinc-400  text-white rounded-full px-2 py-1 text-xs "
             >
               {label}
             </span>

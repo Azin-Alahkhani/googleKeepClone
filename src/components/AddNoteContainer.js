@@ -108,7 +108,9 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   return (
     <div
       ref={noteRef}
-      className="mx-auto max-w-xl p-4 rounded-lg shadow-lg shadow-gray-900/50 border dark:border-gray-700 flex justify-between mb-2"
+      className={`mx-auto max-w-xl ${
+        isFocused || isEdit ? "p-2" : "px-2 py-1"
+      } rounded-lg shadow-xl shadow-gray-900/50 border border-zinc-700 flex justify-between mb-2 transition-all duration-200`}
       style={{
         backgroundColor: bgrColor,
         color: "#fff",
@@ -140,7 +142,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
             value={noteTitle}
             onChange={(e) => setNoteTitle(e.target.value)}
             type="text"
-            className="w-full text-lg font-medium p-2 focus:outline-none bg-transparent text-white"
+            className="w-full text-lg font-medium px-2 focus:outline-none bg-transparent text-white"
             placeholder="Title"
           />
         )}
@@ -148,7 +150,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
           onFocus={() => setIsFocused(true)}
-          className="w-full p-2 text-white  bg-transparent border-none focus:outline-none resize-none"
+          className="w-full px-2 text-white  bg-transparent border-none focus:outline-none resize-none"
           placeholder="Take a note..."
           rows={isFocused || isEdit ? 3 : 1}
         />
