@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
-import { FaPalette } from "react-icons/fa";
+import { HiOutlineArchiveBoxArrowDown } from "react-icons/hi2";
 import {
   MdOutlinePersonAddAlt,
   MdOutlineAddAlert,
@@ -52,7 +52,7 @@ function NoteFooterButtons({
   }, [selectedLabels]);
   return (
     <div className="flex justify-between items-center">
-      <div className="flex gap-3 relative">
+      <div className="flex gap-2 relative">
         {/* Color Picker Button */}
         <div className="relative inline-block ">
           <button
@@ -93,7 +93,7 @@ function NoteFooterButtons({
           <MdOutlineAddAlert
             size={15}
             className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
-            title=" Remind me"
+            title="Remind me"
           />
         </label>
 
@@ -129,7 +129,20 @@ function NoteFooterButtons({
             onChange={handleImageUpload}
           />
         </label>
-
+        <label
+          className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition"
+          role="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent card click
+          }}
+        >
+          <HiOutlineArchiveBoxArrowDown
+            size={15}
+            className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
+            title="Archive"
+          />
+        </label>
         {/* More Options Menu */}
         <div className="relative">
           <button

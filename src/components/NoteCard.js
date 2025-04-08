@@ -83,7 +83,7 @@ function NoteCard({ note, onClick }) {
         </div>
       )}
       {labels && (
-        <div className="flex items-center justify-start mb-10 ml-2 gap-1">
+        <div className="flex items-center justify-start mb-10 ml-4 gap-2">
           {labels.map((label) => (
             <span
               key={label}
@@ -97,7 +97,7 @@ function NoteCard({ note, onClick }) {
       {/* Footer with buttons */}
       <div
         tabIndex={0}
-        className={`absolute z-50 bottom-0 left-0 right-0 p-2 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
+        className={`absolute z-50 bottom-0 left-0 right-0 p-1 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
           isHovered ? "opacity-100" : "opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
