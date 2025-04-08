@@ -77,7 +77,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
     } else {
       style += " hover:bg-zinc-500 hover:bg-opacity-15  rounded-r-full";
     }
-    console.log("style for ", id, ": ", style);
+
     return style;
   };
 

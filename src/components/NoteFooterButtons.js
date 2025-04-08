@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaTrash } from "react-icons/fa6";
 import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { HiOutlineArchiveBoxArrowDown } from "react-icons/hi2";
+import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { FaTrashRestore } from "react-icons/fa";
 import {
   MdOutlinePersonAddAlt,
@@ -10,7 +11,13 @@ import {
   MdOutlinePalette,
 } from "react-icons/md";
 import ColorPicker from "./ColorPicker"; // Assuming you have a ColorPicker component
-import { addNoteToArchive, addNoteToTrash } from "../redux/NotesSlice";
+import {
+  addNoteToArchive,
+  addNoteToTrash,
+  recoverNoteFromTrash,
+  removeNote,
+  removeNoteFromArchive,
+} from "../redux/NotesSlice";
 
 function NoteFooterButtons({
   handleColorSelect,
@@ -32,8 +39,9 @@ function NoteFooterButtons({
   const allLabels = useSelector((state) => state.labels.labels || []);
 
   const dispatch = useDispatch();
+
+  console.log("Note Footer Buttons", noteOption);
   const onClose = () => {
-    console.log(selectedLabels);
     setShowLabelMenu(false);
     setMenuOpen(false);
     setLabels(selectedLabels);
@@ -54,16 +62,30 @@ function NoteFooterButtons({
     handleRemove();
   };
   const handleArchiveClick = () => {
-    console.log("Archive note clicked", note);
-    dispatch(addNoteToArchive(note.id));
+    if (noteOption === "archivedNotes") {
+      console.log("Unarchive note clicked");
+      dispatch(removeNoteFromArchive(note.id));
+    } else {
+      console.log("Archive note clicked", note);
+      dispatch(addNoteToArchive(note.id));
+    }
   };
   const trashClick = () => {
     console.log("Trash note clicked");
     dispatch(addNoteToTrash(note.id));
   };
+  const handleDeleteForever = () => {
+    console.log("Delete forever clicked");
+    dispatch(removeNote(note.id));
+  };
+
+  const handleRecover = () => {
+    console.log("Recover note clicked");
+    dispatch(recoverNoteFromTrash(note.id));
+  };
 
   useEffect(() => {
-    console.log("selected :", selectedLabels);
+    //console.log("selected :", selectedLabels);
     setLabels(selectedLabels);
   }, [selectedLabels]);
   return (
@@ -155,11 +177,19 @@ function NoteFooterButtons({
               handleArchiveClick();
             }}
           >
-            <HiOutlineArchiveBoxArrowDown
-              size={15}
-              className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
-              title="Archive"
-            />
+            {noteOption == "archivedNotes" ? (
+              <RiInboxUnarchiveLine
+                size={15}
+                className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
+                title="Unarchive"
+              />
+            ) : (
+              <HiOutlineArchiveBoxArrowDown
+                size={15}
+                className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
+                title="Archive"
+              />
+            )}
           </label>
           {/* More Options Menu */}
           <div className="relative">
@@ -291,14 +321,14 @@ function NoteFooterButtons({
         <div className="flex flex-row justify-between items-center w-full">
           <button
             type="button"
-            onClick={handleRemoveClick}
+            onClick={handleDeleteForever}
             className="px-4 py-2 text-sm text-white  hover:bg-zinc-500 hover:bg-opacity-40 rounded-full"
           >
             <FaTrash className="text-white" title=" Delete forever" size={12} />
           </button>
           <button
             type="button"
-            onClick={handleRemoveClick}
+            onClick={handleRecover}
             className="px-4 py-2 text-sm text-white   hover:bg-zinc-500 hover:bg-opacity-40 rounded-full"
           >
             <FaTrashRestore className="text-white" title="Recover" size={12} />

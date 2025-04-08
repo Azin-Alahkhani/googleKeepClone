@@ -1,6 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
-import { addNote, editNote, removeNote } from "../redux/NotesSlice";
+import {
+  addNote,
+  addNoteToTrash,
+  editNote,
+  removeNote,
+} from "../redux/NotesSlice";
 import { FaListUl } from "react-icons/fa";
 import { FiImage } from "react-icons/fi";
 import { FaTrashAlt } from "react-icons/fa";
@@ -109,7 +114,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   const handleRemove = () => {
     if (onSave) {
       console.log("removing :", note.id);
-      dispatch(removeNote(note.id));
+      dispatch(addNoteToTrash(note.id));
       onSave();
     }
   };

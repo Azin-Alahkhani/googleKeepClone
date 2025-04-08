@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editNote } from "../redux/NotesSlice"; // Assuming you have this action
 import NoteFooterButtons from "./NoteFooterButtons"; // Assuming you have this component
-import { removeNote } from "../redux/NotesSlice"; // Assuming you have this action
+import { addNoteToTrash } from "../redux/NotesSlice"; // Assuming you have this action
 
 function NoteCard({ note, onClick, noteOption }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -46,7 +46,7 @@ function NoteCard({ note, onClick, noteOption }) {
     }
   }, [bgColor, image]);
   const handleRemove = () => {
-    dispatch(removeNote(note.id)); // Remove note from Redux
+    dispatch(addNoteToTrash(note.id)); // Remove note from Redux
   };
   return (
     <div

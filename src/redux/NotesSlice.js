@@ -52,7 +52,9 @@ const notesSlice = createSlice({
       state.notes.push(action.payload);
     },
     removeNote: (state, action) => {
-      state.notes = state.notes.filter((note) => note.id !== action.payload);
+      state.trashNotes = state.trashNotes.filter(
+        (note) => note.id !== action.payload
+      );
     },
     editNote: (state, action) => {
       const { id, title, content, labels, img } = action.payload;
@@ -77,11 +79,31 @@ const notesSlice = createSlice({
         state.notes = state.notes.filter((note) => note.id !== action.payload);
       }
     },
+    removeNoteFromArchive: (state, action) => {
+      const note = state.archivedNotes.find(
+        (note) => note.id === action.payload
+      );
+      if (note) {
+        state.notes.push(note);
+        state.archivedNotes = state.archivedNotes.filter(
+          (note) => note.id !== action.payload
+        );
+      }
+    },
     addNoteToTrash: (state, action) => {
       const note = state.notes.find((note) => note.id === action.payload);
       if (note) {
         state.trashNotes.push(note);
         state.notes = state.notes.filter((note) => note.id !== action.payload);
+      }
+    },
+    recoverNoteFromTrash: (state, action) => {
+      const note = state.trashNotes.find((note) => note.id === action.payload);
+      if (note) {
+        state.notes.push(note);
+        state.trashNotes = state.trashNotes.filter(
+          (note) => note.id !== action.payload
+        );
       }
     },
   },
@@ -94,5 +116,7 @@ export const {
   setSelectedLabel,
   addNoteToArchive,
   addNoteToTrash,
+  recoverNoteFromTrash,
+  removeNoteFromArchive,
 } = notesSlice.actions;
 export default notesSlice.reducer;
