@@ -11,6 +11,7 @@ import { setSelectedLabel } from "../redux/NotesSlice";
 const Sidebar = ({ isExpanded, setIsExpanded }) => {
   const labels = useSelector((state) => state.labels.labels || []);
   const [editModal, setEditModal] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,11 +85,6 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
             >
               {item.label}
             </span>
-            {!isExpanded && (
-              <div className="absolute left-full ml-6 px-2 py-1 bg-gray-900 text-sm rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
-                {item.label}
-              </div>
-            )}
           </div>
         ))}
         {/* User Labels with Bookmark Icon */}
@@ -112,11 +108,6 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
             >
               {item.label}
             </span>
-            {!isExpanded && (
-              <div className="absolute left-full ml-6 px-2 py-1 bg-gray-900 text-sm rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
-                {item.label}
-              </div>
-            )}
           </div>
         ))}
 
@@ -140,11 +131,6 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
             >
               {item.label}
             </span>
-            {!isExpanded && (
-              <div className="absolute left-full ml-6 px-2 py-1 bg-gray-900 text-sm rounded-md invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 whitespace-nowrap">
-                {item.label}
-              </div>
-            )}
           </div>
         ))}
       </nav>

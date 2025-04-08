@@ -8,6 +8,7 @@ import { store } from "./redux/storeConfig";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   const [menuW, setMenuW] = useState("300px");
   const UpdateMenuWidth = () => {
     const width = window.innerWidth;
@@ -32,11 +33,13 @@ function App() {
       <div style={{ backgroundColor: "#202124" }}>
         <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <div className="flex flex-row ">
+          {/* static Sidebar */}
           <div
             className={menuOpen ? "basis-1/8 w-[200px]" : "basis-1/8 w-[150px]"}
           >
             <Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} />
           </div>
+          {/* Hover sidebar */}
 
           <div className={"flex-grow justify-center"}>
             <div className="basis-full p-5 ">
