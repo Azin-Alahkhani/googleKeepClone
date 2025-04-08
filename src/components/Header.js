@@ -4,8 +4,12 @@ import { FiSettings, FiList, FiRefreshCcw } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Header({ menuOpen, setMenuOpen }) {
+  const selectedLabel = useSelector(
+    (state) => state.notes.selectedLabel || null
+  );
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -33,19 +37,29 @@ function Header({ menuOpen, setMenuOpen }) {
             <button
               onClick={toggleMenu}
               type="button"
-              className="p-2 rounded-full hover:bg-gray-800 "
+              className="p-2 rounded-full hover:bg-zinc-700 hover:bg-opacity-50 "
             >
-              <Bars3Icon className="h-6 w-6 text-white " />
+              <Bars3Icon className="h-6 w-6 text-white" title="Main menu" />
             </button>
           </div>
-          <div>
-            <a href="/" className="flex items-center rounded">
-              <img src={logo} className="h-8 sm:h-10" alt="Keep Logo" />
-              <span className="self-center text-xl font-thin whitespace-nowrap text-white">
-                Keep
+          {/* Logo or Selected label*/}
+          {!selectedLabel && (
+            <div>
+              <a href="/" className="flex items-center rounded">
+                <img src={logo} className="h-8 sm:h-10" alt="Keep Logo" />
+                <span className="self-center text-xl font-thin whitespace-nowrap text-white">
+                  Keep
+                </span>
+              </a>
+            </div>
+          )}
+          {selectedLabel && (
+            <div className="flex items-center">
+              <span className="text-white text-lg font-medium">
+                {selectedLabel}
               </span>
-            </a>
-          </div>
+            </div>
+          )}
         </div>
         {/* Search bar */}
         <div className="hidden md:flex items-center justify-around w-full">

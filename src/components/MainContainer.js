@@ -30,14 +30,11 @@ const MainContainer = () => {
   return (
     <div style={{ backgroundColor: "#202124" }}>
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <div className="flex flex-row ">
+      <div className="flex flex-row gap-10">
         {/* static Sidebar */}
-        <div
-          className={menuOpen ? "basis-1/8 w-[200px]" : "basis-1/8 w-[150px]"}
-        >
+        <div className={menuOpen ? "basis-1/8 " : "basis-1/8 "}>
           <Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} />
         </div>
-        {/* Hover sidebar */}
 
         <div className={"flex-grow justify-center"}>
           <div className="basis-full p-5 ">
