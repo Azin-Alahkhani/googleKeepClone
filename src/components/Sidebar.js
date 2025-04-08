@@ -6,7 +6,7 @@ import { IoArchiveOutline } from "react-icons/io5";
 import { setSelectedLabel } from "../redux/NotesSlice";
 import EditLabelsModal from "./EditLabelsModal";
 
-const Sidebar = ({ isExpanded, setIsExpanded }) => {
+const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   const labels = useSelector((state) => state.labels.labels || []);
   const [editModal, setEditModal] = useState(false);
 
@@ -36,23 +36,30 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
 
   const handleClickLabels = (label, id) => {
     setSelectedItem(id);
+    setNoteOptions("notes");
     dispatch(setSelectedLabel(label));
   };
 
   const handleClick = (id) => {
-    setSelectedItem(id); // Set selected item when menu item is clicked
+    setSelectedItem(id);
+    dispatch(setSelectedLabel(null));
     switch (id) {
       case 1:
-        dispatch(setSelectedLabel(null));
+        setNoteOptions("notes");
+
         break;
       case 2:
+        setNoteOptions("Reminders");
+
         break;
       case 3:
         setEditModal(!editModal);
         break;
       case 4:
+        setNoteOptions("archivedNotes");
         break;
       case 5:
+        setNoteOptions("trashNotes");
         break;
       default:
         break;

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 const MainContainer = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [noteOption, setNoteOptions] = useState("notes");
 
   const [menuW, setMenuW] = useState("300px");
   const UpdateMenuWidth = () => {
@@ -33,15 +34,19 @@ const MainContainer = () => {
       <div className="flex flex-row gap-10">
         {/* static Sidebar */}
         <div className={menuOpen ? "basis-1/8 " : "basis-1/8 "}>
-          <Sidebar isExpanded={menuOpen} setIsExpanded={setMenuOpen} />
+          <Sidebar
+            isExpanded={menuOpen}
+            setIsExpanded={setMenuOpen}
+            setNoteOptions={setNoteOptions}
+          />
         </div>
 
         <div className={"flex-grow justify-center"}>
           <div className="basis-full p-5 ">
-            <AddNoteContainer />
+            <AddNoteContainer noteOption={noteOption} />
           </div>
           <div className="w-full">
-            <NoteContainer menuOpen={menuOpen} />
+            <NoteContainer menuOpen={menuOpen} noteOption={noteOption} />
           </div>
         </div>
       </div>

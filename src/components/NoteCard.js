@@ -5,7 +5,7 @@ import { editNote } from "../redux/NotesSlice"; // Assuming you have this action
 import NoteFooterButtons from "./NoteFooterButtons"; // Assuming you have this component
 import { removeNote } from "../redux/NotesSlice"; // Assuming you have this action
 
-function NoteCard({ note, onClick }) {
+function NoteCard({ note, onClick, noteOption }) {
   const [isHovered, setIsHovered] = useState(false);
   const [bgColor, setBgColor] = useState(note.bgColor); // Initialize with note color
   const [image, setImage] = useState(note.img); // Initialize with note image
@@ -118,6 +118,8 @@ function NoteCard({ note, onClick }) {
           isHovered={isHovered}
           labels={note.labels}
           setLabels={setLabels}
+          note={note}
+          noteOption={noteOption}
         />
       </div>
     </div>

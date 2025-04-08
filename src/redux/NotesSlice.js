@@ -39,6 +39,9 @@ const initialState = {
     },
   ],
   selectedLabel: null, // For filtering
+  archivedNotes: [],
+  trashNotes: [],
+  Reminders: [],
 };
 
 const notesSlice = createSlice({
@@ -65,9 +68,31 @@ const notesSlice = createSlice({
     setSelectedLabel: (state, action) => {
       state.selectedLabel = action.payload;
     },
+    addNoteToArchive: (state, action) => {
+      const note = state.notes.find((note) => note.id === action.payload);
+      console.log("note being archived: ", note);
+      if (note) {
+        console.log("note being archived: ", note);
+        state.archivedNotes.push(note);
+        state.notes = state.notes.filter((note) => note.id !== action.payload);
+      }
+    },
+    addNoteToTrash: (state, action) => {
+      const note = state.notes.find((note) => note.id === action.payload);
+      if (note) {
+        state.trashNotes.push(note);
+        state.notes = state.notes.filter((note) => note.id !== action.payload);
+      }
+    },
   },
 });
 
-export const { addNote, removeNote, editNote, setSelectedLabel } =
-  notesSlice.actions;
+export const {
+  addNote,
+  removeNote,
+  editNote,
+  setSelectedLabel,
+  addNoteToArchive,
+  addNoteToTrash,
+} = notesSlice.actions;
 export default notesSlice.reducer;

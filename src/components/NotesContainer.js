@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import NoteModal from "./NoteModal"; // Import modal component
 import Masonry from "@mui/lab/Masonry";
 
-function NoteContainer({ menuOpen }) {
-  const notes = useSelector((state) => state.notes.notes || []); // Get notes from Redux store
+function NoteContainer({ menuOpen, noteOption }) {
+  const notes = useSelector((state) => state.notes[noteOption] || []); // Get notes from Redux store
   const [selectedNote, setSelectedNote] = useState(null);
   const selectedLabel = useSelector((state) => state.notes.selectedLabel);
 
@@ -53,14 +53,8 @@ function NoteContainer({ menuOpen }) {
           <NoteCard
             key={note.id}
             note={note}
-            handleRemove={handleRemove}
-            noteTitle={note.title}
-            noteText={note.content}
-            label={note.label}
-            index={note.id}
-            bgColor={note.bgColor}
             onClick={() => setSelectedNote(note)}
-            img={note.img}
+            noteOption={noteOption}
           />
         ))}
       </Masonry>

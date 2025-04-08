@@ -8,7 +8,7 @@ import { FaTrash } from "react-icons/fa6";
 
 import NoteFooterButtons from "./NoteFooterButtons"; // Importing the new NoteFooterButtons component
 
-function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
+function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   const [noteText, setNoteText] = useState(note.content || "");
   const [noteTitle, setNoteTitle] = useState(note.title || "");
   const [isFocused, setIsFocused] = useState(false);
@@ -20,8 +20,6 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
   const [labels, setLabels] = useState(note.labels || []);
   const noteRef = useRef(null);
   const dispatch = useDispatch();
-
-  console.log(note.labels);
 
   // Handle Click Outside to Collapse
   const handleClickOutside = (e) => {
@@ -212,6 +210,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
               setLabels={setLabels}
               labels={labels}
               handleClickClose={handleClickClose}
+              note={note}
             />
           </>
         )}
