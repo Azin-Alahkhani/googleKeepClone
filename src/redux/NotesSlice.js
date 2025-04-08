@@ -96,7 +96,26 @@ const notesSlice = createSlice({
         state.trashNotes.push(note);
         state.notes = state.notes.filter((note) => note.id !== action.payload);
       }
+      const archivedNote = state.archivedNotes.find(
+        (note) => note.id === action.payload
+      );
+      if (archivedNote) {
+        state.trashNotes.push(archivedNote);
+        state.archivedNotes = state.archivedNotes.filter(
+          (note) => note.id !== action.payload
+        );
+      }
+      const reminderNote = state.Reminders.find(
+        (note) => note.id === action.payload
+      );
+      if (reminderNote) {
+        state.trashNotes.push(reminderNote);
+        state.Reminders = state.Reminders.filter(
+          (note) => note.id !== action.payload
+        );
+      }
     },
+
     recoverNoteFromTrash: (state, action) => {
       const note = state.trashNotes.find((note) => note.id === action.payload);
       if (note) {
