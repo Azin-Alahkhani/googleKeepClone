@@ -83,11 +83,11 @@ function NoteCard({ note, onClick }) {
         </div>
       )}
       {labels && (
-        <div className="flex items-center justify-start mb-12 ml-2 gap-1">
+        <div className="flex items-center justify-start mb-10 ml-2 gap-1">
           {labels.map((label) => (
             <span
               key={label}
-              className="border border-zinc-400  text-white rounded-full px-2 py-1 text-xs "
+              className="border border-zinc-400 text-white text-shadow-lg rounded-full px-1 py-[2px] text-[10.5px] font-semibold "
             >
               {label}
             </span>

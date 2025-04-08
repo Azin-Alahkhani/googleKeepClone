@@ -197,7 +197,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {} }) {
               {labels.map((label) => (
                 <span
                   key={label}
-                  className="bg-gray-600 text-white rounded-full px-2 py-1 text-xs mr-2"
+                  className="border border-zinc-400 text-white text-shadow-lg rounded-full px-1 py-[2px] text-[10.5px] font-semibold"
                 >
                   {label}
                 </span>
