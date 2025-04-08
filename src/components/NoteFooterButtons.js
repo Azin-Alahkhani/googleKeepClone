@@ -18,7 +18,7 @@ function NoteFooterButtons({
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const [showLabelMenu, setShowLabelMenu] = useState(false);
-  const [selectedLabels, setSelectedLabels] = useState(labels);
+  const [selectedLabels, setSelectedLabels] = useState(labels || []);
   const allLabels = useSelector((state) => state.labels.labels || []);
 
   const onClose = () => {
@@ -26,7 +26,7 @@ function NoteFooterButtons({
     setShowLabelMenu(false);
     setMenuOpen(false);
     setLabels(selectedLabels);
-    //setSelectedLabels([]);
+    setSelectedLabels([]);
   };
   const handleLabelToggle = (label) => {
     setSelectedLabels(
@@ -40,7 +40,10 @@ function NoteFooterButtons({
     console.log("Delete note clicked");
     handleRemove();
   };
-
+  useEffect(() => {
+    console.log("selected :", selectedLabels);
+    setLabels(selectedLabels);
+  }, [selectedLabels]);
   return (
     <div className="flex justify-between items-center">
       {/* List & Color Picker */}
