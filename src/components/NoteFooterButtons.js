@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 
 import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { FaPalette } from "react-icons/fa";
-import { MdOutlinePersonAddAlt, MdOutlineAddAlert } from "react-icons/md";
+import {
+  MdOutlinePersonAddAlt,
+  MdOutlineAddAlert,
+  MdOutlinePalette,
+} from "react-icons/md";
 import ColorPicker from "./ColorPicker"; // Assuming you have a ColorPicker component
 
 function NoteFooterButtons({
@@ -59,8 +63,8 @@ function NoteFooterButtons({
             }}
             className="p-2 rounded-full   hover:bg-gray-600"
           >
-            <FaPalette
-              size={20}
+            <MdOutlinePalette
+              size={15}
               className="text-white hover:text-gray-200  "
               title="Background options"
             />
@@ -87,6 +91,7 @@ function NoteFooterButtons({
           }}
         >
           <MdOutlineAddAlert
+            size={15}
             className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
             title=" Remind me"
           />
@@ -102,14 +107,16 @@ function NoteFooterButtons({
           }}
         >
           <MdOutlinePersonAddAlt
+            size={15}
             className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
-            title=" Collaborator"
+            title="Collaborator"
           />
         </label>
 
         {/* Add image */}
         <label className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition">
           <FiImage
+            size={15}
             className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
             title="Add Image"
           />
@@ -135,7 +142,7 @@ function NoteFooterButtons({
             className="p-2 rounded-full hover:bg-gray-600"
           >
             <FiMoreVertical
-              size={20}
+              size={15}
               className="text-white hover:text-gray-200"
               title="More"
             />
@@ -234,6 +241,7 @@ function NoteFooterButtons({
           )}
         </div>
       </div>
+      {/* Close Button */}
       {handleClickClose && (
         <div className="flex gap-3">
           <button
