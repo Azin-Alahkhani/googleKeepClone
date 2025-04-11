@@ -41,13 +41,14 @@ function NoteCard({ note, onClick, noteOption }) {
   };
 
   useEffect(() => {
-    if (bgColor !== "" || image !== "") {
+    if (bgColor !== note.bgColor || image !== note.img) {
       dispatchUpdatedNote();
     }
   }, [bgColor, image]);
 
   useEffect(() => {
     if (note.labels !== labels) {
+      console.log("Labels changed: v", labels);
       dispatchUpdatedNote();
     }
   }, [labels]);
