@@ -3,7 +3,7 @@ import { FaSearch, FaUser } from "react-icons/fa";
 import { FiSettings, FiList, FiRefreshCcw } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setSearchQuery } from "../redux/NotesSlice";
@@ -12,12 +12,16 @@ function Header({ menuOpen, setMenuOpen }) {
   const selectedLabel = useSelector(
     (state) => state.notes.selectedLabel || null
   );
+  const HeaderTitle = useSelector((state) => state.notes.HeaderTitle || null);
 
   const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+  useEffect(() => {
+    console.log("HeaderTitle changed:", HeaderTitle);
+  }, [HeaderTitle]);
 
   function handleSearchTermChange(e) {
     setSearchTerm(e.target.value);
@@ -49,7 +53,7 @@ function Header({ menuOpen, setMenuOpen }) {
             </button>
           </div>
           {/* Logo or Selected label*/}
-          {!selectedLabel && (
+          {!HeaderTitle && (
             <div>
               <a href="/" className="flex items-center rounded">
                 <img src={logo} className="h-8 sm:h-10" alt="Keep Logo" />
@@ -59,10 +63,10 @@ function Header({ menuOpen, setMenuOpen }) {
               </a>
             </div>
           )}
-          {selectedLabel && (
+          {HeaderTitle && (
             <div className="flex items-center">
               <span className="text-white text-lg font-medium">
-                {selectedLabel}
+                {HeaderTitle}
               </span>
             </div>
           )}

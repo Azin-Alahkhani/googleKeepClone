@@ -14,7 +14,7 @@ const MainContainer = () => {
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className="flex flex-row gap-10">
         {/* static Sidebar */}
-        <div className={menuOpen ? "basis-1/8 " : "basis-1/8 "}>
+        <div>
           <Sidebar
             isExpanded={menuOpen}
             setIsExpanded={setMenuOpen}

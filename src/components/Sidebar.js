@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiHome, FiTrash, FiBell, FiBookmark } from "react-icons/fi";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { IoArchiveOutline } from "react-icons/io5";
-import { setSelectedLabel } from "../redux/NotesSlice";
+import { setSelectedLabel, setHeaderTitle } from "../redux/NotesSlice";
 import EditLabelsModal from "./EditLabelsModal";
 
 const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
@@ -35,9 +35,15 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   ];
 
   const handleClickLabels = (label, id) => {
+    console.log("Label clicked:", label);
     setSelectedItem(id);
     setNoteOptions("notes");
     dispatch(setSelectedLabel(label));
+    if (label === "Notes") {
+      dispatch(setHeaderTitle(null));
+    } else {
+      dispatch(setHeaderTitle(label));
+    }
   };
 
   const handleClick = (id) => {
@@ -46,20 +52,26 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
     switch (id) {
       case 1:
         setNoteOptions("notes");
-
+        dispatch(setSelectedLabel(null));
+        dispatch(setHeaderTitle(null));
         break;
       case 2:
         setNoteOptions("Reminders");
-
+        dispatch(setSelectedLabel("Reminders"));
+        dispatch(setHeaderTitle("Reminders"));
         break;
       case 3:
         setEditModal(!editModal);
         break;
       case 4:
         setNoteOptions("archivedNotes");
+        dispatch(setSelectedLabel("Archive"));
+        dispatch(setHeaderTitle("Archive"));
         break;
       case 5:
         setNoteOptions("trashNotes");
+        dispatch(setSelectedLabel("Trash"));
+        dispatch(setHeaderTitle("Trash"));
         break;
       default:
         break;

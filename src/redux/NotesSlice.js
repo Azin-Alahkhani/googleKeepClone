@@ -59,7 +59,7 @@ const initialState = {
   trashNotes: [],
   Reminders: [],
   searchQuery: "",
-  HeaderTitle: "",
+  HeaderTitle: null,
 };
 
 const notesSlice = createSlice({
@@ -162,5 +162,6 @@ export const {
   recoverNoteFromTrash,
   removeNoteFromArchive,
   setSearchQuery,
+  setHeaderTitle,
 } = notesSlice.actions;
 export default notesSlice.reducer;

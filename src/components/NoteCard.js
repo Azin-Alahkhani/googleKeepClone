@@ -58,7 +58,7 @@ function NoteCard({ note, onClick, noteOption }) {
   return (
     <div
       key={note.index}
-      className="relative isolate w-full max-w-[210px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform"
+      className="relative isolate w-full max-w-[220px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform"
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick} // Click anywhere on the card
       onMouseEnter={() => setIsHovered(true)}
@@ -109,14 +109,6 @@ function NoteCard({ note, onClick, noteOption }) {
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/*<button onClick={Remove} className="hover:bg-gray-700 p-1 rounded">
-          <FiCheckSquare size={20} />
-        </button>
-
-        <button onClick={Remove} className="hover:bg-gray-700 p-1 rounded">
-          <FiCheck size={20} />
-        </button>*/}
-
         <NoteFooterButtons
           handleRemove={handleRemove}
           handleColorSelect={handleBgChange}
