@@ -45,13 +45,19 @@ function NoteCard({ note, onClick, noteOption }) {
       dispatchUpdatedNote();
     }
   }, [bgColor, image]);
+
+  useEffect(() => {
+    if (note.labels !== labels) {
+      dispatchUpdatedNote();
+    }
+  }, [labels]);
   const handleRemove = () => {
     dispatch(addNoteToTrash(note.id)); // Remove note from Redux
   };
   return (
     <div
       key={note.index}
-      className="w-full max-w-[230px]  border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform  hover:shadow-lg relative"
+      className="relative isolate w-full max-w-[230px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform"
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick} // Click anywhere on the card
       onMouseEnter={() => setIsHovered(true)}

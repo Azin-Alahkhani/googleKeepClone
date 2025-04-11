@@ -44,7 +44,7 @@ function NoteFooterButtons({
     setShowLabelMenu(false);
     setMenuOpen(false);
     setLabels(selectedLabels);
-    setSelectedLabels([]);
+    //setSelectedLabels([]);
   };
   const handleLabelToggle = (label) => {
     setSelectedLabels(
@@ -206,28 +206,28 @@ function NoteFooterButtons({
             {menuOpen && (
               <div
                 ref={menuRef}
-                className="absolute z-[9999] right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-1  text-xs"
+                className="absolute z-[9999] right-0 mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-1  text-xs"
               >
                 {isEdit && (
                   <button
-                    className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                     onClick={trashClick}
                   >
                     Delete note
                   </button>
                 )}
                 <button
-                  className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                  className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                   onClick={(e) => {
                     e.preventDefault();
                     setShowLabelMenu(!showLabelMenu);
-                    setMenuOpen(false);
+                    //setMenuOpen(false);
                   }}
                 >
                   {labels && labels.length > 0 ? "Change label" : "Add label"}
                 </button>
                 {showLabelMenu && (
-                  <div className="absolute z-[9999] right-0 mt-1 w-48 bg-gray-700 text-white shadow-lg rounded-sm py-2 text-xs">
+                  <div className="absolute z-[9999] right-0 mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-2 text-xs">
                     <div className="p-3 text-sm">Select Labels</div>
                     <div className="space-y-1">
                       {allLabels.map((label) => (
@@ -248,7 +248,7 @@ function NoteFooterButtons({
                     <div className="mt-2">
                       <button
                         onClick={onClose}
-                        className="w-full py-1 text-xs text-center bg-gray-600 rounded-sm hover:bg-gray-500"
+                        className="w-full py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
                       >
                         Done
                       </button>
@@ -257,21 +257,21 @@ function NoteFooterButtons({
                 )}
                 {isEdit && (
                   <button
-                    className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                     onClick={handleRemove}
                   >
                     Make a copy
                   </button>
                 )}
                 <button
-                  className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                  className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                   onClick={handleRemove}
                 >
                   Show checkboxes
                 </button>
                 {isEdit && (
                   <button
-                    className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                     onClick={handleRemove}
                   >
                     Grab image text
@@ -279,7 +279,7 @@ function NoteFooterButtons({
                 )}
                 {isEdit && (
                   <button
-                    className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                     onClick={handleRemove}
                   >
                     Copy to google doc
@@ -287,7 +287,7 @@ function NoteFooterButtons({
                 )}
                 {isEdit && (
                   <button
-                    className="block px-4 py-2 text-sm hover:bg-gray-600 w-full text-left"
+                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
                     onClick={handleRemove}
                   >
                     Version history
@@ -304,7 +304,7 @@ function NoteFooterButtons({
           <button
             type="button"
             onClick={handleClickClose}
-            className="px-4 py-2 text-sm text-white  rounded-sm hover:bg-gray-500"
+            className="px-4 py-2 text-sm text-white  rounded-sm hover:bg-zinc-500"
           >
             Close
           </button>

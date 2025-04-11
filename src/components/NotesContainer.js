@@ -58,8 +58,8 @@ function NoteContainer({ menuOpen, noteOption }) {
   }, [menuOpen]);
 
   return (
-    <>
-      <Masonry columns={columns} spacing={1} className="flex flex-wrap  gap-1 ">
+    <div className="overflow-visible">
+      <Masonry columns={columns} spacing={1} className="flex flex-wrap  gap-1">
         {filteredNotes.map((note) => (
           <NoteCard
             key={note.id}
@@ -73,7 +73,7 @@ function NoteContainer({ menuOpen, noteOption }) {
       {selectedNote && (
         <NoteModal note={selectedNote} onClose={() => setSelectedNote(null)} />
       )}
-    </>
+    </div>
   );
 }
 
