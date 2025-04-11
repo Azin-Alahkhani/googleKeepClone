@@ -27,7 +27,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
     icon: FiBookmark,
     label,
   }));
-  console.log("labelItems", labelItems);
+
   const extraMenuItems = [
     { id: 3, icon: MdOutlineModeEdit, label: "Edit labels" },
     { id: 4, icon: IoArchiveOutline, label: "Archive" },
@@ -84,7 +84,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   return (
     <div
       className={`${
-        isExpanded ? "w-64" : "w-20"
+        isExpanded ? "w-50" : "w-20"
       } text-white h-screen pt-1 left-0 transition-all duration-300 ease-in-out`}
     >
       <nav className="flex flex-col gap-0">

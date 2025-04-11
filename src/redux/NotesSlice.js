@@ -37,11 +37,29 @@ const initialState = {
       bgColor: "#202124",
       img: "",
     },
+    {
+      id: 5,
+      title: "no",
+      content: "kaj ajkf.",
+      labels: [],
+      bgColor: "#202124",
+      img: "",
+    },
+    {
+      id: 6,
+      title: "hi",
+      content: "new note.",
+      labels: ["Personal"],
+      bgColor: "#202634",
+      img: "",
+    },
   ],
   selectedLabel: null, // For filtering
   archivedNotes: [],
   trashNotes: [],
   Reminders: [],
+  searchQuery: "",
+  HeaderTitle: "",
 };
 
 const notesSlice = createSlice({
@@ -72,9 +90,9 @@ const notesSlice = createSlice({
     },
     addNoteToArchive: (state, action) => {
       const note = state.notes.find((note) => note.id === action.payload);
-      console.log("note being archived: ", note);
+      //console.log("note being archived: ", note);
       if (note) {
-        console.log("note being archived: ", note);
+        //console.log("note being archived: ", note);
         state.archivedNotes.push(note);
         state.notes = state.notes.filter((note) => note.id !== action.payload);
       }
@@ -125,6 +143,12 @@ const notesSlice = createSlice({
         );
       }
     },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
+    setHeaderTitle: (state, action) => {
+      state.HeaderTitle = action.payload;
+    },
   },
 });
 
@@ -137,5 +161,6 @@ export const {
   addNoteToTrash,
   recoverNoteFromTrash,
   removeNoteFromArchive,
+  setSearchQuery,
 } = notesSlice.actions;
 export default notesSlice.reducer;

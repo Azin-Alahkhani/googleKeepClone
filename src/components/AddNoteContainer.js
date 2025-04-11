@@ -113,7 +113,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   }, [image]);
   const handleRemove = () => {
     if (onSave) {
-      console.log("removing :", note.id);
+      //console.log("removing :", note.id);
       dispatch(addNoteToTrash(note.id));
       onSave();
     }

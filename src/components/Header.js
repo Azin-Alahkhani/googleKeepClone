@@ -5,17 +5,23 @@ import { IoIosSearch } from "react-icons/io";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { setSearchQuery } from "../redux/NotesSlice";
 
 function Header({ menuOpen, setMenuOpen }) {
   const selectedLabel = useSelector(
     (state) => state.notes.selectedLabel || null
   );
+
+  const dispatch = useDispatch();
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   function handleSearchTermChange(e) {
     setSearchTerm(e.target.value);
+    dispatch(setSearchQuery(e.target.value));
   }
   const [searchTerm, setSearchTerm] = useState("");
   const [isFocusedOnSearch, setIsFocusedOnSearch] = useState(false);

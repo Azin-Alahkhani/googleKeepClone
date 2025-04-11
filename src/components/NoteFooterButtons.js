@@ -40,7 +40,6 @@ function NoteFooterButtons({
 
   const dispatch = useDispatch();
 
-  console.log("Note Footer Buttons", noteOption);
   const onClose = () => {
     setShowLabelMenu(false);
     setMenuOpen(false);
@@ -58,29 +57,24 @@ function NoteFooterButtons({
   const handleRemoveClick = () => {
     //show a confirmation dialog with undo option
 
-    console.log("Delete note clicked");
+    //("Delete note clicked");
     handleRemove();
   };
   const handleArchiveClick = () => {
     if (noteOption === "archivedNotes") {
-      console.log("Unarchive note clicked");
       dispatch(removeNoteFromArchive(note.id));
     } else {
-      console.log("Archive note clicked", note);
       dispatch(addNoteToArchive(note.id));
     }
   };
   const trashClick = () => {
-    console.log("Trash note clicked");
     dispatch(addNoteToTrash(note.id));
   };
   const handleDeleteForever = () => {
-    console.log("Delete forever clicked");
     dispatch(removeNote(note.id));
   };
 
   const handleRecover = () => {
-    console.log("Recover note clicked");
     dispatch(recoverNoteFromTrash(note.id));
   };
 
