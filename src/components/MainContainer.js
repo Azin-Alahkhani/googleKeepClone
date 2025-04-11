@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { use } from "react";
 
 const MainContainer = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(true);
   const [noteOption, setNoteOptions] = useState("notes");
 
   return (

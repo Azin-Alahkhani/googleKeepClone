@@ -10,7 +10,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   const labels = useSelector((state) => state.labels.labels || []);
   const [editModal, setEditModal] = useState(false);
 
-  const [selectedItem, setSelectedItem] = useState(null); // Track selected item
+  const [selectedItem, setSelectedItem] = useState(1); // Track selected item
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   return (
     <div
       className={`${
-        isExpanded ? "w-50" : "w-20"
+        isExpanded ? "w-60" : "w-50"
       } text-white h-screen pt-1 left-0 transition-all duration-300 ease-in-out`}
     >
       <nav className="flex flex-col gap-0">

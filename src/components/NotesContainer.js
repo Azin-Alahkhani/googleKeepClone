@@ -4,6 +4,7 @@ import NoteCard from "./NoteCard";
 import { useState, useEffect } from "react";
 import NoteModal from "./NoteModal"; // Import modal component
 import Masonry from "@mui/lab/Masonry";
+import { useRef } from "react";
 
 function NoteContainer({ menuOpen, noteOption }) {
   const notes = useSelector((state) => state.notes[noteOption] || []); // Get notes from Redux store
@@ -27,39 +28,45 @@ function NoteContainer({ menuOpen, noteOption }) {
   const dispatch = useDispatch(); // Dispatch actions
   const [columns, setColumns] = useState(menuOpen ? 4 : 3);
   const [noteW, setNoteW] = useState("200px");
-  const updateColumns = () => {
-    const width = window.innerWidth;
+  const menuOpenRef = useRef(menuOpen);
 
-    if (width < 500) {
-      setColumns(1);
-    } else if (width < 900) {
-      setColumns(menuOpen ? 2 : 1);
-    } else if (width < 869) {
-      setColumns(menuOpen ? 2 : 3);
-    } else if (width < 1395) {
-      setColumns(menuOpen ? 4 : 3);
-    } else {
-      setColumns(menuOpen ? 3 : 4); // Default: 4 or 5 columns
-    }
-  };
   useEffect(() => {
-    updateColumns(); // Set columns on mount
-    console.log(
-      "menuOpen",
-      menuOpen,
-      "columns",
-      columns,
-      "width",
-      window.innerWidth
-    );
-    window.addEventListener("resize", updateColumns); // Listen for resize events
-
-    return () => window.removeEventListener("resize", updateColumns); // Cleanup
+    menuOpenRef.current = menuOpen; // keep ref in sync
   }, [menuOpen]);
+
+  useEffect(() => {
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      const currentMenuOpen = menuOpenRef.current;
+
+      if (width < 500) {
+        setColumns(1);
+      } else if (width < 900) {
+        setColumns(currentMenuOpen ? 2 : 1);
+      } else if (width < 1100) {
+        setColumns(currentMenuOpen ? 3 : 2);
+      } else if (width < 1395) {
+        setColumns(currentMenuOpen ? 4 : 3);
+      } else {
+        setColumns(currentMenuOpen ? 4 : 4);
+      }
+    };
+
+    updateColumns(); // Set on mount
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
+  useEffect(() => {
+    console.log("Columns changed:", columns);
+  }, [columns]);
 
   return (
     <div className="overflow-visible">
-      <Masonry columns={columns} spacing={1} className="flex flex-wrap  gap-1">
+      <Masonry
+        columns={columns}
+        spacing={1}
+        className="flex flex-wrap flex-grow-0  gap-1"
+      >
         {filteredNotes.map((note) => (
           <NoteCard
             key={note.id}
