@@ -57,7 +57,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
         break;
       case 2:
         setNoteOptions("Reminders");
-        dispatch(setSelectedLabel("Reminders"));
+        //dispatch(setSelectedLabel("Reminders"));
         dispatch(setHeaderTitle("Reminders"));
         break;
       case 3:
@@ -65,12 +65,12 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
         break;
       case 4:
         setNoteOptions("archivedNotes");
-        dispatch(setSelectedLabel("Archive"));
+        //dispatch(setSelectedLabel("Archive"));
         dispatch(setHeaderTitle("Archive"));
         break;
       case 5:
         setNoteOptions("trashNotes");
-        dispatch(setSelectedLabel("Trash"));
+        //dispatch(setSelectedLabel("Trash"));
         dispatch(setHeaderTitle("Trash"));
         break;
       default:
