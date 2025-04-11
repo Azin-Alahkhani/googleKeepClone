@@ -22,7 +22,7 @@ const MainContainer = () => {
           />
         </div>
 
-        <div className={"flex-grow justify-center"}>
+        <div className={"w-screen  justify-center"}>
           <div className="basis-full p-5 ">
             <AddNoteContainer noteOption={noteOption} />
           </div>

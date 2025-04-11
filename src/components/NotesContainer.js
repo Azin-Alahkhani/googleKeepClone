@@ -44,23 +44,22 @@ function NoteContainer({ menuOpen, noteOption }) {
   };
   useEffect(() => {
     updateColumns(); // Set columns on mount
-    console.log("menuOpen", menuOpen, "columns", columns);
+    console.log(
+      "menuOpen",
+      menuOpen,
+      "columns",
+      columns,
+      "width",
+      window.innerWidth
+    );
     window.addEventListener("resize", updateColumns); // Listen for resize events
 
     return () => window.removeEventListener("resize", updateColumns); // Cleanup
   }, [menuOpen]);
 
-  const handleRemove = (note) => {
-    dispatch(removeNote(note.id)); // Remove note from Redux
-  };
-
   return (
     <>
-      <Masonry
-        columns={columns}
-        spacing={1}
-        className="flex flex-wrap -mx-4 gap-1 "
-      >
+      <Masonry columns={columns} spacing={1} className="flex flex-wrap  gap-1 ">
         {filteredNotes.map((note) => (
           <NoteCard
             key={note.id}

@@ -42,7 +42,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
 
   const handleClick = (id) => {
     setSelectedItem(id);
-    dispatch(setSelectedLabel(null));
+    //dispatch(setSelectedLabel(null));
     switch (id) {
       case 1:
         setNoteOptions("notes");
