@@ -57,7 +57,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
         break;
       case 2:
         setNoteOptions("Reminders");
-        //dispatch(setSelectedLabel("Reminders"));
+        dispatch(setSelectedLabel(null));
         dispatch(setHeaderTitle("Reminders"));
         break;
       case 3:
@@ -65,12 +65,12 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
         break;
       case 4:
         setNoteOptions("archivedNotes");
-        //dispatch(setSelectedLabel("Archive"));
+        dispatch(setSelectedLabel(null));
         dispatch(setHeaderTitle("Archive"));
         break;
       case 5:
         setNoteOptions("trashNotes");
-        //dispatch(setSelectedLabel("Trash"));
+        dispatch(setSelectedLabel(null));
         dispatch(setHeaderTitle("Trash"));
         break;
       default:
@@ -80,7 +80,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
 
   const getClassName = (id) => {
     var style =
-      "group relative flex items-center gap-4 px-2 py-3 cursor-pointer transition-all duration-200";
+      "group relative flex items-center gap-4 px-2 py-4 cursor-pointer transition-all duration-200";
 
     if (selectedItem == null) {
       style += " hover:bg-[#41321c] hover:bg-opacity-80 rounded-r-full";

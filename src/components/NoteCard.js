@@ -1,9 +1,9 @@
 import { FiCheckSquare, FiCheck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { editNote } from "../redux/NotesSlice"; // Assuming you have this action
-import NoteFooterButtons from "./NoteFooterButtons"; // Assuming you have this component
-import { addNoteToTrash } from "../redux/NotesSlice"; // Assuming you have this action
+import { editNote } from "../redux/NotesSlice";
+import NoteFooterButtons from "./NoteFooterButtons";
+import { addNoteToTrash } from "../redux/NotesSlice";
 
 function NoteCard({ note, onClick, noteOption }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -58,7 +58,7 @@ function NoteCard({ note, onClick, noteOption }) {
   return (
     <div
       key={note.index}
-      className="relative isolate w-full max-w-[220px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform"
+      className="relative rounded-b-lg isolate w-full max-w-[240px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md transition transform"
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick} // Click anywhere on the card
       onMouseEnter={() => setIsHovered(true)}
@@ -89,7 +89,7 @@ function NoteCard({ note, onClick, noteOption }) {
           )}
         </div>
       )}
-      {labels && (
+      {labels.length > 0 && (
         <div className="flex items-center justify-start mb-10 ml-4 gap-2">
           {labels.map((label) => (
             <span

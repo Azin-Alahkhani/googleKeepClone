@@ -1,10 +1,8 @@
-import { useSelector, useDispatch } from "react-redux";
-import { removeNote } from "../redux/actions";
+import { useSelector } from "react-redux";
 import NoteCard from "./NoteCard";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NoteModal from "./NoteModal"; // Import modal component
-import Masonry from "@mui/lab/Masonry";
-import { useRef } from "react";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 function NoteContainer({ menuOpen, noteOption }) {
   const notes = useSelector((state) => state.notes[noteOption] || []); // Get notes from Redux store
@@ -25,57 +23,29 @@ function NoteContainer({ menuOpen, noteOption }) {
         : true
     );
 
-  const dispatch = useDispatch(); // Dispatch actions
-  const [columns, setColumns] = useState(menuOpen ? 4 : 3);
-  const [noteW, setNoteW] = useState("200px");
-  const menuOpenRef = useRef(menuOpen);
-
-  useEffect(() => {
-    menuOpenRef.current = menuOpen; // keep ref in sync
-  }, [menuOpen]);
-
-  useEffect(() => {
-    const updateColumns = () => {
-      const width = window.innerWidth;
-      const currentMenuOpen = menuOpenRef.current;
-
-      if (width < 500) {
-        setColumns(1);
-      } else if (width < 900) {
-        setColumns(currentMenuOpen ? 2 : 1);
-      } else if (width < 1100) {
-        setColumns(currentMenuOpen ? 3 : 2);
-      } else if (width < 1395) {
-        setColumns(currentMenuOpen ? 4 : 3);
-      } else {
-        setColumns(currentMenuOpen ? 4 : 4);
-      }
-    };
-
-    updateColumns(); // Set on mount
-    window.addEventListener("resize", updateColumns);
-    return () => window.removeEventListener("resize", updateColumns);
-  }, []);
-  useEffect(() => {
-    console.log("Columns changed:", columns);
-  }, [columns]);
-
   return (
-    <div className="overflow-visible">
-      <Masonry
-        columns={columns}
-        spacing={1}
-        className="flex flex-wrap flex-grow-0  gap-1"
+    <div className=" ">
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{
+          350: 1,
+          600: menuOpen ? 1 : 2,
+          750: menuOpen ? 2 : 3,
+          900: 3,
+          1100: menuOpen ? 3 : 4,
+          1200: menuOpen ? 4 : 5,
+        }}
       >
-        {filteredNotes.map((note) => (
-          <NoteCard
-            key={note.id}
-            note={note}
-            onClick={() => setSelectedNote(note)}
-            noteOption={noteOption}
-          />
-        ))}
-      </Masonry>
+        <Masonry gutter="1px">
+          {filteredNotes.map((note) => (
+            <NoteCard
+              key={note.id}
+              note={note}
+              onClick={() => setSelectedNote(note)}
+              noteOption={noteOption}
+            />
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
       {/* Modal for Editing */}
       {selectedNote && (
         <NoteModal note={selectedNote} onClose={() => setSelectedNote(null)} />

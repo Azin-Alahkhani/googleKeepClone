@@ -12,7 +12,7 @@ const MainContainer = () => {
   return (
     <div style={{ backgroundColor: "#202124" }}>
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-      <div className="flex flex-row gap-10">
+      <div className="flex flex-row gap-[60px]">
         {/* static Sidebar */}
         <div>
           <Sidebar

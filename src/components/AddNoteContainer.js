@@ -147,7 +147,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
         {/* Show image if uploaded */}
         {image && (
           <div className="mt-2 relative group ">
-            <div className="max-h-[600px] overflow-auto">
+            <div className="max-h-[500px] overflow-auto">
               <img
                 src={image}
                 alt="Note"
