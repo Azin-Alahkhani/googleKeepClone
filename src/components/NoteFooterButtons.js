@@ -55,12 +55,7 @@ function NoteFooterButtons({
           : [...prevSelected, label] // Select
     );
   };
-  const handleRemoveClick = () => {
-    //show a confirmation dialog with undo option
 
-    //("Delete note clicked");
-    handleRemove();
-  };
   const handleArchiveClick = () => {
     if (noteOption === "archivedNotes") {
       dispatch(removeNoteFromArchive(note.id));
@@ -83,6 +78,14 @@ function NoteFooterButtons({
     //console.log("selected :", selectedLabels);
     setLabels(selectedLabels);
   }, [selectedLabels]);
+
+  useEffect(() => {
+    if (!isHovered) {
+      setShowColorPicker(false);
+      setMenuOpen(false);
+      setShowLabelMenu(false);
+    }
+  }, [isHovered]);
   return (
     <div className="flex justify-between items-center">
       {noteOption !== "trashNotes" && (

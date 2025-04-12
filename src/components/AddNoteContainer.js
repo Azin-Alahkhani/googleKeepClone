@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux"; // Import useDispatch from react-redux
+import { useSelector } from "react-redux"; // Import useSelector from react-redux
 import {
   addNote,
   addNoteToTrash,
@@ -20,6 +21,10 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   const [image, setImage] = useState(note.img || "");
   const [bgrColor, setBgrColor] = useState(
     note.bgColor != "#202124" ? note.bgColor : "#202124"
+  );
+
+  const selectedLabel = useSelector(
+    (state) => state.notes.selectedLabel || null
   );
 
   const [labels, setLabels] = useState(note.labels || []);
@@ -111,6 +116,12 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
       // Logs the updated image URL
     }
   }, [image]);
+  useEffect(() => {
+    if (!isEdit)
+      if (selectedLabel && !labels.includes(selectedLabel)) {
+        setLabels((prevLabels) => [...prevLabels, selectedLabel]);
+      }
+  }, [selectedLabel, labels]);
   const handleRemove = () => {
     if (onSave) {
       //console.log("removing :", note.id);
