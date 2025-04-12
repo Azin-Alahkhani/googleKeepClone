@@ -82,14 +82,14 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
 
   const getClassName = (id) => {
     const base =
-      "group rounded-r-full relative flex justify-self-start items-center gap-1 px-2 py-2 cursor-pointer transition-all duration-200";
+      "group rounded-r-full relative flex   items-center gap-1 px-2 py-2 cursor-pointer transition-all duration-200";
 
     const isSelected = selectedItem === id;
     const isCollapsed = !isExpanded;
-
+    console.log("isCollapsed", isCollapsed);
     // Apply hover effect only to non-selected items
     const hoverEffect = !isSelected
-      ? "hover:bg-zinc-500 hover:bg-opacity-15"
+      ? "hover:bg-zinc-500 hover:bg-opacity-15 "
       : ""; // No hover effect on selected item
     const overLayHighlight =
       isHovered && isSelected
@@ -97,19 +97,22 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
         : "";
     // Apply overlay highlight if hovered and selected
     if (isCollapsed && isSelected) {
-      return `${base} ${overLayHighlight} rounded-r-full`;
+      console.log("Collapsed and selected", id);
+      return `${base} ${overLayHighlight} rounded-r-full  `;
     }
-    if (isCollapsed) {
+    if (isCollapsed && !isHovered) {
+      console.log("Collapsed and not h", id);
       // Collapsed: Only circle highlight on icon, still have hover effect
       return `${base} justify-center ${hoverEffect}`;
     }
 
     // Expanded: Full width highlight with fixed selected color
     if (isSelected) {
-      return `${base} bg-[#41321c] bg-opacity-80 rounded-r-full`; // Selected item fixed color
+      console.log("Expanded and selected", id);
+      return `${base} bg-[#41321c] bg-opacity-80 rounded-r-full justify-start`; // Selected item fixed color
     }
-
-    return `${base} ${hoverEffect} rounded-r-full`; // Apply hover effect for non-selected items
+    console.log("Expanded and not selected", id);
+    return `${base} ${hoverEffect} rounded-r-full justify-start`; // Apply hover effect for non-selected items
   };
 
   return (
@@ -136,11 +139,11 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             tabIndex={0}
           >
             <div
-              className={` flex items-center justify-center min-w-[2rem] h-10 w-10 ml-2 transition-colors rounded-full ${
-                !isExpanded && !isHovered
+              className={`flex items-center justify-center min-w-[2rem] h-10 w-10 ml-2 transition-colors rounded-full ${
+                !isExpanded
                   ? selectedItem === item.id
-                    ? "bg-[#41321c] bg-opacity-80 "
-                    : ""
+                    ? "bg-[#41321c] bg-opacity-80"
+                    : "hover:bg-zinc-500 hover:bg-opacity-15"
                   : ""
               }`}
             >
