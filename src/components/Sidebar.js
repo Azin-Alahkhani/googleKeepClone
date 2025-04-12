@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FiHome, FiTrash, FiBell, FiBookmark } from "react-icons/fi";
-import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineModeEdit, MdLightbulbOutline } from "react-icons/md";
 import { IoArchiveOutline } from "react-icons/io5";
 import { setSelectedLabel, setHeaderTitle } from "../redux/NotesSlice";
 import EditLabelsModal from "./EditLabelsModal";
@@ -20,7 +20,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   }, [isExpanded]);
 
   const menuItems = [
-    { id: 1, icon: FiHome, label: "Notes" },
+    { id: 1, icon: MdLightbulbOutline, label: "Notes" },
     { id: 2, icon: FiBell, label: "Reminders" },
   ];
   var i = 6;
@@ -86,32 +86,26 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
 
     const isSelected = selectedItem === id;
     const isCollapsed = !isExpanded;
-    console.log("isCollapsed", isCollapsed);
-    // Apply hover effect only to non-selected items
+
     const hoverEffect = !isSelected
       ? "hover:bg-zinc-500 hover:bg-opacity-15 "
-      : ""; // No hover effect on selected item
+      : "";
     const overLayHighlight =
       isHovered && isSelected
         ? " bg-[#41321c] bg-opacity-80 rounded-r-full"
         : "";
-    // Apply overlay highlight if hovered and selected
+
     if (isCollapsed && isSelected) {
-      console.log("Collapsed and selected", id);
       return `${base} ${overLayHighlight} rounded-r-full  `;
     }
     if (isCollapsed && !isHovered) {
-      console.log("Collapsed and not h", id);
-      // Collapsed: Only circle highlight on icon, still have hover effect
       return `${base} justify-center ${hoverEffect}`;
     }
 
     // Expanded: Full width highlight with fixed selected color
     if (isSelected) {
-      console.log("Expanded and selected", id);
       return `${base} bg-[#41321c] bg-opacity-80 rounded-r-full justify-start`; // Selected item fixed color
     }
-    console.log("Expanded and not selected", id);
     return `${base} ${hoverEffect} rounded-r-full justify-start`; // Apply hover effect for non-selected items
   };
 

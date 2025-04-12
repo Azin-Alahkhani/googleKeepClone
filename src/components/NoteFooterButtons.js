@@ -30,6 +30,7 @@ function NoteFooterButtons({
   handleClickClose,
   note = {},
   noteOption,
+  handleDuplicateNote,
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -221,78 +222,68 @@ function NoteFooterButtons({
                   onClick={(e) => {
                     e.preventDefault();
                     setShowLabelMenu(!showLabelMenu);
-                    //setMenuOpen(false);
+                    setMenuOpen(false);
                   }}
                 >
                   {labels && labels.length > 0 ? "Change label" : "Add label"}
                 </button>
-                {showLabelMenu && (
-                  <div className="absolute z-[9999] right-0 mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-2 text-xs">
-                    <div className="p-3 text-sm">Select Labels</div>
-                    <div className="space-y-1">
-                      {allLabels.map((label) => (
-                        <label
-                          key={label}
-                          className="flex items-center space-x-2"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={selectedLabels.includes(label)}
-                            onChange={() => handleLabelToggle(label)}
-                            className="text-white"
-                          />
-                          <span>{label}</span>
-                        </label>
-                      ))}
-                    </div>
-                    <div className="mt-2">
-                      <button
-                        onClick={onClose}
-                        className="w-full py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
-                      >
-                        Done
-                      </button>
-                    </div>
-                  </div>
-                )}
+
                 {isEdit && (
                   <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setMenuOpen(false);
+                      handleDuplicateNote(note.id);
+                    }}
                     className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
-                    onClick={handleRemove}
                   >
                     Make a copy
                   </button>
                 )}
-                <button
-                  className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
-                  onClick={handleRemove}
-                >
+                <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                   Show checkboxes
                 </button>
                 {isEdit && (
-                  <button
-                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
-                    onClick={handleRemove}
-                  >
+                  <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                     Grab image text
                   </button>
                 )}
                 {isEdit && (
-                  <button
-                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
-                    onClick={handleRemove}
-                  >
+                  <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                     Copy to google doc
                   </button>
                 )}
                 {isEdit && (
-                  <button
-                    className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left"
-                    onClick={handleRemove}
-                  >
+                  <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                     Version history
                   </button>
                 )}
+              </div>
+            )}
+            {showLabelMenu && (
+              <div className="absolute z-[9999] right-0  top-0 h-full w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-2 text-xs">
+                <div className="p-3 text-sm">Select Labels</div>
+                <div className="space-y-1">
+                  {allLabels.map((label) => (
+                    <label key={label} className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        checked={selectedLabels.includes(label)}
+                        onChange={() => handleLabelToggle(label)}
+                        className="text-white"
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+                <div className="mt-2">
+                  <button
+                    onClick={onClose}
+                    className="w-full py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
+                  >
+                    Done
+                  </button>
+                </div>
               </div>
             )}
           </div>

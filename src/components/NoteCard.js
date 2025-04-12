@@ -1,9 +1,10 @@
 import { FiCheckSquare, FiCheck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { editNote } from "../redux/NotesSlice";
+import { addNote, editNote } from "../redux/NotesSlice";
 import NoteFooterButtons from "./NoteFooterButtons";
 import { addNoteToTrash } from "../redux/NotesSlice";
+import { useSelector } from "react-redux";
 
 function NoteCard({ note, onClick, noteOption }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -12,7 +13,20 @@ function NoteCard({ note, onClick, noteOption }) {
   const [labels, setLabels] = useState(note.labels || []); // Initialize with note labels
 
   const dispatch = useDispatch(); // Set up dispatch
+  const notes = useSelector((state) => state.notes[noteOption] || []); // Get notes from Redux store
 
+  const handleDuplicateNote = (noteId) => {
+    const selectedNote = notes.find((note) => note.id === noteId); // Find the note to duplicate
+    console.log("Selected note to duplicate: ", selectedNote);
+    if (selectedNote) {
+      const duplicatedNote = {
+        ...selectedNote,
+        id: new Date().getTime(), // Create a unique ID for the duplicated note
+        title: selectedNote.title + " (Copy)", // Modify the title to indicate it's a copy
+      };
+      dispatch(addNote(duplicatedNote)); // Add duplicated note to state
+    }
+  };
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -119,6 +133,7 @@ function NoteCard({ note, onClick, noteOption }) {
           setLabels={setLabels}
           note={note}
           noteOption={noteOption}
+          handleDuplicateNote={handleDuplicateNote}
         />
       </div>
     </div>
