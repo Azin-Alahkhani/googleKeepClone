@@ -93,6 +93,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   }, [noteRef, isEdit, noteTitle, noteText, image]);
 
   const handleColorSelect = (color) => {
+    console.log("Selected color:", color);
     setBgrColor(color);
   };
 
