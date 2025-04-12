@@ -32,7 +32,7 @@ function Header({ menuOpen, setMenuOpen }) {
 
   return (
     <nav
-      className="border-gray-200 fixed px-2 sm:px-4 py-2.5 dark:bg-gray-900 font-sans "
+      className="border-gray-200 fixed px-2 sm:px-4   font-sans "
       style={{
         position: "sticky",
         top: 0,

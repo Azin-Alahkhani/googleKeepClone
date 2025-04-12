@@ -14,7 +14,7 @@ const MainContainer = () => {
       <Header menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       <div className="flex flex-row gap-[60px]">
         {/* static Sidebar */}
-        <div>
+        <div className={`${menuOpen ? "w-60" : "w-50"} `}>
           <Sidebar
             isExpanded={menuOpen}
             setIsExpanded={setMenuOpen}
@@ -22,7 +22,7 @@ const MainContainer = () => {
           />
         </div>
 
-        <div className={"w-screen  justify-center"}>
+        <div className={"w-screen  justify-center h-screen ml-10"}>
           <div className="basis-full p-5 ">
             <AddNoteContainer noteOption={noteOption} />
           </div>

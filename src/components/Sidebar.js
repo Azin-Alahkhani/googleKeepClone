@@ -13,6 +13,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   const [selectedItem, setSelectedItem] = useState(1); // Track selected item
   const dispatch = useDispatch();
 
+  const [isHovered, setIsHovered] = useState(false);
+
   useEffect(() => {
     localStorage.setItem("sidebarState", JSON.stringify(isExpanded));
   }, [isExpanded]);
@@ -80,29 +82,49 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
 
   const getClassName = (id) => {
     const base =
-      "group relative flex items-center gap-1 px-2 py-2 cursor-pointer transition-all duration-200";
+      "group rounded-r-full relative flex justify-self-start items-center gap-1 px-2 py-2 cursor-pointer transition-all duration-200";
 
     const isSelected = selectedItem === id;
     const isCollapsed = !isExpanded;
 
+    // Apply hover effect only to non-selected items
+    const hoverEffect = !isSelected
+      ? "hover:bg-zinc-500 hover:bg-opacity-15"
+      : ""; // No hover effect on selected item
+    const overLayHighlight =
+      isHovered && isSelected
+        ? " bg-[#41321c] bg-opacity-80 rounded-r-full"
+        : "";
+    // Apply overlay highlight if hovered and selected
+    if (isCollapsed && isSelected) {
+      return `${base} ${overLayHighlight} rounded-r-full`;
+    }
     if (isCollapsed) {
-      // Collapsed: Only circle highlight on icon
-      return `${base} justify-center`;
+      // Collapsed: Only circle highlight on icon, still have hover effect
+      return `${base} justify-center ${hoverEffect}`;
     }
 
-    // Expanded: Full width highlight
+    // Expanded: Full width highlight with fixed selected color
     if (isSelected) {
-      return `${base} bg-[#41321c] bg-opacity-80 rounded-r-full`;
+      return `${base} bg-[#41321c] bg-opacity-80 rounded-r-full`; // Selected item fixed color
     }
 
-    return `${base} hover:bg-zinc-500 hover:bg-opacity-15 rounded-r-full`;
+    return `${base} ${hoverEffect} rounded-r-full`; // Apply hover effect for non-selected items
   };
 
   return (
     <div
-      className={`${
-        isExpanded ? "w-60" : "w-50"
-      } text-white h-screen pt-1 left-0 transition-all duration-300 ease-in-out`}
+      className={`text-white pt-1 transition-all duration-300 ease-in-out 
+    ${
+      isExpanded
+        ? "relative h-screen w-60"
+        : "fixed top-[80p] left-0 z-50 h-screen"
+    } 
+    ${!isExpanded && isHovered ? "bg-[#1f1f1f] w-[15rem]" : " "}
+    overflow-hidden`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      tabIndex={0}
     >
       <nav className="flex flex-col gap-0">
         {menuItems.map((item) => (
@@ -115,10 +137,10 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
           >
             <div
               className={` flex items-center justify-center min-w-[2rem] h-10 w-10 ml-2 transition-colors rounded-full ${
-                !isExpanded
+                !isExpanded && !isHovered
                   ? selectedItem === item.id
-                    ? "bg-[#41321c] bg-opacity-80"
-                    : "hover:bg-zinc-500 hover:bg-opacity-15"
+                    ? "bg-[#41321c] bg-opacity-80 "
+                    : ""
                   : ""
               }`}
             >
@@ -129,9 +151,9 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             </div>
             <span
               className={`${
-                isExpanded ? "opacity-100" : "opacity-0 hidden"
+                isExpanded || isHovered ? "opacity-100" : "opacity-0 hidden"
               } whitespace-nowrap transition-opacity duration-200 text-sm font-semibold ${
-                isExpanded ? "delay-100" : ""
+                isExpanded || isHovered ? "delay-100" : ""
               }`}
             >
               {item.label}
@@ -163,9 +185,9 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             </div>
             <span
               className={`${
-                isExpanded ? "opacity-100" : "opacity-0 hidden"
+                isExpanded || isHovered ? "opacity-100" : "opacity-0 hidden"
               } whitespace-nowrap transition-opacity duration-200 text-sm font-semibold ${
-                isExpanded ? "delay-100" : ""
+                isExpanded || isHovered ? "delay-100" : ""
               }`}
             >
               {item.label}
@@ -197,9 +219,9 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             </div>
             <span
               className={`${
-                isExpanded ? "opacity-100" : "opacity-0 hidden"
+                isExpanded || isHovered ? "opacity-100" : "opacity-0 hidden"
               } whitespace-nowrap transition-opacity duration-200 text-sm font-semibold ${
-                isExpanded ? "delay-100" : ""
+                isExpanded || isHovered ? "delay-100" : ""
               }`}
             >
               {item.label}
