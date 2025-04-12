@@ -3,6 +3,8 @@ import { FaSearch, FaUser } from "react-icons/fa";
 import { FiSettings, FiList, FiRefreshCcw } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import { TfiViewList } from "react-icons/tfi";
+import { MdRefresh } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -72,9 +74,9 @@ function Header({ menuOpen, setMenuOpen }) {
           )}
         </div>
         {/* Search bar */}
-        <div className="hidden md:flex items-center justify-around w-full">
+        <div className="hidden md:flex items-center  justify-around w-full">
           <div
-            className="ml-24 w-full flex justify-normal items-center p-1   rounded-lg shadow-md border-none  mr-24"
+            className="ml-24 w-[700px] flex justify-normal items-center   rounded-lg shadow-md border-none  mr-24"
             style={{
               backgroundColor: isFocusedOnSearch
                 ? "#ffffff"
@@ -108,37 +110,35 @@ function Header({ menuOpen, setMenuOpen }) {
         </div>
 
         {/*right side stuff*/}
-        <div className="grid grid-cols-4 gap-5 mr-5 flex-end ">
+        <div className="grid grid-cols-4 gap-10 justify-between items-center">
           <div>
-            <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
-              <FiRefreshCcw
-                className="w-7 h-7 text-gray-500 hover:text-white"
-                title="Refresh"
-              />
+            <button
+              type="button"
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
+            >
+              <MdRefresh className="w-7 h-7 " title="Refresh" />
             </button>
           </div>
           <div>
-            <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
-              <FiList
-                className="w-7 h-7 text-gray-500 hover:text-white"
-                title="Refresh"
-              />
+            <button
+              type="button"
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
+            >
+              <TfiViewList className="w-7 h-7 " title="View as list" />
             </button>
           </div>
-          <div>
-            <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
-              <FiSettings
-                className="w-7 h-7 text-gray-500 hover:text-white"
-                title="Refresh"
-              />
+          <div className="flex  justify-end gap-2 ">
+            <button
+              type="button"
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white ml-2 "
+            >
+              <FiSettings className="w-7 h-7 " title="Refresh" />
             </button>
-          </div>
-          <div>
-            <button type="button" className="rounded h-8 w-8 hover:bg-zinc-600">
-              <FaUser
-                className="w-7 h-7 text-gray-500 hover:text-white"
-                title="Refresh"
-              />
+            <button
+              type="button"
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
+            >
+              <FaUser className="w-7 h-7 " title="Account" />
             </button>
           </div>
         </div>

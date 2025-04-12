@@ -22,7 +22,7 @@ function NoteCard({ note, onClick, noteOption }) {
       const duplicatedNote = {
         ...selectedNote,
         id: new Date().getTime(), // Create a unique ID for the duplicated note
-        title: selectedNote.title + " (Copy)", // Modify the title to indicate it's a copy
+        title: selectedNote.title, // Modify the title to indicate it's a copy
       };
       dispatch(addNote(duplicatedNote)); // Add duplicated note to state
     }

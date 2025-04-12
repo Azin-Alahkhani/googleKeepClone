@@ -22,7 +22,9 @@ const MainContainer = () => {
           />
         </div>
 
-        <div className={"w-screen  justify-center h-screen ml-10"}>
+        <div
+          className={"w-screen  justify-center h-screen overflow-y-auto ml-10"}
+        >
           <div className="basis-full p-5 ">
             <AddNoteContainer noteOption={noteOption} />
           </div>
