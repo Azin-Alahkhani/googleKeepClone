@@ -79,18 +79,23 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   };
 
   const getClassName = (id) => {
-    var style =
-      "group relative flex items-center gap-4 px-2 py-4 cursor-pointer transition-all duration-200";
+    const base =
+      "group relative flex items-center gap-1 px-2 py-2 cursor-pointer transition-all duration-200";
 
-    if (selectedItem == null) {
-      style += " hover:bg-[#41321c] hover:bg-opacity-80 rounded-r-full";
-    } else if (selectedItem === id) {
-      style += " bg-[#41321c] bg-opacity-80 rounded-r-full";
-    } else {
-      style += " hover:bg-zinc-500 hover:bg-opacity-15  rounded-r-full";
+    const isSelected = selectedItem === id;
+    const isCollapsed = !isExpanded;
+
+    if (isCollapsed) {
+      // Collapsed: Only circle highlight on icon
+      return `${base} justify-center`;
     }
 
-    return style;
+    // Expanded: Full width highlight
+    if (isSelected) {
+      return `${base} bg-[#41321c] bg-opacity-80 rounded-r-full`;
+    }
+
+    return `${base} hover:bg-zinc-500 hover:bg-opacity-15 rounded-r-full`;
   };
 
   return (
@@ -108,9 +113,17 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             onClick={() => handleClick(item.id)}
             tabIndex={0}
           >
-            <div className="flex items-center justify-center min-w-[2rem]">
+            <div
+              className={` flex items-center justify-center min-w-[2rem] h-10 w-10 ml-2 transition-colors rounded-full ${
+                !isExpanded
+                  ? selectedItem === item.id
+                    ? "bg-[#41321c] bg-opacity-80"
+                    : "hover:bg-zinc-500 hover:bg-opacity-15"
+                  : ""
+              }`}
+            >
               <item.icon
-                className="h-5 w-5 text-zinc-300 ml-6"
+                className="h-5 w-5 text-zinc-300   justify-self-center"
                 aria-hidden="true"
               />
             </div>
@@ -134,9 +147,17 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             onClick={() => handleClickLabels(item.label, item.id)}
             tabIndex={0}
           >
-            <div className="flex items-center justify-center min-w-[2rem]">
+            <div
+              className={`flex items-center justify-center min-w-[2rem] h-10 w-10 ml-2 transition-colors rounded-full ${
+                !isExpanded
+                  ? selectedItem === item.id
+                    ? "bg-[#41321c] bg-opacity-80"
+                    : "hover:bg-zinc-500 hover:bg-opacity-15"
+                  : ""
+              }`}
+            >
               <item.icon
-                className="h-5 w-5 text-zinc-300 ml-6"
+                className="h-5 w-5 text-zinc-300 justify-self-center "
                 aria-hidden="true"
               />
             </div>
@@ -160,9 +181,17 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
             onClick={() => handleClick(item.id)}
             tabIndex={0}
           >
-            <div className="flex items-center justify-center min-w-[2rem]">
+            <div
+              className={`flex items-center justify-center min-w-[2rem] h-10 w-10 ml-2 transition-colors rounded-full ${
+                !isExpanded
+                  ? selectedItem === item.id
+                    ? "bg-[#41321c] bg-opacity-80"
+                    : "hover:bg-zinc-500 hover:bg-opacity-15"
+                  : ""
+              }`}
+            >
               <item.icon
-                className="h-5 w-5 text-zinc-300 ml-6"
+                className="h-5 w-5 text-zinc-300 justify-self-center"
                 aria-hidden="true"
               />
             </div>

@@ -35,7 +35,7 @@ function NoteContainer({ menuOpen, noteOption }) {
           1200: menuOpen ? 4 : 5,
         }}
       >
-        <Masonry gutter="1px">
+        <Masonry gutter="0px">
           {filteredNotes.map((note) => (
             <NoteCard
               key={note.id}
