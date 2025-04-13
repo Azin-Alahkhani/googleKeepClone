@@ -49,16 +49,17 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
   };
 
   const handleClick = (id) => {
-    setSelectedItem(id);
     //dispatch(setSelectedLabel(null));
     switch (id) {
       case 1:
         setNoteOptions("notes");
+        setSelectedItem(id);
         dispatch(setSelectedLabel(null));
         dispatch(setHeaderTitle(null));
         break;
       case 2:
         setNoteOptions("Reminders");
+        setSelectedItem(id);
         dispatch(setSelectedLabel(null));
         dispatch(setHeaderTitle("Reminders"));
         break;
@@ -68,11 +69,13 @@ const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
       case 4:
         setNoteOptions("archivedNotes");
         dispatch(setSelectedLabel(null));
+        setSelectedItem(id);
         dispatch(setHeaderTitle("Archive"));
         break;
       case 5:
         setNoteOptions("trashNotes");
         dispatch(setSelectedLabel(null));
+        setSelectedItem(id);
         dispatch(setHeaderTitle("Trash"));
         break;
       default:

@@ -53,24 +53,17 @@ function NoteCard({ note, onClick, noteOption }) {
   const handleBgChange = (color) => {
     setBgColor(color);
   };
-  useEffect(() => {
-    if (labels !== note.labels) {
-      dispatchUpdatedNote();
-    }
-  }, [labels]);
 
   useEffect(() => {
-    if (bgColor !== note.bgColor || image !== note.img) {
+    if (
+      bgColor !== note.bgColor ||
+      image !== note.img ||
+      labels !== note.labels
+    ) {
       dispatchUpdatedNote();
     }
-  }, [bgColor, image]);
+  }, [bgColor, image, labels]);
 
-  useEffect(() => {
-    if (note.labels !== labels) {
-      console.log("Labels changed: v", labels);
-      dispatchUpdatedNote();
-    }
-  }, [labels]);
   const handleRemove = () => {
     dispatch(addNoteToTrash(note.id));
   };
