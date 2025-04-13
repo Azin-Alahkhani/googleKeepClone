@@ -234,19 +234,21 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
       </form>
       {!isFocused && !isEdit && (
         <div className="flex gap-3 justify-center">
-          <div className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition">
+          <div className="relative flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-600 transition">
             <button type="button">
-              <FaListUl
-                className="text-white hover:text-gray-400 "
-                title="NewList"
-              />
+              <div className="relative flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-600 transition">
+                <FaListUl
+                  className="text-white hover:text-gray-400 "
+                  title="NewList"
+                />
+              </div>
             </button>
           </div>
-          <div className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition">
+          <div className="relative flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-600 transition">
             <button type="button">
               <label
                 htmlFor="imageUpload"
-                className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition"
+                className="relative flex items-center cursor-pointer p-1 rounded-full hover:bg-gray-600 transition"
               >
                 <FiImage
                   className="text-white text-xl hover:text-gray-400 hover:bg-gray-600 "

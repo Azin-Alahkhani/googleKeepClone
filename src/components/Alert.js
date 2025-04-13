@@ -7,7 +7,7 @@ const myAlert = (alertTxt, handleUndo) => {
     <Alert
       severity="success"
       action={
-        <Button color="inherit" size="small" onClick={handleUndo}>
+        <Button color="zinc-800" size="small" onClick={handleUndo}>
           UNDO
         </Button>
       }

@@ -55,7 +55,23 @@ function NoteFooterButtons({
           : [...prevSelected, label] // Select
     );
   };
-
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+        setShowLabelMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+  useEffect(() => {
+    if (selectedLabels !== labels) {
+      setLabels(selectedLabels);
+    }
+  }, [selectedLabels]);
   const handleArchiveClick = () => {
     if (noteOption === "archivedNotes") {
       dispatch(removeNoteFromArchive(note.id));
@@ -79,13 +95,6 @@ function NoteFooterButtons({
     setLabels(selectedLabels);
   }, [selectedLabels]);
 
-  useEffect(() => {
-    if (!isHovered) {
-      setShowColorPicker(false);
-      setMenuOpen(false);
-      setShowLabelMenu(false);
-    }
-  }, [isHovered]);
   return (
     <div className="flex justify-between items-center">
       {noteOption !== "trashNotes" && (
@@ -243,15 +252,15 @@ function NoteFooterButtons({
                     Make a copy
                   </button>
                 )}
-                <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
+                {/*<button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                   Show checkboxes
-                </button>
-                {isEdit && (
+                </button>*/}
+                {isEdit && note.img && (
                   <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                     Grab image text
                   </button>
                 )}
-                {isEdit && (
+                {/*{isEdit && (
                   <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                     Copy to google doc
                   </button>
@@ -260,13 +269,13 @@ function NoteFooterButtons({
                   <button className="block px-4 py-2 text-sm hover:bg-zinc-600 w-full text-left">
                     Version history
                   </button>
-                )}
+                )}*/}
               </div>
             )}
             {showLabelMenu && (
-              <div className="absolute z-[9999] right-0  top-0 h-full w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-2 text-xs">
-                <div className="p-3 text-sm">Select Labels</div>
-                <div className="space-y-1">
+              <div className="absolute flex flex-col gap-1 z-[100] right-0 bg-zinc-700 top-0 h-full w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-2 text-xs">
+                <div className=" text-sm">Select Labels</div>
+                <div className="space-y-1 bg-zinc-700">
                   {allLabels.map((label) => (
                     <label key={label} className="flex items-center space-x-2">
                       <input
@@ -279,7 +288,7 @@ function NoteFooterButtons({
                     </label>
                   ))}
                 </div>
-                <div className="mt-2">
+                <div className=" ">
                   <button
                     onClick={onClose}
                     className="w-full py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
