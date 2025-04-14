@@ -20,11 +20,11 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   const [isFocused, setIsFocused] = useState(false);
   const [image, setImage] = useState(note.img || "");
   const [bgrColor, setBgrColor] = useState(
-    note.bgColor != "#202124" ? note.bgColor : "#202124"
+    note.bgColor != "#202124" ? note.bgColor : "#202124",
   );
 
   const selectedLabel = useSelector(
-    (state) => state.notes.selectedLabel || null
+    (state) => state.notes.selectedLabel || null,
   );
 
   const [labels, setLabels] = useState(note.labels || []);
@@ -80,7 +80,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
             img: image,
             labels: labels,
             bgColor: bgrColor,
-          })
+          }),
         );
       }
       onSave();

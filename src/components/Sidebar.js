@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FiHome, FiTrash, FiBell, FiBookmark } from "react-icons/fi";
+import {  FiTrash, FiBell, FiBookmark } from "react-icons/fi";
 import { MdOutlineModeEdit, MdLightbulbOutline } from "react-icons/md";
 import { IoArchiveOutline } from "react-icons/io5";
 import { setSelectedLabel, setHeaderTitle } from "../redux/NotesSlice";
 import EditLabelsModal from "./EditLabelsModal";
 
-const Sidebar = ({ isExpanded, setIsExpanded, setNoteOptions = () => {} }) => {
+const Sidebar = ({ isExpanded, setNoteOptions = () => {} }) => {
   const labels = useSelector((state) => state.labels.labels || []);
   const [editModal, setEditModal] = useState(false);
 

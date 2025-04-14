@@ -19,7 +19,8 @@ export default function EditLabelsModal({ isOpen, onClose }) {
     }
   };
 
-  const handleDeleteLabel = (labelToRemove) => {
+  const handleDeleteLabel = 
+  (labelToRemove) => {
     dispatch(removeLabel(labelToRemove)); // Dispatch action to remove label
   };
 
