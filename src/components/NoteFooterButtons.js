@@ -31,6 +31,7 @@ function NoteFooterButtons({
   note = {},
   noteOption,
   handleDuplicateNote,
+  setBtnClicked = () => {},
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -105,6 +106,7 @@ function NoteFooterButtons({
               type="button"
               onClick={(e) => {
                 e.preventDefault();
+                setBtnClicked(true);
                 setShowColorPicker(!showColorPicker);
               }}
               className="p-2 rounded-full   hover:bg-gray-600"
@@ -184,7 +186,7 @@ function NoteFooterButtons({
               handleArchiveClick();
             }}
           >
-            {noteOption == "archivedNotes" ? (
+            {noteOption === "archivedNotes" ? (
               <RiInboxUnarchiveLine
                 size={15}
                 className="text-white text-xl hover:text-gray-200 hover:bg-gray-600 "
@@ -206,6 +208,7 @@ function NoteFooterButtons({
                 e.preventDefault();
                 e.stopPropagation(); // Prevent card click
                 setMenuOpen(!menuOpen);
+                setBtnClicked(true);
               }}
               className="p-2 rounded-full hover:bg-gray-600"
             >
