@@ -7,7 +7,7 @@ import { IoArchiveOutline } from "react-icons/io5";
 import { setSelectedLabel, setHeaderTitle } from "../redux/NotesSlice";
 import EditLabelsModal from "./EditLabelsModal";
 
-const Sidebar = ({ isExpanded, setNoteOptions = () => {} }) => {
+const Sidebar = ({ isOpen, setNoteOptions = () => {} }) => {
   const labels = useSelector((state) => state.labels.labels || []);
   const [editModal, setEditModal] = useState(false);
 
@@ -15,6 +15,7 @@ const Sidebar = ({ isExpanded, setNoteOptions = () => {} }) => {
   const dispatch = useDispatch();
 
   const [isHovered, setIsHovered] = useState(false);
+  const isExpanded = false;
 
   useEffect(() => {
     localStorage.setItem("sidebarState", JSON.stringify(isExpanded));

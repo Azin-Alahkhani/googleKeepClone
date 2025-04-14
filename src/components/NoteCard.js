@@ -73,7 +73,7 @@ function NoteCard({ note, onClick, noteOption }) {
   return (
     <div
       key={note.index}
-      className="relative rounded-b-lg isolate w-full max-w-[240px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md  "
+      className="relative rounded-b-lg isolate w-full w-[240px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md  "
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}

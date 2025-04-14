@@ -20,7 +20,7 @@ function Header({ menuOpen, setMenuOpen }) {
   const dispatch = useDispatch();
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
+    //setMenuOpen(!menuOpen);
   };
   useEffect(() => {
     console.log("HeaderTitle changed:", HeaderTitle);

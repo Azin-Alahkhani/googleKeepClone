@@ -16,7 +16,7 @@ const MainContainer = () => {
         {/* static Sidebar */}
         <div className={`${menuOpen ? "w-60" : "w-50"} `}>
           <Sidebar
-            isExpanded={menuOpen}
+            isOpen={menuOpen}
             setIsExpanded={setMenuOpen}
             setNoteOptions={setNoteOptions}
           />
