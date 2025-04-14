@@ -70,7 +70,8 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
       if (
         noteTitle !== note.title ||
         noteText !== note.content ||
-        image !== note.img
+        image !== note.img ||
+        labels !== note.labels
       ) {
         dispatch(
           editNote({
