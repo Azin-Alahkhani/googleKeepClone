@@ -29,7 +29,7 @@ function NoteContainer({ menuOpen, noteOption }) {
       <ResponsiveMasonry
         columnsCountBreakPoints={{
           350: 1,
-          600: menuOpen ? 1 : 2,
+          600: 2,
           750: menuOpen ? 2 : 3,
           900: 3,
           1100: menuOpen ? 3 : 4,

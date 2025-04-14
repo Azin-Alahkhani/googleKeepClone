@@ -77,7 +77,7 @@ function Header({ menuOpen, setMenuOpen }) {
         {/* Search bar */}
         <div className="hidden md:flex items-center  justify-around w-full">
           <div
-            className="ml-24 w-[700px] flex justify-normal items-center   rounded-lg shadow-md border-none  mr-24"
+            className="ml-24 max-w-[700px] flex justify-normal items-center   rounded-lg shadow-md border-none  mr-24"
             style={{
               backgroundColor: isFocusedOnSearch
                 ? "#ffffff"

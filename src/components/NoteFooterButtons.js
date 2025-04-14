@@ -5,6 +5,7 @@ import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { HiOutlineArchiveBoxArrowDown } from "react-icons/hi2";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { FaTrashRestore } from "react-icons/fa";
+import Checkbox from "@mui/material/Checkbox";
 import {
   MdOutlinePersonAddAlt,
   MdOutlineAddAlert,
@@ -317,23 +318,55 @@ function NoteFooterButtons({
             {showLabelMenu && (
               <div className="absolute z-[9999] right-0 bottom-full mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-1  text-xs">
                 <div className="m-1 text-sm">Select Labels</div>
-                <div className="space-y-1 bg-zinc-700">
-                  {allLabels.map((label) => (
+                <div className="mt-2 bg-zinc-700 flex flex-col ">
+                  {/*{allLabels.map((label) => (
                     <label key={label} className="flex items-center space-x-2">
                       <input
                         type="checkbox"
                         checked={selectedLabels.includes(label)}
                         onChange={() => handleLabelToggle(label)}
-                        className="text-white"
+                        className="text-white bg-zinc-400"
                       />
+                      <span>{label}</span>
+                    </label>
+                  ))}*/}
+                  {allLabels.map((label) => (
+                    <label
+                      key={label}
+                      className="flex items-center m-[3px] cursor-pointer group"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={selectedLabels.includes(label)}
+                        onChange={() => handleLabelToggle(label)}
+                        className="hidden peer"
+                      />
+                      <div
+                        className={`w-4 h-4 mr-1 border rounded-sm flex items-center justify-center
+      peer-checked:bg-zinc-500 peer-checked:border-zinc-500 border-zinc-400 transition`}
+                      >
+                        <svg
+                          className="w-3 h-3 text-white hidden peer-checked:block"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={3}
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
                       <span>{label}</span>
                     </label>
                   ))}
                 </div>
-                <div className=" ">
+                <div className="flex items-center justify-center ">
                   <button
                     onClick={onClose}
-                    className="w-full py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
+                    className="w-[50%] py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
                   >
                     Done
                   </button>
