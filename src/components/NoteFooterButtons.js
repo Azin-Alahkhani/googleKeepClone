@@ -31,7 +31,7 @@ function NoteFooterButtons({
   note = {},
   noteOption,
   handleDuplicateNote,
-  setBtnClicked = () => {},
+  isCard = false,
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,6 +40,7 @@ function NoteFooterButtons({
   const [selectedLabels, setSelectedLabels] = useState(labels || []);
   const allLabels = useSelector((state) => state.labels.labels || []);
 
+  const [btnClicked, setBtnClicked] = useState(false);
   const dispatch = useDispatch();
 
   const onClose = () => {
@@ -59,6 +60,8 @@ function NoteFooterButtons({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
+        console.log("Clicked outside");
+        setShowColorPicker(false);
         setMenuOpen(false);
         setShowLabelMenu(false);
       }
@@ -97,9 +100,11 @@ function NoteFooterButtons({
   }, [selectedLabels]);
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center basis-full">
       {noteOption !== "trashNotes" && (
-        <div className="flex gap-2 relative">
+        <div
+          className={`flex gap-1 relative ${isCard ? "basis-full justify-between items-center " : ""}`}
+        >
           {/* Color Picker Button */}
           <div className="relative inline-block ">
             <button
@@ -109,7 +114,7 @@ function NoteFooterButtons({
                 setBtnClicked(true);
                 setShowColorPicker(!showColorPicker);
               }}
-              className="p-2 rounded-full   hover:bg-gray-600"
+              className="p-2 rounded-full hover:bg-gray-600"
             >
               <MdOutlinePalette
                 size={15}
@@ -119,7 +124,7 @@ function NoteFooterButtons({
             </button>
 
             {showColorPicker && (
-              <div className="absolute top-10 left-0 z-[9999] shadow-lg">
+              <div className="absolute bottom-full left-0 z-[9999] shadow-lg">
                 <ColorPicker
                   showPalette={showColorPicker}
                   onColorSelect={handleColorSelect}
@@ -161,7 +166,7 @@ function NoteFooterButtons({
             />
           </label>
 
-          {/* Add image */}
+          {/* Add Image */}
           <label className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition">
             <FiImage
               size={15}
@@ -177,6 +182,7 @@ function NoteFooterButtons({
               onChange={handleImageUpload}
             />
           </label>
+          {/* Archive Button */}
           <label
             className="relative flex items-center cursor-pointer p-2 rounded-full hover:bg-gray-600 transition"
             role="button"
@@ -222,7 +228,7 @@ function NoteFooterButtons({
             {menuOpen && (
               <div
                 ref={menuRef}
-                className="absolute z-[9999] right-0 mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-1  text-xs"
+                className="absolute z-[9999] right-0 bottom-full mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-1  text-xs"
               >
                 {isEdit && (
                   <button
@@ -276,8 +282,8 @@ function NoteFooterButtons({
               </div>
             )}
             {showLabelMenu && (
-              <div className="absolute flex flex-col gap-1 z-[100] right-0 bg-zinc-700 top-0 h-full w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-2 text-xs">
-                <div className=" text-sm">Select Labels</div>
+              <div className="absolute z-[9999] right-0 bottom-full mt-1 w-48 bg-zinc-700 text-white shadow-lg rounded-sm py-1  text-xs">
+                <div className="m-1 text-sm">Select Labels</div>
                 <div className="space-y-1 bg-zinc-700">
                   {allLabels.map((label) => (
                     <label key={label} className="flex items-center space-x-2">

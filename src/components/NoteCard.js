@@ -12,6 +12,8 @@ function NoteCard({ note, onClick, noteOption }) {
   const [image, setImage] = useState(note.img); // Initialize with note image
   const [labels, setLabels] = useState(note.labels || []); // Initialize with note labels
 
+  const [btnClicked, setBtnClicked] = useState(false); // Track if button is clicked
+
   const dispatch = useDispatch(); // Set up dispatch
   const notes = useSelector((state) => state.notes[noteOption] || []); // Get notes from Redux store
 
@@ -116,7 +118,7 @@ function NoteCard({ note, onClick, noteOption }) {
       {/* Footer with buttons */}
       <div
         tabIndex={0}
-        className={`absolute z-50 bottom-0 left-0 right-0 p-1 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
+        className={`absolute z-1 bottom-0 left-0 right-0 p-1 bg-black  bg-opacity-10 text-white text-sm flex justify-between items-center transition-opacity duration-300 ${
           isHovered ? "opacity-100" : "opacity-0"
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -132,6 +134,7 @@ function NoteCard({ note, onClick, noteOption }) {
           note={note}
           noteOption={noteOption}
           handleDuplicateNote={handleDuplicateNote}
+          isCard={true}
         />
       </div>
     </div>
