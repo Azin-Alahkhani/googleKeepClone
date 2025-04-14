@@ -14,10 +14,10 @@ const labelsSlice = createSlice({
       }
     },
     removeLabel: (state, action) => {
-      state.labels = state.labels.filter(label => label !== action.payload);
+      state.labels = state.labels.filter((label) => label !== action.payload);
     },
   },
 });
 
 export const { addLabel, removeLabel } = labelsSlice.actions;
-export default labelsSlice.reducer ;
+export default labelsSlice.reducer;

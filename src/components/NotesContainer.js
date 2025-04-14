@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import NoteCard from "./NoteCard";
 import { useState } from "react";
@@ -9,18 +10,18 @@ function NoteContainer({ menuOpen, noteOption }) {
   const [selectedNote, setSelectedNote] = useState(null);
   const selectedLabel = useSelector((state) => state.notes.selectedLabel);
   const searchQuery = useSelector(
-    (state) => state.notes.searchQuery || ""
+    (state) => state.notes.searchQuery || "",
   ).toLowerCase();
 
   const filteredNotes = notes
     .filter((note) =>
-      selectedLabel ? note.labels?.includes(selectedLabel) : true
+      selectedLabel ? note.labels?.includes(selectedLabel) : true,
     )
     .filter((note) =>
       searchQuery
         ? note.title?.toLowerCase().includes(searchQuery) ||
           note.content?.toLowerCase().includes(searchQuery)
-        : true
+        : true,
     );
 
   return (

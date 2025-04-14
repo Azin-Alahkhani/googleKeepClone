@@ -1,3 +1,4 @@
+import React from "react";
 import AddNoteContainer from "./AddNoteContainer";
 
 function NoteModal({ note, onClose }) {

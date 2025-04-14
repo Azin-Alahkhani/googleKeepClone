@@ -53,7 +53,7 @@ function NoteFooterButtons({
       (prevSelected) =>
         prevSelected.includes(label)
           ? prevSelected.filter((item) => item !== label) // Deselect
-          : [...prevSelected, label] // Select
+          : [...prevSelected, label], // Select
     );
   };
   useEffect(() => {

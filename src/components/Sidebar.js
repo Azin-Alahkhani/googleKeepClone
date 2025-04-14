@@ -1,6 +1,7 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  FiTrash, FiBell, FiBookmark } from "react-icons/fi";
+import { FiTrash, FiBell, FiBookmark } from "react-icons/fi";
 import { MdOutlineModeEdit, MdLightbulbOutline } from "react-icons/md";
 import { IoArchiveOutline } from "react-icons/io5";
 import { setSelectedLabel, setHeaderTitle } from "../redux/NotesSlice";

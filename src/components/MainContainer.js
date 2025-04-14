@@ -1,9 +1,9 @@
+import React from "react";
 import Header from "./Header";
 import AddNoteContainer from "./AddNoteContainer";
 import NoteContainer from "./NotesContainer";
 import Sidebar from "./Sidebar";
-import { useEffect, useState } from "react";
-import { use } from "react";
+import { useState } from "react";
 
 const MainContainer = () => {
   const [menuOpen, setMenuOpen] = useState(true);

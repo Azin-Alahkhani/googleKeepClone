@@ -1,4 +1,4 @@
-import { FiCheckSquare, FiCheck } from "react-icons/fi";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNote, editNote } from "../redux/NotesSlice";
@@ -47,7 +47,7 @@ function NoteCard({ note, onClick, noteOption }) {
         title: note.title,
         img: image !== "" ? image : note.img,
         labels: labels,
-      })
+      }),
     );
   };
   const handleBgChange = (color) => {

@@ -71,7 +71,7 @@ const notesSlice = createSlice({
     },
     removeNote: (state, action) => {
       state.trashNotes = state.trashNotes.filter(
-        (note) => note.id !== action.payload
+        (note) => note.id !== action.payload,
       );
     },
     editNote: (state, action) => {
@@ -99,12 +99,12 @@ const notesSlice = createSlice({
     },
     removeNoteFromArchive: (state, action) => {
       const note = state.archivedNotes.find(
-        (note) => note.id === action.payload
+        (note) => note.id === action.payload,
       );
       if (note) {
         state.notes.push(note);
         state.archivedNotes = state.archivedNotes.filter(
-          (note) => note.id !== action.payload
+          (note) => note.id !== action.payload,
         );
       }
     },
@@ -115,21 +115,21 @@ const notesSlice = createSlice({
         state.notes = state.notes.filter((note) => note.id !== action.payload);
       }
       const archivedNote = state.archivedNotes.find(
-        (note) => note.id === action.payload
+        (note) => note.id === action.payload,
       );
       if (archivedNote) {
         state.trashNotes.push(archivedNote);
         state.archivedNotes = state.archivedNotes.filter(
-          (note) => note.id !== action.payload
+          (note) => note.id !== action.payload,
         );
       }
       const reminderNote = state.Reminders.find(
-        (note) => note.id === action.payload
+        (note) => note.id === action.payload,
       );
       if (reminderNote) {
         state.trashNotes.push(reminderNote);
         state.Reminders = state.Reminders.filter(
-          (note) => note.id !== action.payload
+          (note) => note.id !== action.payload,
         );
       }
     },
@@ -139,7 +139,7 @@ const notesSlice = createSlice({
       if (note) {
         state.notes.push(note);
         state.trashNotes = state.trashNotes.filter(
-          (note) => note.id !== action.payload
+          (note) => note.id !== action.payload,
         );
       }
     },

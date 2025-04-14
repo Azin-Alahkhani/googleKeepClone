@@ -1,6 +1,7 @@
+import React from "react";
 import logo from "../assets/keep_2020q4_48dp.png";
-import { FaSearch, FaUser } from "react-icons/fa";
-import { FiSettings, FiList, FiRefreshCcw } from "react-icons/fi";
+import { FaUser } from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { TfiViewList } from "react-icons/tfi";
@@ -12,7 +13,7 @@ import { setSearchQuery } from "../redux/NotesSlice";
 
 function Header({ menuOpen, setMenuOpen }) {
   const selectedLabel = useSelector(
-    (state) => state.notes.selectedLabel || null
+    (state) => state.notes.selectedLabel || null,
   );
   const HeaderTitle = useSelector((state) => state.notes.HeaderTitle || null);
 
