@@ -62,10 +62,8 @@ function NoteFooterButtons({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        console.log("Clicked outside in footer");
-        setShowColorPicker(false);
+        console.log("Clicked outside the menu");
         setMenuOpen(false);
-        setShowLabelMenu(false);
         setBtnClicked(false);
       }
     };
@@ -77,10 +75,8 @@ function NoteFooterButtons({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (paletteRef.current && !paletteRef.current.contains(event.target)) {
-        console.log("Clicked outside in footer");
+        console.log("Clicked outside the palette");
         setShowColorPicker(false);
-        setMenuOpen(false);
-        setShowLabelMenu(false);
         setBtnClicked(false);
       }
     };
@@ -95,9 +91,7 @@ function NoteFooterButtons({
         labelMenuRef.current &&
         !labelMenuRef.current.contains(event.target)
       ) {
-        console.log("Clicked outside in footer");
-        setShowColorPicker(false);
-        setMenuOpen(false);
+        console.log("Clicked outside the label menu");
         setShowLabelMenu(false);
         setBtnClicked(false);
       }

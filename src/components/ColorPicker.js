@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FaPalette } from "react-icons/fa";
+import React, { useEffect } from "react";
 
 const darkColors = [
   { color: "#77172e", name: "Coral" },
@@ -16,7 +15,11 @@ const darkColors = [
 ];
 
 function ColorPicker({ onColorSelect, showPalette, setShowPalette }) {
-  useEffect(() => {});
+  const selectColor = (color) => {
+    onColorSelect(color);
+    setShowPalette(false);
+    console.log("Selected color:", color);
+  };
   return (
     <div className="relative">
       {showPalette && (
@@ -27,7 +30,7 @@ function ColorPicker({ onColorSelect, showPalette, setShowPalette }) {
               className="w-6 h-6 rounded-full cursor-pointer border border-gray-700"
               style={{ backgroundColor: color.color }}
               onClick={() => {
-                onColorSelect(color.color);
+                selectColor(color.color);
                 setShowPalette(false);
               }}
               title={color.name}
