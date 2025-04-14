@@ -32,15 +32,17 @@ function NoteFooterButtons({
   noteOption,
   handleDuplicateNote,
   isCard = false,
+  setBtnClicked = () => {},
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const labelMenuRef = useRef(null);
+  const paletteRef = useRef(null);
   const [showLabelMenu, setShowLabelMenu] = useState(false);
   const [selectedLabels, setSelectedLabels] = useState(labels || []);
   const allLabels = useSelector((state) => state.labels.labels || []);
 
-  const [btnClicked, setBtnClicked] = useState(false);
   const dispatch = useDispatch();
 
   const onClose = () => {
@@ -60,10 +62,11 @@ function NoteFooterButtons({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        console.log("Clicked outside");
+        console.log("Clicked outside in footer");
         setShowColorPicker(false);
         setMenuOpen(false);
         setShowLabelMenu(false);
+        setBtnClicked(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -71,6 +74,39 @@ function NoteFooterButtons({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuRef]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (paletteRef.current && !paletteRef.current.contains(event.target)) {
+        console.log("Clicked outside in footer");
+        setShowColorPicker(false);
+        setMenuOpen(false);
+        setShowLabelMenu(false);
+        setBtnClicked(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [paletteRef]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        labelMenuRef.current &&
+        !labelMenuRef.current.contains(event.target)
+      ) {
+        console.log("Clicked outside in footer");
+        setShowColorPicker(false);
+        setMenuOpen(false);
+        setShowLabelMenu(false);
+        setBtnClicked(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [labelMenuRef]);
   useEffect(() => {
     if (selectedLabels !== labels) {
       setLabels(selectedLabels);
@@ -124,7 +160,10 @@ function NoteFooterButtons({
             </button>
 
             {showColorPicker && (
-              <div className="absolute bottom-full left-0 z-[9999] shadow-lg">
+              <div
+                className="absolute bottom-full left-0 z-[9999] shadow-lg"
+                ref={paletteRef}
+              >
                 <ColorPicker
                   showPalette={showColorPicker}
                   onColorSelect={handleColorSelect}
@@ -207,7 +246,7 @@ function NoteFooterButtons({
             )}
           </label>
           {/* More Options Menu */}
-          <div className="relative">
+          <div className="relative" ref={labelMenuRef}>
             <button
               type="button"
               onClick={(e) => {
