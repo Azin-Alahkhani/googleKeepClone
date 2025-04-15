@@ -119,10 +119,9 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
     }
   }, [image]);
   useEffect(() => {
-    if (!isEdit)
-      if (selectedLabel && !labels.includes(selectedLabel)) {
-        setLabels((prevLabels) => [...prevLabels, selectedLabel]);
-      }
+    if (selectedLabel && !labels.includes(selectedLabel)) {
+      setLabels((prevLabels) => [...prevLabels, selectedLabel]);
+    }
   }, [selectedLabel, labels]);
   const handleRemove = () => {
     if (onSave) {
@@ -135,7 +134,8 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
     if (
       noteTitle !== note.title ||
       noteText !== note.content ||
-      image !== note.img
+      image !== note.img ||
+      labels !== note.labels
     ) {
       // Dispatch note
       dispatchNote();
