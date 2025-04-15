@@ -3,15 +3,24 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNote, editNote } from "../redux/NotesSlice";
 import NoteFooterButtons from "./NoteFooterButtons";
-import { addNoteToTrash } from "../redux/NotesSlice";
 import { useSelector } from "react-redux";
+import { Button, IconButton, Snackbar } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+  recoverNoteFromTrash,
+  removeNoteFromArchive,
+  addNoteToArchive,
+  addNoteToTrash,
+} from "../redux/NotesSlice";
 
-function NoteCard({ note, onClick, noteOption }) {
+function NoteCard({ note, onClick, noteOption , setHoveredNote , setAlertMsg ,setOpen, setUndoMode}) {
   const [isHovered, setIsHovered] = useState(false);
   const [bgColor, setBgColor] = useState(note.bgColor); // Initialize with note color
   const [image, setImage] = useState(note.img); // Initialize with note image
   const [labels, setLabels] = useState(note.labels || []); // Initialize with note labels
-
+  //const [undoMode, setUndoMode] = useState("");
+  //const [open, setOpen] = useState(false);
+  //const [alertMsg, setAlertMsg] = useState("");
   const [btnClicked, setBtnClicked] = useState(false); // Track if button is clicked
 
   const dispatch = useDispatch(); // Set up dispatch
@@ -19,7 +28,7 @@ function NoteCard({ note, onClick, noteOption }) {
 
   const handleDuplicateNote = (noteId) => {
     const selectedNote = notes.find((note) => note.id === noteId); // Find the note to duplicate
-    console.log("Selected note to duplicate: ", selectedNote);
+    //console.log("Selected note to duplicate: ", selectedNote);
     if (selectedNote) {
       const duplicatedNote = {
         ...selectedNote,
@@ -54,7 +63,9 @@ function NoteCard({ note, onClick, noteOption }) {
   const handleBgChange = (color) => {
     setBgColor(color);
   };
-
+  const closeSnackbar = () => {
+    //setOpen(false);
+  };
   useEffect(() => {
     if (
       bgColor !== note.bgColor ||
@@ -64,20 +75,30 @@ function NoteCard({ note, onClick, noteOption }) {
       dispatchUpdatedNote();
     }
   }, [bgColor, image, labels]);
-  useEffect(() => {
-    console.log("Button clicked:", btnClicked, " isHovered:", isHovered);
-  }, [btnClicked, isHovered]);
+
   const handleRemove = () => {
     dispatch(addNoteToTrash(note.id));
   };
+
+  const showAlert = (message, mode) => {
+    console.log("showAlert called in note:", note.id);
+    setOpen(false); // Force close first
+    setTimeout(() => {
+      setUndoMode(mode);
+      setAlertMsg(message);
+      setOpen(true);
+    }, 0);
+  };
+
+
   return (
     <div
       key={note.index}
-      className="relative rounded-b-lg isolate w-full w-[240px] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md  "
+      className="relative rounded-b-lg isolate w-full md:w-[260px] lg:w-[240px] sm:w-[80%] border mb-2 border-zinc-600 rounded-lg cursor-pointer hover:shadow-lg duration-200 shadow-md  "
       style={{ backgroundColor: note.bgColor }}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => {setIsHovered(true); setHoveredNote(note)}}
+      onMouseLeave={() => {setIsHovered(false);}}
     >
       {/* Image (if available) */}
       {note.img && (
@@ -137,10 +158,14 @@ function NoteCard({ note, onClick, noteOption }) {
           handleDuplicateNote={handleDuplicateNote}
           isCard={true}
           setBtnClicked={setBtnClicked}
+          setOpen={setOpen}
+          setAlertMsg={setAlertMsg}
+          setUndoMode={setUndoMode}
+          showAlert={showAlert}
         />
       </div>
     </div>
   );
 }
 
-export default NoteCard;
+export default React.memo(NoteCard)

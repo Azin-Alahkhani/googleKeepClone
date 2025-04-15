@@ -17,7 +17,7 @@ const initialState = {
       content:
         "Google Keep Clone! lets see how close we can get to the actual design. seems easy but we'll have to wait and see.",
       labels: ["Personal"],
-      bgColor: "#202124",
+      bgColor: "oklch(37.8% 0.077 168.94)",
       img: "",
     },
     {
@@ -34,7 +34,7 @@ const initialState = {
       title: "Smbh",
       content: "jhfbhejhfbhejhfbhejhfbhe.",
       labels: ["Work"],
-      bgColor: "#202124",
+      bgColor: "#555555",
       img: "",
     },
     {
@@ -50,7 +50,7 @@ const initialState = {
       title: "hi",
       content: "new note.",
       labels: ["Personal"],
-      bgColor: "#202634",
+      bgColor: "#099eeb",
       img: "",
     },
   ],

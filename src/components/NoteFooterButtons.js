@@ -5,7 +5,8 @@ import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { HiOutlineArchiveBoxArrowDown } from "react-icons/hi2";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { FaTrashRestore } from "react-icons/fa";
-import Checkbox from "@mui/material/Checkbox";
+import { Button, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   MdOutlinePersonAddAlt,
   MdOutlineAddAlert,
@@ -19,6 +20,8 @@ import {
   removeNote,
   removeNoteFromArchive,
 } from "../redux/NotesSlice";
+import MyAlert from "./Alert";
+import { Snackbar } from "@mui/material";
 
 function NoteFooterButtons({
   handleColorSelect,
@@ -34,6 +37,11 @@ function NoteFooterButtons({
   handleDuplicateNote,
   isCard = false,
   setBtnClicked = () => {},
+  alertMsg = "",
+  open = false,
+  undoMode = "",
+  setUndoMode = () => {},
+  showAlert = () => {},
 }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,6 +51,9 @@ function NoteFooterButtons({
   const [showLabelMenu, setShowLabelMenu] = useState(false);
   const [selectedLabels, setSelectedLabels] = useState(labels || []);
   const allLabels = useSelector((state) => state.labels.labels || []);
+  //const [undoMode, setUndoMode] = useState("");
+  //const [open, setOpen] = useState(false);
+  //const [alertMsg, setAlertMsg] = useState("");
 
   const dispatch = useDispatch();
 
@@ -60,10 +71,10 @@ function NoteFooterButtons({
           : [...prevSelected, label], // Select
     );
   };
+  // click outside to close menus
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
-        console.log("Clicked outside the menu");
         setMenuOpen(false);
         setBtnClicked(false);
       }
@@ -76,7 +87,6 @@ function NoteFooterButtons({
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (paletteRef.current && !paletteRef.current.contains(event.target)) {
-        console.log("Clicked outside the palette");
         setShowColorPicker(false);
         setBtnClicked(false);
       }
@@ -92,7 +102,6 @@ function NoteFooterButtons({
         labelMenuRef.current &&
         !labelMenuRef.current.contains(event.target)
       ) {
-        console.log("Clicked outside the label menu");
         setShowLabelMenu(false);
         setBtnClicked(false);
       }
@@ -110,23 +119,46 @@ function NoteFooterButtons({
   const handleArchiveClick = () => {
     if (noteOption === "archivedNotes") {
       dispatch(removeNoteFromArchive(note.id));
+      //setUndoMode("unarchive");
+      showAlert("Note unarchived successfully", "unarchive");
     } else {
+      console.log("ARCHIVE CLICKED");
       dispatch(addNoteToArchive(note.id));
+      console.log("SETTING undoMode, alertMsg, open");
+      //setUndoMode("archive");
+      showAlert("Note archived successfully", "archive");
     }
   };
   const trashClick = () => {
+    console.log("note trash clicked");
     dispatch(addNoteToTrash(note.id));
+    //setUndoMode("trash");
+    showAlert("Note deleted successfully", "trash");
   };
   const handleDeleteForever = () => {
     dispatch(removeNote(note.id));
+    //open confirmation dialog
   };
 
   const handleRecover = () => {
     dispatch(recoverNoteFromTrash(note.id));
+    //setUndoMode("restore");
+    showAlert("Note recovered successfully", "restore");
+  };
+
+  const handleUndo = () => {
+    if (undoMode === "trash") {
+      dispatch(recoverNoteFromTrash(note.id));
+    } else if (undoMode === "archive") {
+      dispatch(removeNoteFromArchive(note.id));
+    } else if (undoMode === "unarchive") {
+      dispatch(addNoteToArchive(note.id));
+    } else if (undoMode === "restore") {
+      dispatch(addNoteToTrash(note.id));
+    }
   };
 
   useEffect(() => {
-    //console.log("selected :", selectedLabels);
     setLabels(selectedLabels);
   }, [selectedLabels]);
 
@@ -407,7 +439,9 @@ function NoteFooterButtons({
           </button>
         </div>
       )}
+      {/* Alert */}
+      
     </div>
   );
 }
-export default NoteFooterButtons;
+export default React.memo(NoteFooterButtons);
