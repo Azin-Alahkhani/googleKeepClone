@@ -39,7 +39,7 @@ const Sidebar = ({ isOpen, setNoteOptions = () => {} }) => {
   ];
 
   const handleClickLabels = (label, id) => {
-    console.log("Label clicked:", label);
+
     setSelectedItem(id);
     setNoteOptions("notes");
     dispatch(setSelectedLabel(label));
