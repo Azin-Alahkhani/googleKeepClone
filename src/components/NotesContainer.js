@@ -79,15 +79,7 @@ function NoteContainer({ menuOpen, noteOption }) {
         }, 6000); // Close the snackbar after 6 seconds
       }
     },[open]);
-
-    useEffect(() => {
-      if (hoveredNote) {
-        console.log("Hovered note:", hoveredNote.id);
-      }
-    }
-    , [hoveredNote]);
   
-
   return (
     <div className=" ">
       <ResponsiveMasonry

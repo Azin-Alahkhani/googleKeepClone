@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setSearchQuery } from "../redux/NotesSlice";
+import Avatar from "boring-avatars";
 
 function Header({ menuOpen, setMenuOpen }) {
   const selectedLabel = useSelector(
@@ -44,7 +45,7 @@ function Header({ menuOpen, setMenuOpen }) {
       }}
     >
       <div className="flex flex-row  items-center font-sans">
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row items-center justify-between ">
           {/* menu toggle */}
           <div className="flex items-center m-2">
             <button
@@ -77,7 +78,7 @@ function Header({ menuOpen, setMenuOpen }) {
 
           <div className="flex flex-row gap-1 items-center justify-between w-full">
         {/* Search bar */}
-            <div className="flex items-center max-w-[700px]  justify-around w-full">
+            <div className="flex items-center md:w-[700px] w-[33%] justify-around w-full">
               <div
                 className="ml-24 hidden md:flex  flex justify-normal items-center   rounded-lg shadow-md border-none  mr-24"
                 style={{
@@ -109,48 +110,37 @@ function Header({ menuOpen, setMenuOpen }) {
               className="w-full text-white text-lg font-medium p-2 bg-transparent focus:text-gray-800 border-none focus:outline-none"
               placeholder="Search"
             />
-          </div>
-            
+          </div>           
         </div>
          <div className="flex flex-row gap-2 items-center justify-between">
             <button
               type="button"
-              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 flex hover:text-white "
             >
-              <MdRefresh className="w-7 h-7 " title="Refresh" />
+              <MdRefresh className="w-6 h-6 " title="Refresh" />
             </button>
             <button
               type="button"
-              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 flex hover:text-white "
             >
-              <TfiViewList className="w-7 h-7 " title="View as list" />
+              <TfiViewList className="w-5 h-5 " title="View as list" />
             </button>
              <button
               type="button"
-              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white ml-2 "
+              className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white flex ml-2 "
             >
-              <FiSettings className="w-7 h-7 " title="Refresh" />
+              <FiSettings className="w-5 h-5 " title="Refresh" />
             </button>
           </div>
-           
-          <div>
-            
           </div>
-          </div>
-
-        {/*right side stuff*/}
-        <div className="">
-         
-         
-          <div className="flex  justify-end gap-2 ">
-           
+          <div className="flex ml-2 justify-end gap-2 ">          
             <button
               type="button"
+              title="Account"
               className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
             >
-              <FaUser className="w-7 h-7 " title="Account" />
+             <Avatar name="Azin Alahkhani" variant="beam"/>
             </button>
-          </div>
         </div>
       </div>
       <hr className="border-gray-500 dark:border-gray-700 mt-2" />

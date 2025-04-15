@@ -5,11 +5,9 @@ import {
   addNote,
   addNoteToTrash,
   editNote,
-  removeNote,
 } from "../redux/NotesSlice";
 import { FaListUl } from "react-icons/fa";
 import { FiImage } from "react-icons/fi";
-import { FaTrashAlt } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
 
 import NoteFooterButtons from "./NoteFooterButtons"; // Importing the new NoteFooterButtons component
@@ -132,7 +130,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
     }
   };
   const handleClickClose = () => {
-    console.log("colors: ", bgrColor, note.bgColor);
+    console.log("note close ", bgrColor, note.bgColor);
     if (
       noteTitle !== note.title ||
       noteText !== note.content ||

@@ -4,14 +4,7 @@ import { useDispatch } from "react-redux";
 import { addNote, editNote } from "../redux/NotesSlice";
 import NoteFooterButtons from "./NoteFooterButtons";
 import { useSelector } from "react-redux";
-import { Button, IconButton, Snackbar } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import {
-  recoverNoteFromTrash,
-  removeNoteFromArchive,
-  addNoteToArchive,
-  addNoteToTrash,
-} from "../redux/NotesSlice";
+import { addNoteToTrash } from "../redux/NotesSlice";
 
 function NoteCard({ note, onClick, noteOption , setHoveredNote , setAlertMsg ,setOpen, setUndoMode}) {
   const [isHovered, setIsHovered] = useState(false);
