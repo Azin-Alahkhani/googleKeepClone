@@ -2,13 +2,22 @@ import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FaTimes, FaTrash, FaPlus } from "react-icons/fa";
-
-import { addLabel } from "../redux/LabelSlice"; // Import your action to add a label
-import { removeLabel } from "../redux/LabelSlice"; // Import your action to remove a label
+import { editNote } from "../redux/NotesSlice"; // Import your action to edit a note
+import { removeLabel , addLabel } from "../redux/LabelSlice"; // Import your action to remove a label
 
 export default function EditLabelsModal({ isOpen, onClose }) {
   const [newLabel, setNewLabel] = useState("");
-  const labels = useSelector((state) => state.labels.labels || []); // Fetch labels from Redux store
+  const labels = useSelector((state) => state.labels.labels || []);
+
+const notesState = useSelector((state) => state.notes);
+
+const notes = [
+  ...(notesState.notes || []),
+  ...(notesState.archive || []),
+  ...(notesState.trash || []),
+  ...(notesState.reminders || [])
+];
+ 
   const dispatch = useDispatch();
 
   if (!isOpen) return null; // Don't render if not open
@@ -21,7 +30,21 @@ export default function EditLabelsModal({ isOpen, onClose }) {
   };
 
   const handleDeleteLabel = (labelToRemove) => {
-    dispatch(removeLabel(labelToRemove)); // Dispatch action to remove label
+    dispatch(removeLabel(labelToRemove));
+    if(notes){
+   notes.forEach((note) => {
+  if (note.labels?.includes(labelToRemove)) {
+    const updatedLabels = note.labels.filter((label) => label !== labelToRemove);
+
+    dispatch(
+      editNote({
+        ...note,
+        labels: updatedLabels,
+      }),
+    );
+  }
+});
+    }
   };
 
   return (

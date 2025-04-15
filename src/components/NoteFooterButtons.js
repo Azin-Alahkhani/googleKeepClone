@@ -5,8 +5,6 @@ import { FiMoreVertical, FiImage, FiBell } from "react-icons/fi";
 import { HiOutlineArchiveBoxArrowDown } from "react-icons/hi2";
 import { RiInboxUnarchiveLine } from "react-icons/ri";
 import { FaTrashRestore } from "react-icons/fa";
-import { Button, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import {
   MdOutlinePersonAddAlt,
   MdOutlineAddAlert,
@@ -20,8 +18,6 @@ import {
   removeNote,
   removeNoteFromArchive,
 } from "../redux/NotesSlice";
-import MyAlert from "./Alert";
-import { Snackbar } from "@mui/material";
 
 function NoteFooterButtons({
   handleColorSelect,
@@ -51,18 +47,10 @@ function NoteFooterButtons({
   const [showLabelMenu, setShowLabelMenu] = useState(false);
   const [selectedLabels, setSelectedLabels] = useState(labels || []);
   const allLabels = useSelector((state) => state.labels.labels || []);
-  //const [undoMode, setUndoMode] = useState("");
-  //const [open, setOpen] = useState(false);
-  //const [alertMsg, setAlertMsg] = useState("");
+  const [doneWithLabel, setDoneWithLabel] = useState(false);
 
   const dispatch = useDispatch();
 
-  const onClose = () => {
-    setShowLabelMenu(false);
-    setMenuOpen(false);
-    setLabels(selectedLabels);
-    //setSelectedLabels([]);
-  };
   const handleLabelToggle = (label) => {
     setSelectedLabels(
       (prevSelected) =>
@@ -71,6 +59,21 @@ function NoteFooterButtons({
           : [...prevSelected, label], // Select
     );
   };
+  const handleDone = () => {
+    setDoneWithLabel(true);
+ 
+
+   
+  };
+
+  useEffect(() => {
+    if (doneWithLabel ) {
+    setLabels(selectedLabels);
+    setShowLabelMenu(false);
+    setMenuOpen(false);
+    setDoneWithLabel(false);
+    }
+  }, [doneWithLabel]);
   // click outside to close menus
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -111,11 +114,7 @@ function NoteFooterButtons({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [labelMenuRef]);
-  useEffect(() => {
-    if (selectedLabels !== labels) {
-      setLabels(selectedLabels);
-    }
-  }, [selectedLabels]);
+ 
   const handleArchiveClick = () => {
     if (noteOption === "archivedNotes") {
       dispatch(removeNoteFromArchive(note.id));
@@ -158,9 +157,7 @@ function NoteFooterButtons({
     }
   };
 
-  useEffect(() => {
-    setLabels(selectedLabels);
-  }, [selectedLabels]);
+
 
   return (
     <div className="flex justify-between items-center basis-full">
@@ -397,7 +394,10 @@ function NoteFooterButtons({
                 </div>
                 <div className="flex items-center justify-center ">
                   <button
-                    onClick={onClose}
+                    onClick={(e)=>{
+                      e.preventDefault();
+                      handleDone();
+                    }}
                     className="w-[50%] py-1 text-xs text-center bg-zinc-600 rounded-sm hover:bg-zinc-500"
                   >
                     Done

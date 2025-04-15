@@ -161,4 +161,4 @@ function NoteCard({ note, onClick, noteOption , setHoveredNote , setAlertMsg ,se
   );
 }
 
-export default React.memo(NoteCard)
+export default NoteCard;

@@ -124,6 +124,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
       setLabels((prevLabels) => [...prevLabels, selectedLabel]);
     }
   }, [selectedLabel, labels]);
+  
   const handleRemove = () => {
     if (onSave) {
       //console.log("removing :", note.id);
