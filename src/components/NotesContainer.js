@@ -96,7 +96,7 @@ function NoteContainer({ menuOpen, noteOption }) {
           600: 2,
           859: 3,
           1150: 4,
-          1200: 5,
+          1340: 5,
         }}
       >
         <Masonry gutter="0px">

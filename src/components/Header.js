@@ -74,16 +74,18 @@ function Header({ menuOpen, setMenuOpen }) {
             </div>
           )}
         </div>
+
+          <div className="flex flex-row gap-1 items-center justify-between w-full">
         {/* Search bar */}
-        <div className="hidden md:flex items-center  justify-around w-full">
-          <div
-            className="ml-24 max-w-[700px] flex justify-normal items-center   rounded-lg shadow-md border-none  mr-24"
-            style={{
-              backgroundColor: isFocusedOnSearch
-                ? "#ffffff"
-                : "oklch(43.9% 0 0)",
-            }}
-          >
+            <div className="flex items-center max-w-[700px]  justify-around w-full">
+              <div
+                className="ml-24 hidden md:flex  flex justify-normal items-center   rounded-lg shadow-md border-none  mr-24"
+                style={{
+                  backgroundColor: isFocusedOnSearch
+                    ? "#ffffff"
+                    : "oklch(43.9% 0 0)",
+                }}
+              >
             <div
               className={`${
                 isFocusedOnSearch ? "hover:bg-stone-100" : "hover:bg-stone-500"
@@ -108,33 +110,40 @@ function Header({ menuOpen, setMenuOpen }) {
               placeholder="Search"
             />
           </div>
+            
         </div>
-
-        {/*right side stuff*/}
-        <div className="grid grid-cols-4 gap-10 justify-between items-center">
-          <div>
+         <div className="flex flex-row gap-2 items-center justify-between">
             <button
               type="button"
               className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
             >
               <MdRefresh className="w-7 h-7 " title="Refresh" />
             </button>
-          </div>
-          <div>
             <button
               type="button"
               className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
             >
               <TfiViewList className="w-7 h-7 " title="View as list" />
             </button>
-          </div>
-          <div className="flex  justify-end gap-2 ">
-            <button
+             <button
               type="button"
               className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white ml-2 "
             >
               <FiSettings className="w-7 h-7 " title="Refresh" />
             </button>
+          </div>
+           
+          <div>
+            
+          </div>
+          </div>
+
+        {/*right side stuff*/}
+        <div className="">
+         
+         
+          <div className="flex  justify-end gap-2 ">
+           
             <button
               type="button"
               className="rounded-full h-10 w-10 hover:bg-zinc-700 justify-center items-center text-gray-500 hover:text-white "
@@ -143,24 +152,6 @@ function Header({ menuOpen, setMenuOpen }) {
             </button>
           </div>
         </div>
-
-        {/*<div
-          className="hidden w-full md:block md:w-auto"
-          id="navbar-default"
-        >
-          <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <a className="block py-2 pl-3 pr-4 text-gray-700 rounded md:hover:text-amber-500 dark:text-gray-400 dark:hover:text-white">
-                Home
-              </a>
-            </li>
-            <li>
-              <a className="block py-2 pl-3 pr-4 text-gray-700 rounded md:hover:text-amber-500 dark:text-gray-400 dark:hover:text-white">
-                About
-              </a>
-            </li>
-          </ul>
-        </div>*/}
       </div>
       <hr className="border-gray-500 dark:border-gray-700 mt-2" />
     </nav>
