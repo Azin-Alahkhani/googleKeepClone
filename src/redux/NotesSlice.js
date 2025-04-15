@@ -84,6 +84,16 @@ const notesSlice = createSlice({
         note.bgColor = action.payload.bgColor || note.bgColor;
         note.img = img;
       }
+      const archivedNote = state.archivedNotes.find(
+        (note) => note.id === id,
+      );
+      if (archivedNote) {
+        archivedNote.title = title;
+        archivedNote.content = content;
+        archivedNote.labels = labels;
+        archivedNote.bgColor = action.payload.bgColor || archivedNote.bgColor;
+        archivedNote.img = img;
+      }
     },
     setSelectedLabel: (state, action) => {
       state.selectedLabel = action.payload;
