@@ -126,7 +126,7 @@ function NoteCard({ note, onClick, noteOption , setHoveredNote , setAlertMsg ,se
         </div>
       )}
       {labels.length > 0 && (
-        <div className="flex items-center justify-start mb-10 ml-4 gap-2 ">
+        <div className="flex flex-wrap items-center justify-start mb-10 ml-4 gap-2">
           {labels.map((label) => (
             <span
               key={label}
