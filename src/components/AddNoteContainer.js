@@ -71,7 +71,8 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
         noteTitle !== note.title ||
         noteText !== note.content ||
         image !== note.img ||
-        labels !== note.labels
+        labels !== note.labels ||
+        bgrColor !== note.bgColor
       ) {
         dispatch(
           editNote({
@@ -131,11 +132,13 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
     }
   };
   const handleClickClose = () => {
+    console.log("colors: ", bgrColor, note.bgColor);
     if (
       noteTitle !== note.title ||
       noteText !== note.content ||
       image !== note.img ||
-      labels !== note.labels
+      labels !== note.labels ||
+      bgrColor !== note.bgColor
     ) {
       // Dispatch note
       dispatchNote();
