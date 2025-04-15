@@ -58,7 +58,7 @@ function NoteContainer({ menuOpen, noteOption }) {
   };
     const action = (
       <React.Fragment>
-        <Button color="secondary" size="small" onClick={handleUndo}>
+        <Button color="warning" size="small" onClick={handleUndo}>
           UNDO
         </Button>
         <IconButton
