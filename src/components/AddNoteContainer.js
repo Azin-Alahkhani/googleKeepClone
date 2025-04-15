@@ -55,6 +55,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
   };
   const dispatchNote = () => {
     if (!isEdit) {
+      if(noteText.trim() || noteTitle.trim() || image.trim()){ {
       const noteData = {
         title: noteTitle,
         content: noteText,
@@ -64,6 +65,7 @@ function AddNoteContainer({ onSave, isEdit = false, note = {}, noteOption }) {
         labels,
       };
       dispatch(addNote(noteData));
+    }}
     } else if (onSave && isEdit) {
       if (
         noteTitle !== note.title ||
